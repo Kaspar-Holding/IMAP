@@ -61,7 +61,7 @@ class UserEmails extends Model
                             <div style='padding:20px 30px'>
                                 <div style='font-size:16px;line-height:1.5em;border-bottom:1px solid #f2f3f5;padding-bottom:10px;margin-bottom:20px'>
                                     <p><a style='text-decoration:none;color:#000'>Welcome <strong>".$useremail."</strong>,</a></p>
-                                    <p><a style='text-decoration:none;color:#000'>Your Account Password: $password </a></p>
+                                    <p><a href='http://kaspar.eastus.cloudapp.azure.com/jynx_testing/reset_password'>Reset Your Account password here </a></p>
                                     <p><a style='text-decoration:none;color:#000'><strong>Note:</strong> Contact us <strong><a href='https://jynx.co.za' target='_blank'>Here</a></strong> immediately if you did not make this request.</a></p>
                                 </div>
                             </div>

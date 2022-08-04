@@ -27,7 +27,8 @@ use App\Http\Controllers\SplashController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::post('/update_password',[UserController::class, 'update_password'])->name('update_password');
+Route::get('/reset_password',[UserController::class, 'reset_password'])->name('reset_password');
 Route::group(['middleware' =>[
     'auth:sanctum', 'verified'
 ]], function(){
@@ -60,6 +61,7 @@ Route::group(['middleware' =>[
     Route::get('/fetch_dha_profile/{id}', [UserController::class, 'fetch_dha_profile'])->name('fetch_dha_profile');
     Route::get('/register_new_user', [UserController::class, 'register_new_user'])->name('register_new_user');
     Route::post('/save_user',[UserController::class, 'save_user'])->name('save_user');
+    
     
     //DJ Routes
     Route::get('/register_new_djuser', [DjAppController::class, 'register_new_djuser'])->name('register_new_djuser');

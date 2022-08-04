@@ -83,7 +83,7 @@ class SurveyController extends Controller
         $question->answers                      = $answers;
         $question->survey_question_description  = $req->survey_question_description;
         $question->save();
-        return redirect('/view_survey_questions/'.$req->survey_id)->with('success','Question Created Successfully!');
+        return redirect('view_survey_questions/'.$req->survey_id)->with('success','Question Created Successfully!');
     }
     function edit_question($id){
     	$question = Questions::find($id);
@@ -96,16 +96,16 @@ class SurveyController extends Controller
         $question->answers                      = $answers;
         $question->survey_question_description  = $req->survey_question_description;
         $question->save();
-        return redirect('/view_survey_questions/'.$req->survey_id)->with('success','Question Details Updated Successfully!');
+        return redirect('view_survey_questions/'.$req->survey_id)->with('success','Question Details Updated Successfully!');
     }
     public function delete_question ($id) {
         $question_id = Questions::where('id',$id)->first();
         $survey_id = $question_id->survey_id;
         if(Questions::where('id', $id)->exists()) {
             $event= Questions::where('id', $id)->delete();
-            return redirect('/view_survey_questions/'.$survey_id)->with('success','Question Details Deleted Successfully!');
+            return redirect('view_survey_questions/'.$survey_id)->with('success','Question Details Deleted Successfully!');
         }else{
-            return redirect('/view_survey_questions/'.$survey_id)->with('error','Question Not Found');
+            return redirect('view_survey_questions/'.$survey_id)->with('error','Question Not Found');
         }
     }
 
@@ -124,7 +124,7 @@ class SurveyController extends Controller
         $answer->question_id = $req->question_id;
         $answer->answer      = $req->answer;
         $answer->save();
-        return redirect('/view_survey_answers/'.$req->question_id)->with('success','Answer Created Successfully!');
+        return redirect('view_survey_answers/'.$req->question_id)->with('success','Answer Created Successfully!');
     }
     function edit_answer($id){
     	$answer = Answers::find($id);
@@ -134,7 +134,7 @@ class SurveyController extends Controller
         $answer               		 = Answers::find($req->id);
         $answer->answer              = $req->answer;
         $answer->save();
-        return redirect('/view_survey_answers/'.$req->question_id)->with('success','Answer Details Updated Successfully!');
+        return redirect('view_survey_answers/'.$req->question_id)->with('success','Answer Details Updated Successfully!');
     }
 
 

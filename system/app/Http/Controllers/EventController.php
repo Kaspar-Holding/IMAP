@@ -173,8 +173,8 @@ class EventController extends Controller
     function event_list_api($id){
         $date = \Carbon\Carbon::today()->subDays(7);
         $event_data = Event::where('created_at','>=',$date)->get();
-        $bookings   = Bookings::where('user_id',$id)->get();
-        return response()->json(['event_list' =>$event_data,'booking_list' =>$bookings,'image_url'=>'http://kaspar.eastus.cloudapp.azure.com/jynx_testing/image/', 'success' => true], 200);
+        $bookings   = Bookings::where('user_id',$id)->orderBy('id', 'DESC')->first();
+        return response()->json(['event_list' =>$event_data,'booking_list' =>[$bookings],'image_url'=>'http://kaspar.eastus.cloudapp.azure.com/jynx_testing/image/', 'success' => true], 200);
     }
     function single_event_api($id){
         $event = Event::find($id);
@@ -182,7 +182,7 @@ class EventController extends Controller
     }
     function get_bookings($id){
         $bookings = Bookings::where('user_id',$id)->orderBy('id', 'DESC')->first();
-        return response()->json(['bookings' =>$bookings,'success' => true], 200);
+        return response()->json(['bookings' =>[$bookings],'success' => true], 200);
     }
     function remove_booking(Request $req){
         $bookings = Bookings::where('id', $req->id)->delete();

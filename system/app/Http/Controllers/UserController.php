@@ -391,6 +391,42 @@ class UserController extends Controller
   function register_new_user(){
     return view("users.register_user");
   }
+  function reset_password(){
+    return view("reset_password");
+  }
+  function update_password(Request $request){
+      $validator = \Validator::make($request->all(), [
+          'password' => 'required|string|max:191',
+          'email' => 'required',
+      ]);
+      if ($validator->fails()) {
+          $responseArr['message'] = $validator->errors();
+          return response()->json($responseArr);
+      }
+      try{
+          $email=$request->email;
+          $password = $request->password;
+          $user_infos=DB::table('user_infos')->select('email')->where('email',$request->email)->first();
+          if (empty($user_infos)) {
+              return ['code'=>'201','status'=>'failed','message'=>'Invalid EMAIL'];
+          }
+          if(!empty($user_infos)){
+            PasswordReset::where('email','=',$request->email)->update([
+              'password'=>$password
+            ]);
+            $password = Hash::make($request->password);
+            user_infos::where('email','=',$request->email)->update([
+              'password'=>$password
+            ]);
+            return view("success");
+            
+          }
+      }catch(\Exception $e){
+          return response()->json(["status"=>"error", "code" => 201, "message"=> $e->getMessage()]);
+      }
+    
+    return view("reset_password");
+  }
   function save_user(Request $req){
     $user_infos = user_infos::where('email','=',$req->email)->get();
     if (sizeof($user_infos) > 0){
@@ -717,7 +753,7 @@ class UserController extends Controller
         }catch(\Exception $e){
             return response()->json(["status"=>"error", "code" => 201, "message"=> $e->getMessage()]);
         }
-    }
+  }
   public function approve_user(Request $req)
   {
     user_infos::where('user_id','=',$req->id)->update([

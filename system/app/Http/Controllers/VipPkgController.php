@@ -116,7 +116,7 @@ class VipPkgController extends Controller
                 }
                 $vip_booking = new Bookings;
                 $vip_booking->booking_type     = "3";
-                $vip_booking->event_id         = $check->event_id;
+                $vip_booking->event_id         = $result['eventId'];
                 $vip_booking->vip_booth_id     = $check->vip_booth_id;
                 $vip_booking->booking_id       = $newcode;
                 $vip_booking->user_id          = $user['id'];
@@ -163,15 +163,7 @@ class VipPkgController extends Controller
                 $message = "You Are Invited For An Event";
                 $this->mobile_push_notification($message,$userFind->player_id);
             }
-            $$vip_booking = new Bookings;
-            $vip_booking->booking_type     = "3";
-            $vip_booking->event_id         = $check->event_id;
-            $vip_booking->vip_booth_id     = $check->vip_booth_id;
-            $vip_booking->booking_id       = $newcode;
-            $vip_booking->user_id          = $user['id'];
-            $vip_booking->booking_user_id  = $result['userId'];
-            $vip_booking->unique_id        = $check->unique_id;
-            $vip_booking->save();
+           
             
         }
         return response()->json(['message' => "Guest List Updated Successfully", 'success' => true], 200);
