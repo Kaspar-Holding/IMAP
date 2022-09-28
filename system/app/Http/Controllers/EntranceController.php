@@ -19,8 +19,10 @@ use Illuminate\Support\Str;
 use App\Models\user_wallets;
 
 use DB;
+use Carbon\Carbon;
 
 use App\Models\Event;
+use App\Models\Entries;
 use App\Models\DjUser;
 use App\Models\VipPkg;
 use App\Models\Bookings;
@@ -445,7 +447,18 @@ class EntranceController extends Controller
             return response()->json(["qr_information"=>[["message"=> "Booking not found!"]]], 404);
         //   return response()->json(["response"=> "Booking not found!"], 404);
         }
-        else{            
+        else{     
+            $booking_infoss = Bookings::where('booking_id','=',$req->booking_id)->first();     
+            $date = Carbon::now();
+            $entry = new Entries ;
+            $entry->user_id = $booking_infoss->user_id;
+            $entry->event_id = $booking_infoss->event_id;
+            if(!empty($req->reason)){
+                $entry->reason = $req->reason;
+            }
+            $entry->entered_at = $date;
+            $entry->save();
+
             // print_r($booking_infos->toArray()[0]);
             // $booking_infos = Bookings::where('booking_id','=',$req->booking_id)->get();
             $combined_user_data = array();
@@ -499,7 +512,7 @@ class EntranceController extends Controller
                 // $combined_user_data['user_details'] = $user_infos->toArray();
                 
                 $combined_user_data = $booking_infos->toArray()[0];
-                $combined_user_data['user_details'] = $user_infos->toArray()[0];
+                $combined_user_data['user_details'] = $user_infos->toArray()[0]; 
                 $combined_user_data["event_details"] = $event_info->toArray()[0];
                 if (sizeof($dha_user_infos) > 0) {
                     // $combined_user_data = array_merge($user_infos->toArray()[0],$dha_user_infos->toArray());

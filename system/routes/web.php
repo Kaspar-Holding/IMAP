@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DjAppController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DJQuestionnaireController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\EventController;
@@ -194,7 +195,26 @@ Route::group(['middleware' =>[
     Route::get('/vip_booking_list' ,  [VipPkgController::class, 'vip_booking_list'])->name('vip_booking_list');
     Route::get('/delete_vip_booking/{id}', [VipPkgController::class, 'delete_vip_booking'])->name('delete_vip_booking');
     
-    }
+    // DJ Questionnaire Routes
+    Route::get('/dj_questionnaire', [DJQuestionnaireController::class, 'dj_questionnaire_list'])->name('dj_questionnaire');
+    // Route::get('/dj_questionnaire_list' ,  [DJQuestionnaireController::class, 'dj_questionnaire_list'])->name('dj_questionnaire_list');
+    Route::get('/add_new_dj_questionnaire', [DJQuestionnaireController::class, 'add_new_dj_questionnaire'])->name('add_new_dj_questionnaire');
+    Route::get('/delete_dj_questionnaire/{id}', [DJQuestionnaireController::class, 'delete_dj_questionnaire'])->name('delete_dj_questionnaire');
+    Route::post('/create_dj_questionnaire',[DJQuestionnaireController::class, 'create_dj_questionnaire'])->name('create_dj_questionnaire');
+    Route::get('/edit_dj_questionnaire/{id}', [DJQuestionnaireController::class, 'edit_dj_questionnaire'])->name('edit_dj_questionnaire');
+    Route::post('/dj_questionnaire_update', [DJQuestionnaireController::class, 'dj_questionnaire_update'])->name('dj_questionnaire_update');
+    Route::get('/view_dj_questionnaire_questions/{id}', [DJQuestionnaireController::class, 'view_dj_questionnaire_questions'])->name('view_dj_questionnaire_questions');
+    Route::get('/add_new_dj_questionnaire_question/{id}', [DJQuestionnaireController::class, 'add_new_dj_questionnaire_question'])->name('add_new_dj_questionnaire_question');
+    Route::post('/create_dj_questionnaire_question',[DJQuestionnaireController::class, 'create_dj_questionnaire_question'])->name('create_dj_questionnaire_question');
+    Route::get('/edit_dj_questionnaire_question/{id}', [DJQuestionnaireController::class, 'edit_dj_questionnaire_question'])->name('edit_dj_questionnaire_question');
+    Route::get('/delete_dj_questionnaire_question/{id}', [DJQuestionnaireController::class, 'delete_dj_questionnaire_question'])->name('delete_dj_questionnaire_question');
+    Route::post('/update_dj_questionnaire_question', [DJQuestionnaireController::class, 'update_dj_questionnaire_question'])->name('update_dj_questionnaire_question');
+    Route::get('/view_dj_questionnaire_answers/{id}', [DJQuestionnaireController::class, 'view_dj_questionnaire_answers'])->name('view_dj_questionnaire_answers');
+    Route::get('/add_new_dj_questionnaire_answer/{id}', [DJQuestionnaireController::class, 'add_new_dj_questionnaire_answer'])->name('add_new_dj_questionnaire_answer');
+    Route::post('/create_dj_questionnaire_answer',[DJQuestionnaireController::class, 'create_dj_questionnaire_answer']);
+    Route::get('/edit_dj_questionnaire_answer/{id}', [DJQuestionnaireController::class, 'edit_dj_questionnaire_answer'])->name('edit_dj_questionnaire_answer');
+    Route::post('/update_dj_questionnaire_answer', [DJQuestionnaireController::class, 'update_dj_questionnaire_answer'])->name('update_dj_questionnaire_answer');    
+}
     
 );
 Route::get('/', [WebsiteController::class, 'get_data'])->name('home');
@@ -203,5 +223,9 @@ Route::get('/privacy_policy', [WebsiteController::class, 'privacy_policy'])->nam
 Route::get('/booth', [WebsiteController::class, 'get_booth'])->name('booth');
 Route::get('/gallery', [WebsiteController::class, 'get_gallery'])->name('gallery');
 Route::get('/club_events', [WebsiteController::class, 'get_clubevent'])->name('club_events');
+
+
+Route::get('/show-map',[DashboardController::class,'showMap'])->name('show-map');
+
 
 

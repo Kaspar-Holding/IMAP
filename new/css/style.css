@@ -55,6 +55,9 @@ body {font-family: 'Poppins', sans-serif;
     color: #1337CF;
     
 }
+.margin_1{
+    margin-left: 1rem;
+}
 .navbar{
     height: 118px;
     text-align: center;
@@ -324,11 +327,11 @@ textarea{
 
   
 
-footer{
+#footer{
     height: 186px;
     
-    background-color: #0d1c5c;
-    background: linear-gradient(180deg, rgba(0, 36, 187, 0.9) 0%, rgba(0, 21, 112) 100%);
+    background-color: rgb(28 138 181);
+    
     backdrop-filter: blur(24px);
     padding-top:67px;
     padding-bottom:67px;

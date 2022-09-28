@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DjAppController;
+use App\Http\Controllers\DJQuestionnaireController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\NewsController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\AdminNotificationController;
 use App\Http\Controllers\VipPkgController;
 use App\Http\Controllers\SplashController;
+use App\Http\Controllers\CouponController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +56,8 @@ Route::post('/register_user' , [UserController::class, 'register_user'])->name('
     Route::post('/update_status' ,  [UserController::class, 'update_status'])->name('update_status');
     Route::post('/wallet_points' ,  [UserController::class, 'wallet_points'])->name('wallet_points');
     
+    Route::get('/dj_questionnaire' ,  [DJQuestionnaireController::class, 'dj_questionnaire_api'])->name('dj_questionnaire_list_api');
+    Route::get('/get_dj_questionnaire_questions' ,  [DJQuestionnaireController::class, 'get_dj_questionnaire_questions'])->name('get_dj_questionnaire_questions');
     Route::get('/survey_list_api' ,  [SurveyController::class, 'survey_list_api'])->name('survey_list_api');
     Route::get('/get_questions_against_survey/{survey_id}/{user_id}' ,  [SurveyController::class, 'get_questions_against_survey'])->name('get_questions_against_survey');
     Route::post('/survey_completed' ,  [SurveyController::class, 'survey_completed'])->name('survey_completed');
@@ -156,4 +160,10 @@ Route::post('/register_user' , [UserController::class, 'register_user'])->name('
      Route::get('/dashboard_count', [DashboardController::class, 'get_data_count_api'])->name('dashboard_count'); 
      Route::post('/dashboard_count_date', [DashboardController::class, 'get_data_count_date_api'])->name('dashboard_count_date'); 
      Route::get('/dashboard_count_now', [DashboardController::class, 'get_data_count_now'])->name('dashboard_count_now'); 
-    
+
+
+     // Coupons
+
+    Route::post('/create_coupon', [CouponController::class, 'create_coupon'])->name('create_coupon'); 
+    Route::post('/validate_coupon', [CouponController::class, 'validate_coupon'])->name('validate_coupon'); 
+    Route::post('/coupon_usage', [CouponController::class, 'coupon_usage'])->name('coupon_usage'); 

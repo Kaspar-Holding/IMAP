@@ -33,6 +33,7 @@ class DashboardController extends Controller
                 $total_qr         = Bookings::whereNotNull('booking_id')->where('created_at', '>=', $get_from_date_value.' 00:00:00')->get();
                 $total_qr_exit    = Bookings::whereNotNull('exit_at')->where('created_at', '>=', $get_from_date_value.' 00:00:00')->get();
                 $points           = user_wallets::where('created_at', '>=', $get_from_date_value.' 00:00:00')->sum('user_wallets.available_points');
+                $event = Event::all();
                 $points_redeem    = Purchase::where('created_at', '>=', $get_from_date_value.' 00:00:00')->sum('purchase.item_price');
             }
             else if($get_to_date_value < $get_from_date_value){
@@ -50,6 +51,8 @@ class DashboardController extends Controller
                 $total_qr_exit    = Bookings::whereNotNull('exit_at')->whereDate('created_at','>=',$get_from_date_value)->whereDate('created_at','<=',$get_to_date_value)->get();
                 $points           = user_wallets::whereDate('created_at','>=',$get_from_date_value)->whereDate('created_at','<=',$get_to_date_value)->sum('user_wallets.available_points');
                 $points_redeem    = Purchase::whereDate('created_at','>=',$get_from_date_value)->whereDate('created_at','<=',$get_to_date_value)->sum('purchase.item_price');
+                $event    = Event::all();
+               
             }
             
             
@@ -60,6 +63,8 @@ class DashboardController extends Controller
             $invalid_users    = user_infos::where('user_status',2)->where('created_at', '>=', $get_from_date_value.' 00:00:00')->get();
             $valid_users      = user_infos::where('user_status',1)->where('created_at', '>=', $get_from_date_value.' 00:00:00')->get();
             $qr_scans         = Bookings::whereNotNull('enter_at')->where('created_at', '>=', $get_from_date_value.' 00:00:00')->get();
+            $event    = Event::all();
+            
             $total_qr         = Bookings::whereNotNull('booking_id')->where('created_at', '>=', $get_from_date_value.' 00:00:00')->get();
             $total_qr_exit    = Bookings::whereNotNull('exit_at')->where('created_at', '>=', $get_from_date_value.' 00:00:00')->get();
             $points           = user_wallets::where('created_at', '>=', $get_from_date_value.' 00:00:00')->sum('user_wallets.available_points');
@@ -72,6 +77,8 @@ class DashboardController extends Controller
             $invalid_users    = user_infos::where('user_status',2)->where('created_at', '>=', $get_to_date_value.' 00:00:00')->get();
             $valid_users      = user_infos::where('user_status',1)->where('created_at', '>=', $get_to_date_value.' 00:00:00')->get();
             $qr_scans         = Bookings::whereNotNull('enter_at')->where('created_at', '>=', $get_to_date_value.' 00:00:00')->get();
+            $event    = Event::all();
+          
             $total_qr         = Bookings::whereNotNull('booking_id')->where('created_at', '>=', $get_to_date_value.' 00:00:00')->get();
             $total_qr_exit    = Bookings::whereNotNull('exit_at')->where('created_at', '>=', $get_to_date_value.' 00:00:00')->get();
             $points           = user_wallets::where('created_at', '>=', $get_to_date_value.' 00:00:00')->sum('user_wallets.available_points');
@@ -83,6 +90,7 @@ class DashboardController extends Controller
             $valid_users      = user_infos::where('user_status',1)->get();
             $qr_scans         = Bookings::whereNotNull('enter_at')->get();
             $total_qr         = Bookings::whereNotNull('booking_id')->get();
+            $event            = Event::pluck('id');
             $total_qr_exit    = Bookings::whereNotNull('exit_at')->get();
             $points           = user_wallets::sum('user_wallets.available_points');
             $points_redeem    = Purchase::sum('purchase.item_price');
@@ -101,7 +109,7 @@ class DashboardController extends Controller
             $october = user_infos::whereBetween('updated_at', [$times.'10-'.'01',$times.'10-'.'31'])->count();
             $november = user_infos::whereBetween('updated_at', [$times.'11-'.'01',$times.'11-'.'31'])->count();
             $december = user_infos::whereBetween('updated_at', [$times.'12-'.'01',$times.'12-'.'31'])->count();
-        return view("dashboard",['registered_users'=>$registered_users,'pending_users'=>$pending_users,'invalid_users'=>$invalid_users,'valid_users'=>$valid_users,'qr_scans'=>$qr_scans,'total_qr'=>$total_qr,'total_qr_exit'=>$total_qr_exit,'points'=>$points,'points_redeem'=>$points_redeem,'january'=>$january,'feburary'=>$feburary,'march'=>$march,'april'=>$april,'may'=>$may,'june'=>$june,'july'=>$july,'august'=>$august,'september'=>$september,'october'=>$october,'november'=>$november,'december'=>$december,'from_date'=>$get_from_date_value, 'to_date'=>$get_to_date_value]);
+        return view("dashboard",['registered_users'=>$registered_users,'events'=>$event,'pending_users'=>$pending_users,'invalid_users'=>$invalid_users,'valid_users'=>$valid_users,'qr_scans'=>$qr_scans,'total_qr'=>$total_qr,'total_qr_exit'=>$total_qr_exit,'points'=>$points,'points_redeem'=>$points_redeem,'january'=>$january,'feburary'=>$feburary,'march'=>$march,'april'=>$april,'may'=>$may,'june'=>$june,'july'=>$july,'august'=>$august,'september'=>$september,'october'=>$october,'november'=>$november,'december'=>$december,'from_date'=>$get_from_date_value, 'to_date'=>$get_to_date_value]);
     }
     function get_data_count_api(){
         $get_from_date_value        = \request()->get('from_date');
@@ -286,8 +294,59 @@ class DashboardController extends Controller
            
         return  response()->json(['bookings'=>COUNT($bookings),'events'=>COUNT($events),'purchases'=>COUNT($purchases),'current'=>COUNT($current),'exit'=>COUNT($exit)]);
     }
+    function get_event_booking_count(Request $req){
+        $type = "application/json";
+        $result = json_decode(file_get_contents("php://input"), true);
+        $get_from_date_value        = $result['from_date'];
+        $get_to_date_value          = $result['to_date'];
+        if($get_from_date_value && $get_to_date_value) {
+
+            
+           
+            $booking_count         = Bookings::whereNotNull('booking_id')->whereBetween('created_at', [$get_from_date_value, $get_to_date_value])->get();
+            $event_labels                = Event::whereNotNull('id')->whereBetween('created_at', [$get_from_date_value, $get_to_date_value])->get();
+        }elseif($get_to_date_value || !empty($get_to_date_value)) {
+            $booking_count        = Bookings::whereNotNull('booking_id')->where('created_at', $get_from_date_value)->get();
+            $event_labels         = Event::whereNotNull('id')->where('created_at', $get_from_date_value)->get();
+        }elseif($get_to_date_value || !empty($get_to_date_value)) {
+            $booking_count         = Bookings::whereNotNull('booking_id')->where('created_at', $get_to_date_value)->get();
+            $event_labels          = Event::whereNotNull('id')->where('created_at', $get_to_date_value)->get();
+        }else{
+            $booking_count    = Bookings::whereNotNull('booking_id')->get();
+            $event_labels     = Event::whereNotNull('id')->get();
+            
+        }
+            $times            = Carbon::now()->format('Y-');
+            $january = Bookings::whereBetween('updated_at', [$times.'01-'.'01',$times.'01-'.'31'])->count();
+            $feburary = Bookings::whereBetween('updated_at', [$times.'02-'.'01',$times.'02-'.'31'])->count();
+            $march = Bookings::whereBetween('updated_at', [$times.'03-'.'01',$times.'03-'.'31'])->count();
+            $april = Bookings::whereBetween('updated_at', [$times.'04-'.'01',$times.'04-'.'31'])->count();
+            $may = Bookings::whereBetween('updated_at', [$times.'05-'.'01',$times.'05-'.'31'])->count();
+            $june = Bookings::whereBetween('updated_at', [$times.'06-'.'01',$times.'06-'.'31'])->count();
+            $july = Bookings::whereBetween('updated_at', [$times.'07-'.'01',$times.'07-'.'31'])->count();
+            $august = Bookings::whereBetween('updated_at', [$times.'08-'.'01',$times.'08-'.'31'])->count();
+            $september = Bookings::whereBetween('updated_at', [$times.'09-'.'01',$times.'09-'.'31'])->count();
+            $october = Bookings::whereBetween('updated_at', [$times.'10-'.'01',$times.'10-'.'31'])->count();
+            $november = Bookings::whereBetween('updated_at', [$times.'11-'.'01',$times.'11-'.'31'])->count();
+            $december = Bookings::whereBetween('updated_at', [$times.'12-'.'01',$times.'12-'.'31'])->count();
+        return  response()->json(['bookings'=>$booking_count,'total_qr_exit'=>$event_labels,'january'=>$january,'feburary'=>$feburary,'march'=>$march,'april'=>$april,'may'=>$may,'june'=>$june,'july'=>$july,'august'=>$august,'september'=>$september,'october'=>$october,'november'=>$november,'december'=>$december,'from_date'=>$get_from_date_value, 'to_date'=>$get_to_date_value]);
+    }
+    public function showMap(){
+        $labelss    = DB::table('events')->select('event_name')->get();
+        $list = array();
+        $arr=array( $labelss);// This is the original array
+        foreach($arr as $k=>$v ){
+            array_push($list,$v);
+            }
+            $labels = $list;
+               $price = ['10', '5', '100', '90', '50', '30'];
+      
+        
+        return view('show_graph',['labels' => $labels,'price'=>$price]);
+    }
+
     function Dashboard(){
-        return view("dashboard.main");
+        return view("dashboard.main"); 
     }
     function layout(){
         return view("layout");

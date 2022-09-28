@@ -288,20 +288,71 @@
                               </div>
                            </div>
                         </div>
+                        
                         <div class="row full margin_bottom_30 column3" style="padding-left:10px;">
-                        <div class="col-sm-4 my-col">
+                           <div class="col-sm-4 my-col">
+                              <div class="white_shd"> 
+                                 <div class="loader row">
+                                    <progress id="send" value="{{ count($qr_scans) }}" max="{{ count($total_qr) }}"></progress>
+                                    <progress id="recv" value="{{ count($total_qr_exit) }}" max="{{ count($total_qr) }}"></progress>
+                                    <button style="font-size:13px;" class="start-btn" id="btn">Total Codes <br/> Generated <br/> <span style="color: #6BEAEC; padding-top:5px;">{{ count($total_qr) }}</span></button>
+                                 </div>
+                                 <div class="row  box-row1" style="margin-top:40px;">
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-8">
+                                    <p class="fp"><span class="online_animation-red"></span> Total Codes Scanned For Entery</p>
+                                    </div>
+                                    <div class="col-sm-1 fp" style="color: #6BEAEC; padding-top:5px;">{{count($qr_scans)}}</div>
+                                    <div class="col-sm-2"></div>
+                                 </div>
+                                 <div class="row  box-row1 load">
+                                    <div class="col-sm-1"></div>
+                                    <div class="col-sm-8">
+                                    <p  class="fp"><span class="online_animation-blue"></span> Total Codes Scanned To Exit</p>
+                                    </div>
+                                    <div class="col-sm-1 fp" style="color: #6BEAEC; padding-top:5px;">{{ count($total_qr_exit) }}</div>
+                                    <div class="col-sm-2"></div>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="col-sm-4 my-col">
                            <div class="white_shd"> 
                               <div class="loader row">
-                                 <progress id="send" value="{{ count($qr_scans) }}" max="{{ count($total_qr) }}"></progress>
-                                 <progress id="recv" value="{{ count($total_qr_exit) }}" max="{{ count($total_qr) }}"></progress>
-                                 <button style="font-size:13px;" class="start-btn" id="btn">Total Codes <br/> Generated <br/> <span style="color: #6BEAEC; padding-top:5px;">{{ count($total_qr) }}</span></button>
+                                 <progress id="send" value="{{ count($pending_users) }}" max="{{ count($registered_users) }}"></progress>
+                                 <progress id="recv" value="{{ count($valid_users) }}" max="{{ count($registered_users) }}"></progress>
+                                 <button style="font-size:13px;" class="start-btn" id="btn">Total Users <span style="color: #6BEAEC; padding-top:5px;">{{ count($registered_users) }}</span></button>
                               </div>
                               <div class="row  box-row1" style="margin-top:40px;">
                                  <div class="col-sm-1"></div>
                                  <div class="col-sm-8">
+                                 <p class="fp"><span class="online_animation-red"></span> Total New Users</p>
+                                 </div>
+                                 <div class="col-sm-1 fp" style="color: #6BEAEC; padding-top:5px;">{{ count($pending_users) }}</div>
+                                 <div class="col-sm-2"></div>
+                              </div>
+                              <div class="row  box-row1 load">
+                                 <div class="col-sm-1"></div>
+                                 <div class="col-sm-8">
+                                 <p  class="fp"><span class="online_animation-blue"></span> Total Active Users</p>
+                                 </div>
+                                 <div class="col-sm-1 fp" style="color: #6BEAEC; padding-top:5px;">{{ count($valid_users) }}</div>
+                                 <div class="col-sm-2"></div>
+                              </div>
+                           </div>
+                           </div>
+                           <div class="col-sm-4 my-col">
+                           <div class="white_shd"> 
+                              <div class="loader row">
+                                 <progress id="send" value="60" max="100"></progress>
+                                 <progress id="recv" value="80" max="100"></progress>
+                                 <button style="font-size:13px;" class="start-btn" id="btn">Total Codes <br/> Generated <br/> <span style="color: #6BEAEC; padding-top:5px;">42459</span></button>
+                              </div>
+                              <div class="row box-row1" style="margin-top:40px;">
+                                 <div class="col-sm-1"></div>
+                                 <div class="col-sm-8">
                                  <p class="fp"><span class="online_animation-red"></span> Total Codes Scanned For Entery</p>
                                  </div>
-                                 <div class="col-sm-1 fp" style="color: #6BEAEC; padding-top:5px;">{{count($qr_scans)}}</div>
+                                 <div class="col-sm-1 fp" style="color: #6BEAEC; padding-top:5px;">14658</div>
                                  <div class="col-sm-2"></div>
                               </div>
                               <div class="row  box-row1 load">
@@ -309,62 +360,58 @@
                                  <div class="col-sm-8">
                                  <p  class="fp"><span class="online_animation-blue"></span> Total Codes Scanned To Exit</p>
                                  </div>
-                                 <div class="col-sm-1 fp" style="color: #6BEAEC; padding-top:5px;">{{ count($total_qr_exit) }}</div>
+                                 <div class="col-sm-1 fp" style="color: #6BEAEC; padding-top:5px;">14658</div>
                                  <div class="col-sm-2"></div>
                               </div>
                            </div>
-                        </div>
-                        <div class="col-sm-4 my-col">
-                        <div class="white_shd"> 
-                           <div class="loader row">
-                              <progress id="send" value="{{ count($pending_users) }}" max="{{ count($registered_users) }}"></progress>
-                              <progress id="recv" value="{{ count($valid_users) }}" max="{{ count($registered_users) }}"></progress>
-                              <button style="font-size:13px;" class="start-btn" id="btn">Total Users <span style="color: #6BEAEC; padding-top:5px;">{{ count($registered_users) }}</span></button>
                            </div>
-                           <div class="row  box-row1" style="margin-top:40px;">
-                              <div class="col-sm-1"></div>
-                              <div class="col-sm-8">
-                              <p class="fp"><span class="online_animation-red"></span> Total New Users</p>
+                           <div class="col-md-l2 col-lg-12">
+                              <div class=" full row">
+                                 <div class="full graph_head">
+                                    <div class="heading1 ">
+                                       <h2>Events Booking Count</h2>
+                                    </div>
+                                 </div>
+                                 <div class="full graph_revenue">
+                                    <div class="row">
+                                       <div class="col-md-12">
+                                          <div class="content">
+                                             <div class="table_section padding_infor_info white_shd margin_1">
+                                                <div class="table-responsive-sm">
+                                                   <table class="table table-striped">
+                                                      <thead>
+                                                         <tr>
+                                                            <th>#</th>
+                                                            <th>Event Name</th>
+                                                            <th>Booking Count</th>
+                                                            
+                                                         </tr>
+                                                      </thead>
+                                                      <tbody>
+                                                         <?php $count = 1;?>
+                                                         @foreach ($events as $event_id)
+                                                         <tr>
+                                                            <td class="text-capitalize">{{$count}}</td>
+                                                           <td class="text-capitalize">{{$event_id['id']}}</td>
+                                                           <td class="text-capitalize">sad</td>
+                                                          
+                                                           
+                                                         </tr>
+                                                         <?php $count = $count+1;?>
+                                                         @endforeach
+                                                      </tbody>
+                                                   </table>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
                               </div>
-                              <div class="col-sm-1 fp" style="color: #6BEAEC; padding-top:5px;">{{ count($pending_users) }}</div>
-                              <div class="col-sm-2"></div>
                            </div>
-                           <div class="row  box-row1 load">
-                              <div class="col-sm-1"></div>
-                              <div class="col-sm-8">
-                              <p  class="fp"><span class="online_animation-blue"></span> Total Active Users</p>
-                              </div>
-                              <div class="col-sm-1 fp" style="color: #6BEAEC; padding-top:5px;">{{ count($valid_users) }}</div>
-                              <div class="col-sm-2"></div>
-                           </div>
+                           
                         </div>
-                        </div>
-                        <div class="col-sm-4 my-col">
-                        <div class="white_shd"> 
-                           <div class="loader row">
-                              <progress id="send" value="60" max="100"></progress>
-                              <progress id="recv" value="80" max="100"></progress>
-                              <button style="font-size:13px;" class="start-btn" id="btn">Total Codes <br/> Generated <br/> <span style="color: #6BEAEC; padding-top:5px;">42459</span></button>
-                           </div>
-                           <div class="row box-row1" style="margin-top:40px;">
-                              <div class="col-sm-1"></div>
-                              <div class="col-sm-8">
-                              <p class="fp"><span class="online_animation-red"></span> Total Codes Scanned For Entery</p>
-                              </div>
-                              <div class="col-sm-1 fp" style="color: #6BEAEC; padding-top:5px;">14658</div>
-                              <div class="col-sm-2"></div>
-                           </div>
-                           <div class="row  box-row1 load">
-                              <div class="col-sm-1"></div>
-                              <div class="col-sm-8">
-                              <p  class="fp"><span class="online_animation-blue"></span> Total Codes Scanned To Exit</p>
-                              </div>
-                              <div class="col-sm-1 fp" style="color: #6BEAEC; padding-top:5px;">14658</div>
-                              <div class="col-sm-2"></div>
-                           </div>
-                        </div>
-                        </div>
-                        
+                       
                      <!-- end graph -->
                   </div>
                      </div>
@@ -385,5 +432,7 @@
     <input type="hidden" id="november" value="{{ $november }}">
     <input type="hidden" id="december" value="{{ $december }}">
     <input type="hidden" id="qr_code_scan" value="{{ count($qr_scans) }}">
+
+   
                 
 @stop

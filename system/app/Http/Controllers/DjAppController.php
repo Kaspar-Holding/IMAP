@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\UserEmails;
 use App\Models\DjUser;
 use App\Models\Genre;
+use App\Models\Sub_Genre;
 use App\Models\DjAgreement;
+use App\Models\DjAnswers;
 use App\Models\EventReject;
 use App\Models\Event;
 use App\Models\Bookings;
@@ -42,11 +44,25 @@ class DjAppController extends Controller
               $djusers->email            = $result['email'];
               $djusers->password         = Hash::make($result['password']);
               $djusers->phone_number     = $result['phone_number'];
-              $djusers->music_genre     = $result['music_genre'];
+              $djusers->music_genre     = "No genre";
+             
               $djusers->gender           = $result['gender'];
               $djusers->representation           = $result['representation'] ;
               $djusers->save();
               $lastId = $djusers->id;  
+              
+              $answers = json_decode(file_get_contents("php://input"), true);
+              foreach ($result['answers'] as $arr) { 
+                $dj_questionnaire_answers = new DJAnswers;
+                $dj_questionnaire_answers->dj_questionnaire_id = 12;
+                $dj_questionnaire_answers->question_id = $arr['question_id'];
+                $dj_questionnaire_answers->answer = $arr['answer'];
+                $dj_questionnaire_answers->dj_id = $lastId;
+                $dj_questionnaire_answers->save();                
+                # code...
+              }
+
+              
                 
             return response()->json(["message" => "User Registered Successfully", "status" => "1",'id' => $lastId],200);
           }else{
@@ -147,10 +163,17 @@ class DjAppController extends Controller
   }
     function music_genre() {
       $type = "application/json";
-        
       $music_genre = Genre::select('id','music_genre')->get(); 
+      $p = array();
+      foreach($music_genre as  $row){
+        $music_id = $row['id'];
+        $sub_genre = Sub_Genre::where('id', $music_id)->get();
+        $row['sub_genre'] = $sub_genre;
+        array_push($p, $row);
+      }
       
-      return response()->json(['genre_list' =>$music_genre, 'status' => "1"], 200);
+      
+      return response()->json(['genre_list' =>$p,'status' => "1"], 200);
   }
   function dj_agreement_status_check() {
     $type = "application/json";
@@ -269,6 +292,7 @@ class DjAppController extends Controller
       $djusers->password         = Hash::make($req->password);
       $djusers->phone_number     = $req->phone_number;
       $djusers->music_genre      = $req->music_genre;
+     
       $djusers->gender           = $req->gender;
       $djusers->representation      = $req->representation;
       // if ($req->hasFile('picture')) {
@@ -295,7 +319,7 @@ class DjAppController extends Controller
     $event = Event::where('id','=',$result['event_id'])->get();
     return response()->json(["event_list" => $event], 200);
   }
-  public function update_password(Request $req){
+  public function update_password(Request $req){ 
     $type = "application/json";
     $result = json_decode(file_get_contents("php://input"), true);
     $email_login = DjUser::where('email','=',$result['phone_number'])->first();

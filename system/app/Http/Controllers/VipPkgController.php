@@ -80,7 +80,8 @@ class VipPkgController extends Controller
     function vip_booth_booking_api(Request $req){
         $unique_id = str::random(20);
         $result = json_decode(file_get_contents("php://input"), true);
-        $check = Bookings::where("event_id",$result['eventId'])->where("vip_booth_id",$result['packageId'])->where("user_id",$result['userId'])->first();
+        $check = Bookings::where("event_id",$result['eventId'])->where("user_id",$result['userId'])->first();
+        
         if(empty($check)){
             $decodes = json_encode($result['users']);
             $code = str::random(30);
@@ -114,23 +115,19 @@ class VipPkgController extends Controller
                     $message = "You Are Invited For An Event";
                     $this->mobile_push_notification($message,$userFind->player_id);
                 }
-                $vip_booking = new Bookings;
-                $vip_booking->booking_type     = "3";
-                $vip_booking->event_id         = $result['eventId'];
-                $vip_booking->vip_booth_id     = $check->vip_booth_id;
-                $vip_booking->booking_id       = $newcode;
-                $vip_booking->user_id          = $user['id'];
-                $vip_booking->booking_user_id  = $result['userId'];
-                $vip_booking->unique_id        = $check->unique_id;
-                $vip_booking->save();
+               
                 
             }
             return response()->json(['qr_code' => $code, 'success' => true], 200);
         }else{
-            $message = "Booking Already Created";
+            $decodes = json_encode($result['users']);
+            Bookings::where('id','=',$check->id)->update([
+            'guest_lists'=>$decodes,
+            ]);
+            $message = "Booking List Updated";
             $userFind = user_infos::where('user_id',$result['userId'])->first();
             $this->mobile_push_notification($message,$userFind->player_id);
-            return response()->json(['message' => "Booking Already Created",'qr_code' => $check->booking_id, 'error' => true], 201);
+            return response()->json(['message' => "Booking List Updated",'qr_code' => $check->booking_id, 'success' => true], 200);
         }
     }
     function update_vip_booth_booking_api(Request $req){

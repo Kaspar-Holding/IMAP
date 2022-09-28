@@ -53,7 +53,7 @@ a:hover, a:active, a:focus {
 
 p {
   padding: 0;
-  margin: 0 0 30px 0;
+  margin: 0 0 8px 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -185,7 +185,6 @@ h1, h2, h3, h4, h5, h6 {
   padding: 20px 0;
   height: 90px;
   /* Rectangle 54 */
-background: linear-gradient(180deg, rgba(0, 36, 187, 0.9) 0%, rgba(0, 21, 112) 100%);
  backdrop-filter:blur(24px);  
 
 
@@ -855,7 +854,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 .inner-block{
   height:224.61px;
   width:369.45px;
-  background-image:linear-gradient(180deg, rgba(0, 36, 187, 0.72) 0%, rgba(0, 21, 112, 0.4) 100%);
+  
   bottom: 0;
   left: 0;
   position: absolute;
@@ -913,7 +912,6 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 .content button{
   padding: 15px 25px;
-  background:linear-gradient(180deg, rgba(20,47,190, 0.94) 0%, rgba(6,44, 248, 0.94)100%);
   color: #fff;
   border: 1px solid #1337CF;
   margin-top:35px;
@@ -1001,8 +999,9 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #footer{
-  background: linear-gradient(180deg, rgba(0,36,187,0.72) 0%, rgba(0,21,112,0.4) 100%);
+  
   backdrop-filter: blur(24px);
+  background-color: rgb(28 138 181);
   padding: 30px 0;
   color: #fff;
 }
@@ -1063,7 +1062,7 @@ line-height: 38px;
 }
 .event button{
 padding: 10px 30px;
-background:linear-gradient(180deg, rgba(20,47,190, 0.94) 0%, rgba(6,44, 248, 0.94)100%);
+
 color: #fff;
 border: 1px solid #1337CF;
 margin-top:195px;
@@ -1091,7 +1090,7 @@ letter-spacing: 1px;
 }
 .booth button{
   padding: 10px 30px;
-  background:linear-gradient(180deg, rgba(20,47,190, 0.94) 0%, rgba(6,44, 248, 0.94)100%);
+  
   color: #fff;
   border: 1px solid #1337CF;
   margin-top:80px;
@@ -1148,7 +1147,7 @@ letter-spacing: 1px;
    }
   .content button{
     padding: 15px 25px;
-    background:linear-gradient(180deg, rgba(20,47,190, 0.94) 0%, rgba(6,44, 248, 0.94)100%);
+    
     color: #fff;
     border: 1px solid #1337CF;
     margin-top:54.5px;
@@ -1296,7 +1295,7 @@ letter-spacing: 1px;
       }
     .event button{
         padding: 10px 30px;
-        background:linear-gradient(180deg, rgba(20,47,190, 0.94) 0%, rgba(6,44, 248, 0.94)100%);
+        
         color: #fff;
         border: 1px solid #1337CF;
         margin-top:22px!important;
@@ -1316,7 +1315,7 @@ letter-spacing: 1px;
       }
       .booth button{
         padding: 10px 30px;
-        background:linear-gradient(180deg, rgba(20,47,190, 0.94) 0%, rgba(6,44, 248, 0.94)100%);
+        
         color: #fff;
         border: 1px solid #1337CF;
         margin-top:22px!important;
@@ -1468,7 +1467,6 @@ letter-spacing: 1px;
   .inner-block{
   height:210.61px;
   width:350px;
-  background-image:linear-gradient(180deg, rgba(0, 36, 187, 0.72) 0%, rgba(0, 21, 112, 0.4) 100%);
   bottom: 0;
   left: 0;
   position: absolute;
@@ -1497,7 +1495,6 @@ margin-bottom: 40px!important;
   }
 .event button{
     padding: 10px 30px;
-    background:linear-gradient(180deg, rgba(20,47,190, 0.94) 0%, rgba(6,44, 248, 0.94)100%);
     color: #fff;
     border: 1px solid #1337CF;
     margin-top:22px!important;
@@ -1522,7 +1519,6 @@ margin-bottom: 40px!important;
     }
   .booth button{
       padding: 10px 30px;
-      background:linear-gradient(180deg, rgba(20,47,190, 0.94) 0%, rgba(6,44, 248, 0.94)100%);
       color: #fff;
       border: 1px solid #1337CF;
       margin-top:22px!important;

@@ -147,13 +147,14 @@ class EventController extends Controller
         
     }
     function create_qr_code_event(Request $req){
+       
         $check = Bookings::where('event_id',$req->event_id)->where('user_id',$req->user_id)->where('status','Qr Code Created')->first();
         if(!empty($check)){
             return response()->json(['message' => "Qr Code Already Created",'qr_code' => $check->booking_id,'qr_code_expires_at'=>$check->qr_code_expires_at, 'error' => true,'code'=>'201'], 201);
         }else{
             $return_code = str::random(30);
             $tomorrow = date("Y-m-d H:i:s", strtotime('+1 day'));
-            $event = Bookings::where('event_id',$req->event_id)->where('user_id',$req->user_id)->first();
+            $event = new Bookings;
             $event->event_id              = $req->event_id;
             $event->user_id               = $req->user_id;
             $event->booking_id            = $return_code;
@@ -173,15 +174,19 @@ class EventController extends Controller
     function event_list_api($id){
         $date = \Carbon\Carbon::today()->subDays(7);
         $event_data = Event::where('created_at','>=',$date)->get();
-        $bookings   = Bookings::where('user_id',$id)->orderBy('id', 'DESC')->first();
-        return response()->json(['event_list' =>$event_data,'booking_list' =>[$bookings],'image_url'=>'http://kaspar.eastus.cloudapp.azure.com/jynx_testing/image/', 'success' => true], 200);
+        $bookings   = Bookings::where('user_id',$id)->get();
+        if(!empty($bookings)){
+            return response()->json(['event_list' =>$event_data,'booking_list' =>$bookings,'image_url'=>'http://kaspar.eastus.cloudapp.azure.com/jynx_testing/image/', 'success' => true], 200);
+        }
+        return response()->json(['event_list' =>$event_data,'booking_list' =>[],'image_url'=>'http://kaspar.eastus.cloudapp.azure.com/jynx_testing/image/', 'success' => true], 200);
     }
     function single_event_api($id){
         $event = Event::find($id);
          return response()->json(['event' =>$event,'image_url'=>'http://kaspar.eastus.cloudapp.azure.com/jynx_testing/image/', 'success' => true], 200);
     }
     function get_bookings($id){
-        $bookings = Bookings::where('user_id',$id)->orderBy('id', 'DESC')->first();
+      
+        $bookings = Bookings::where('user_id',$id)->get();
         return response()->json(['bookings' =>[$bookings],'success' => true], 200);
     }
     function remove_booking(Request $req){

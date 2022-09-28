@@ -50,8 +50,17 @@
                   <div class="col-md-6">
                     <label class="form-label">Music Genre </label>
                     <select name="music_genre" id="music_genre"  class="form-control" required >
-                      <option value="jazz">Jazz</option>
+                      <option value="jazz">House</option>
                       <option value="opera">Opera</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row"style="margin-top:10px;" >
+                  <div class="col-md-6">
+                    <label class="form-label">Sub Genre </label>
+                    <select name="music_genre" id="music_genre"  class="form-control" required >
+                      <option value="jazz">Bassline</option>
+                      <option value="opera">Hard Tock</option>
                     </select>
                   </div>
                 </div>

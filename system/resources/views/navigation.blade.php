@@ -67,6 +67,7 @@
         <ul class="collapse list-unstyled" id="element3">
             <li><a href="{{ route('register_new_djuser') }}"> <span>Register New Dj User</span></a></li>
             <li><a href="{{ route('admin_djlist') }}"> <span>All Dj Users</span></a></li>
+            <li><a href="{{ route('dj_questionnaire') }}"> <span>DJ Questionnaire</span></a></li>
         </ul>
       </li>
       <li>
