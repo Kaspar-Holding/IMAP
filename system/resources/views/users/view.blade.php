@@ -90,7 +90,7 @@
                             </div>
                         </div>
                         <div class="row p-3">
-                            <div class="col-6">
+                            <div class="col-6"> 
                                 <h5>Date of Birth:</h5>
                             </div>
                             <div class="col-6">
@@ -206,7 +206,7 @@
                                 <div class="row p-3">
                                     <div class="col-12">
                                         <div class="d-flex justify-content-center">
-                                            <a href="/fetch_dha_profile/{{$user->user_id}}" type="submit" class="btn btn-primary link-light col-sm-4">Fetch DHA Information</a>
+                                            <a href="{{route('fetch_dha_profile',$user->user_id)}}" type="submit" class="btn btn-primary link-light col-sm-4">Fetch DHA Information</a>
                                         </div>
                                     </div>
                                 </div>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\UserEmails;
 use App\Models\DjUser;
+use App\Models\Dj_Dha_Address;
+use App\Models\Dj_Dha_profile;
 use App\Models\Genre;
 use App\Models\Sub_Genre;
 use App\Models\DjAgreement;
@@ -33,10 +35,7 @@ class DjAppController extends Controller
           return response()->json(["message" => "Phone Number already exists!", "status" => "2"], 404);
         }
         else{
-          
-          
-          
-          if ($result['password'] == $result['c_password']) {
+          if ($result['password'] == $result['c_password']) { 
              
               $djusers = new DjUser;
               $djusers->first_name       = $result['first_name'];
@@ -47,11 +46,33 @@ class DjAppController extends Controller
               $djusers->music_genre     = "No genre";
              
               $djusers->gender           = $result['gender'];
+              $djusers->passport_id           = $result['passport_id'];
+              $djusers->southAfrican_id           = $result['southAfrican_id'];
               $djusers->representation           = $result['representation'] ;
+              $djusers->dj_name           = $result['dj_name'];
+              if (!empty($result['dj_picture'])){
+                $image = $result['dj_picture'];
+                $image = str_replace('data:image/png;base64,', '', $image);
+                $image = str_replace(' ', '+', $image);
+                $image = base64_decode($image);
+                $pic             = time().'.'.'png';  
+                file_put_contents(public_path('image')."/".$pic,$image );
+                // $image->move(public_path('image'), $pic);
+                $djusers->profile_image = $pic;
+              }
+              if (!empty($result['dj_logo'])){
+                $logo_image = $result['dj_logo'];
+                $logo_image = str_replace('data:image/png;base64,', '', $logo_image);
+                $logo_image = str_replace(' ', '+', $logo_image);
+                $logo_image = base64_decode($logo_image);
+                $logo_pic             = time().'.'.'png';  
+                file_put_contents(public_path('image')."/".$logo_pic,$logo_image );
+                // $image->move(public_path('image'), $pic);
+                $djusers->logo_image = $logo_pic;
+              }
               $djusers->save();
               $lastId = $djusers->id;  
               
-              $answers = json_decode(file_get_contents("php://input"), true);
               foreach ($result['answers'] as $arr) { 
                 $dj_questionnaire_answers = new DJAnswers;
                 $dj_questionnaire_answers->dj_questionnaire_id = 12;
@@ -61,9 +82,6 @@ class DjAppController extends Controller
                 $dj_questionnaire_answers->save();                
                 # code...
               }
-
-              
-                
             return response()->json(["message" => "User Registered Successfully", "status" => "1",'id' => $lastId],200);
           }else{
             return response()->json(["message" => "Passwords Didn't Matched", "status" => "0"], 404);
@@ -107,6 +125,114 @@ class DjAppController extends Controller
 
       return response()->json(["message" => "User logged in Successfully", "status" => "1","id"=>$user_id,"name"=>$user_first_name.' '.$user_last_name],201);
   }
+  public function fetch_dj_dha_profile(Request $req)
+  {
+    $dha_info = Dj_Dha_profile::where('dj_id','=',$req->id)->get();
+    if (sizeof($dha_info) == 0){
+        $data_array = array();
+        $data_array['Token'] = "9a88abd8-2f4a-4f6f-bbcf-22755254f89b";
+        $data_array['Username'] = "Jynx";
+        $data_array['Password'] = "Pass12345";
+        $data_array['TransactionReference'] = "Your internal reference";
+        $user_infos = DjUser::where('id','=',$req->id)->first();
+        if($user_infos->southAfrican_id){
+          $data_array['idNumber'] = $user_infos->southAfrican_id;
+        }
+        else{
+          $data_array['idNumber'] = $user_infos->passport_id;
+        }
+        $result = json_decode(file_get_contents("php://input"), true);
+        // $make_call = array();
+        // $make_call['personName'] = "KANZA";
+        // $make_call['personSurname'] = "NAJAM UL HUDA";
+        // $make_call['gender'] = "Female";
+        // $make_call['dateOfBirth'] = "1986-08-12";
+        // $make_call['aliveStatus'] = "ALIVE";
+        $make_call = json_decode($this->callCoreInfoAPI(json_encode($data_array)),true);
+        // $make_call = json_decode('{
+        //     "personName": "KANZA",
+        //     "personSurname": "NAJAM UL HUDA",
+        //     "gender": "Female",
+        //     "dateOfBirth": "1986-08-12",
+        //     "aliveStatus": "ALIVE",
+        //     "clientFeedback": {
+        //         "systemErrorInfo": "0",
+        //         "clientErrorInfo": "0"
+        //     }
+        // }', true);
+        $dha_info = new Dj_Dha_profile;
+        $dha_info->dj_id              = $req->id;
+        if($user_infos->southAfrican_id){
+          $dha_info->identification_num = $user_infos->southAfrican_id;
+        }
+        else{
+          $dha_info->identification_num = $user_infos->passport_id;
+        }
+        $dha_info->personName           = $make_call['personName'];
+        $dha_info->personSurname        = $make_call['personSurname'];
+        $dha_info->gender               = $make_call['gender'];
+        $dha_info->dateOfBirth          = $make_call['dateOfBirth'];
+        $dha_info->aliveStatus          = $make_call['aliveStatus'];
+        $dha_info->dha_api_status       = $make_call['clientFeedback']['clientErrorInfo'];
+        $dha_info->save();
+        $make_call = json_decode($this->callContactInfoAPI(json_encode($data_array)),true);
+        $dha_address = new Dj_Dha_Address;
+        $dha_address->dj_id              = $req->id;
+        if($user_infos->southAfrican_id){
+          $dha_address->identification_num = $user_infos->southAfrican_id;
+        }
+        else{
+          $dha_address->identification_num = $user_infos->passport_id;
+        }
+        $dha_address->addressLine1         = $make_call['addressLine1'];
+        $dha_address->addressLine2         = $make_call['addressLine2'];
+        $dha_address->addressLine3         = $make_call['addressLine3'];
+        $dha_address->addressLine4         = $make_call['addressLine4'];
+        $dha_address->addressLine5         = $make_call['addressLine5'];
+        $dha_address->save();
+        // return redirect()->to('view_user_details/'.$req->id)->with('success','User Status Changed Successfully!');
+        return Redirect::to("/".$req->id)->with('success','User Status Changed Successfully!');
+    }
+    else{            
+        return Redirect::to("/".$req->id)->with('success','Already Exists!');
+    }
+      # code...
+  }
+  
+    private function callCoreInfoAPI($data)
+	{
+		$curl = curl_init();
+		//OPTIONS:
+		curl_setopt($curl, CURLOPT_POST, 1);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+		curl_setopt($curl, CURLOPT_URL, "https://flexywarebio.com/homeaffairs/getcoreinfo");
+		curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json',));
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+		//EXECUTE:
+		$result = curl_exec($curl);
+		if(!$result){die("Connection Failure");}
+		curl_close($curl);
+		
+		return $result;
+	}
+    private function callContactInfoAPI($data)
+	{
+		$curl = curl_init();
+		//OPTIONS:
+		curl_setopt($curl, CURLOPT_POST, 1);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+		curl_setopt($curl, CURLOPT_URL, "https://flexywarebio.com/homeaffairs/getcontactinfo");
+		curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json',));
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+		//EXECUTE:
+		$result = curl_exec($curl);
+		if(!$result){die("Connection Failure");}
+		curl_close($curl);
+		
+		return $result;
+	}
   public function dj_agreement_status_on(Request $req){
     $type = "application/json";
     $result = json_decode(file_get_contents("php://input"), true);
@@ -165,14 +291,36 @@ class DjAppController extends Controller
       $type = "application/json";
       $music_genre = Genre::select('id','music_genre')->get(); 
       $p = array();
-      foreach($music_genre as  $row){
-        $music_id = $row['id'];
-        $sub_genre = Sub_Genre::where('id', $music_id)->get();
-        $row['sub_genre'] = $sub_genre;
-        array_push($p, $row);
+      foreach($music_genre as $row){
+        $c = array();
+
+        $id = $row['id'];
+        $sub_cat = Sub_Genre::where('music_genre',$id)->get();
+        foreach($sub_cat as $cat){
+          array_push($c,$cat);
+
+        }
+        $row['sub_genre'] = $c;
+
+        unset($c);
+
+          
+          array_push($p,$row);
+          
       }
-      
-      
+      // foreach($music_genre as  $row){
+      //   $music_id = $row['id'];
+      //   $sub_genre = Sub_Genre::where('id', $music_id)->get();
+      //   foreach($sub_genre as $row1){
+      //     array_push($p, $row1);
+
+      //   }
+      //   $row['sub_genre'] = $p;
+      //   array_push($c,$row);
+
+      // }
+
+
       return response()->json(['genre_list' =>$p,'status' => "1"], 200);
   }
   function dj_agreement_status_check() {
@@ -220,7 +368,8 @@ class DjAppController extends Controller
   public function email_verify_mail(Request $req){
     $type = "application/json";
     $result = json_decode(file_get_contents("php://input"), true);
-    $user_infos = DjUser::where('email','=',$result['email'])->first();
+    // return $req->email;
+    $user_infos = DjUser::where('email','=',$req->email)->first();
     if (!empty($user_infos)){
         if($user_infos->dj_status == "2"){
             DjUser::where('user_id','=',$user_infos->id)->update([
@@ -233,9 +382,15 @@ class DjAppController extends Controller
             return response()->json(["message" => "Email already exists!",'code'=>'201'], 201);
         }
     }else{
-        $unique_id = str::random(10);
-        UserEmails::signUpEmail($result['email'], $unique_id);
-        return response()->json(["message" => "Email Sent Successfully","verify_code"=>$unique_id,'code'=>'200'], 200);
+        $unique_id =  random_int(100,100000);         
+        $queryStatus;
+        try {
+          $query = UserEmails::signUpEmail($req->email, $unique_id);
+            $queryStatus = "Successful";
+        } catch(Exception $e) {
+            $queryStatus = "Not success";
+        }
+        return response()->json(["message" => "Email Sent Successfully","verify_code"=>$unique_id,"emil"=>$req->email,'code'=>'200'], 200);
     }
 }
   public function delete_djadmin_details ($id) {
@@ -248,7 +403,11 @@ class DjAppController extends Controller
   }
   public function edit_djadmin_details($id){
     $users_data = DjUser::find($id);
-    return view("users.djadminEdit",['user'=>$users_data,]);
+    $dj_dha_profile = Dj_Dha_profile::where('dj_id',$id)->first();
+    $dj_dha_address = Dj_Dha_Address::where('dj_id',$id)->first();
+    // dd($users_data);die();
+    return view("users.djadminEdit",['user'=>$users_data,'dj_dha_profile'=>$dj_dha_profile,'dj_dha_address'=>$dj_dha_address]);
+
   }
   function update_djadmin_user(Request $req){
     $validator = \Validator::make($req->all(), [

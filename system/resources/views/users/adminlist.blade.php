@@ -54,7 +54,7 @@
                                     @if($user->role == "admin")
                                         Super Admin
                                     @else
-                                        Admin
+                                        Manager
                                     @endif
                                 </td>
                                 <td>

@@ -29,7 +29,6 @@ use App\Http\Controllers\CouponController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 Route::group(['middleware' =>[
     'auth:sanctum', 'verified'
 ]], function(){
@@ -151,7 +150,7 @@ Route::post('/register_user' , [UserController::class, 'register_user'])->name('
     Route::post('/register_device' ,  [DjAppController::class, 'register_device'])->name('register_device');
     Route::post('/dj_booking_id' ,  [DjAppController::class, 'dj_booking_id'])->name('dj_booking_id');
     Route::post('/dj_notifications', [DjAppController::class, 'dj_notifications'])->name('dj_notifications');
-    Route::post('/email_verify_mail_dj', [DjAppController::class, 'email_verify_mail'])->name('email_verify_mail');
+    Route::post('/email_verify_mail', [DjAppController::class, 'email_verify_mail'])->name('email_verify_mail');
     Route::post('/one_event' ,  [DjAppController::class, 'one_event'])->name('one_event');
     Route::post('/dj_notification_status_on' ,  [DjAppController::class, 'dj_notification_status_on'])->name('dj_notification_status_on');
     

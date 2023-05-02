@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChargeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DjAppController;
 use App\Http\Controllers\DashboardController;
@@ -67,6 +68,8 @@ Route::group(['middleware' =>[
     //DJ Routes
     Route::get('/register_new_djuser', [DjAppController::class, 'register_new_djuser'])->name('register_new_djuser');
     Route::post('/save_djuser',[DjAppController::class, 'save_djuser'])->name('save_djuser');
+
+    Route::get('/fetch_dj_dha_profile/{id}', [UserController::class, 'fetch_dj_dha_profile'])->name('fetch_dj_dha_profile');
     
     Route::get('/admin_djlist' ,  [DjAppController::class, 'admin_djlist'])->name('admin_djlist');
     Route::get('/dj_event_attend_list' ,  [DjAppController::class, 'dj_event_attend_list'])->name('dj_event_attend_list');
@@ -213,10 +216,17 @@ Route::group(['middleware' =>[
     Route::get('/add_new_dj_questionnaire_answer/{id}', [DJQuestionnaireController::class, 'add_new_dj_questionnaire_answer'])->name('add_new_dj_questionnaire_answer');
     Route::post('/create_dj_questionnaire_answer',[DJQuestionnaireController::class, 'create_dj_questionnaire_answer']);
     Route::get('/edit_dj_questionnaire_answer/{id}', [DJQuestionnaireController::class, 'edit_dj_questionnaire_answer'])->name('edit_dj_questionnaire_answer');
-    Route::post('/update_dj_questionnaire_answer', [DJQuestionnaireController::class, 'update_dj_questionnaire_answer'])->name('update_dj_questionnaire_answer');    
+    Route::post('/update_dj_questionnaire_answer', [DJQuestionnaireController::class, 'update_dj_questionnaire_answer'])->name('update_dj_questionnaire_answer');  
 }
-    
+
 );
+// Route::get('/yoco', function () {
+//     return redirect("/yoco/inline");
+// }); 
+Route::get('/yoco', [ChargeController::class, 'Charge'])->name('Yoco');
+// Route::get('/yoco', function () {
+//     return view("yoco.inline");
+// });  
 Route::get('/', [WebsiteController::class, 'get_data'])->name('home');
 Route::get('/club', [WebsiteController::class, 'get_club'])->name('club_special');
 Route::get('/privacy_policy', [WebsiteController::class, 'privacy_policy'])->name('privacy_policy');

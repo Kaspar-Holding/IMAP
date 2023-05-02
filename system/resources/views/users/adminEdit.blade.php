@@ -19,7 +19,7 @@
                   <h2></h2>
                 </div>
               </div>
-              <form class="container-fluid" action="/update_admin_user" method="POST" style="padding:30px; padding-bottom:40px;">
+              <form class="container-fluid" action="{{ route ('update_admin_user')}}" method="POST" style="padding:30px; padding-bottom:40px;">
                 @csrf
                 <div>
                   <label class="form-label">Name</label>
@@ -42,7 +42,7 @@
                     <select name="user_role" class="form-control" required>
                         <option>-- Select --</option>
                         <option value="admin" @if($user['role'] == 'admin') selected @endif>Super Admin</option>
-                        <option value="manager" @if($user['role'] == 'manager') selected @endif>Admin</option>
+                        <option value="manager" @if($user['role'] == 'manager') selected @endif>Manager</option>
                     </select>
                 </div>
                 <br>
