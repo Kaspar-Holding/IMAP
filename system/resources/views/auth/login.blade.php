@@ -8,7 +8,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Jynx Dashboard Login</title>
+      <title>Dashboard Login</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
@@ -56,7 +56,7 @@
                     @endif
                      <form method="POST" action="{{ route('login') }}" class="login_section">
                         @csrf
-                        <h1 class="center login_heading" style="color:#145DBB; font-size:49px; line-height:140%; padding-bottom:40px;">Sign In To JYNX</h1>
+                        <h1 class="center login_heading" style="color:#145DBB; font-size:49px; line-height:140%; padding-bottom:40px;">Sign In To</h1>
                         <fieldset>
                            <div class="field" style="margin:0px!important; justify-content:center;">
                              
