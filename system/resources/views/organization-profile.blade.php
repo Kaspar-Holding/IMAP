@@ -1,9 +1,11 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
 <!--  Last Published: Fri Apr 28 2023 08:34:19 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="643d23869a03d4062aafe3b6" data-wf-site="643d23859a03d460b5afe396">
+<html data-wf-page="6447d4ad405f3b0863fbb9b2" data-wf-site="643d23859a03d460b5afe396">
 <head>
   <meta charset="utf-8">
-  <title>Job Portal Site</title>
+  <title>Organization Profile</title>
+  <meta content="Organization Profile" property="og:title">
+  <meta content="Organization Profile" property="twitter:title">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta content="Webflow" name="generator">
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
@@ -32,12 +34,12 @@
       </div>
       <div class="navigation-middle">
         <nav role="navigation" class="nav-menu w-nav-menu">
-          <a href="index.html" class="nav-link home w-nav-link">Home</a>
-          <a href="about.html" class="nav-link jobs w-nav-link">Jobs</a>
-          <a href="about.html" class="nav-link about w-nav-link">About us</a>
-          <a href="about.html" class="nav-link faq w-nav-link">FAQ</a>
-          <a href="blog.html" class="nav-link blog w-nav-link">Blog</a>
-          <a href="browse.html" class="nav-link contact w-nav-link">Contact us</a>
+          <a href="{{ route('home')}}" class="nav-link w-nav-link">Home</a>
+          <a href="{{ route('companies')}}" class="nav-link w-nav-link">Jobs</a>
+          <a href="{{ route('about')}}" class="nav-link w-nav-link">About us</a>
+          <a href="{{ route('faq')}}" class="nav-link w-nav-link">FAQ</a>
+          <a href="{{ route('blog')}}" class="nav-link w-nav-link">Blog</a>
+          <a href="{{ route('contact_us')}}" class="nav-link w-nav-link">Contact us</a>
           <div class="navbar-mobile-button-wrapper">
             <a href="#" class="button-primary w-button">Login</a>
           </div>
@@ -45,8 +47,11 @@
       </div>
       <div class="navigation-right">
         <div class="navigation-button-wrap">
-          <a href="post-job.html" class="nav-link sign-in w-nav-link">Sign In</a>
-          <a href="hire-talent.html" class="button-3 w-button">Hire Talent</a>
+        <a href="{{ route('post_jobs')}}" class="nav-link w-nav-link">Add</a>
+
+        <a href="{{ route('sign_up')}}" class="nav-link w-nav-link">Sign Up</a>
+          <a href="{{ route('log_in')}}" class="nav-link w-nav-link">Sign In</a>
+          <a href="{{route('hire_talent')}}" class="button-3 w-button">Hire Talent</a>
         </div>
         <div class="menu-button w-nav-button">
           <div class="w-icon-nav-menu"></div>
@@ -54,75 +59,62 @@
       </div>
     </div>
   </div>
-  <div class="w-users-userformpagewrap account-page-wrapper">
-    <div class="account-left-block">
-      <div class="w-users-usersignupformwrapper account-form-block">
-        <div tabindex="-1" class="w-users-userformsuccessstate w-form-success">
-          <div class="w-users-userformheader form-header">
-            <div class="account-icon-wrapper"><img src="https://d3e54v103j8qbb.cloudfront.net/img/thumbs-up-72.cbcaec93bc.svg" alt="" class="icon-large"></div>
-            <div class="margin-bottom-08">
-              <h3>Account activated</h3>
-            </div>
-            <p>Your account was created successfully. <br>You will be redirected shortly.</p>
-            <div data-wf-user-form-redirect="" class="redirect-block">
-              <a href="index.html">If nothing happens, click here.</a>
-            </div>
-          </div>
-        </div>
-        <form class="sign-up-form" method="post" data-wf-user-form-type="signup">
-          <div class="w-users-userformheader account-form-title">
-            <div class="margin-bottom-16">
-              <h3 class="signup">Create an account</h3>
-              <div class="signup-link"><img loading="lazy" src="images/Frame-6.png" alt="" class="facebook"><img loading="lazy" src="images/Frame-6_1.png" alt="" class="google"></div>
-            </div>
-            <div class="name">
-              <div class="columns-2 w-row">
-                <div class="column w-col w-col-6"><label for="Name" class="field-label first-name">First Name</label><input type="text" class="form-field first-name w-input" maxlength="256" name="" data-name="field" data-wf-user-field="wf-user-field-name" placeholder="" id="wf-sign-up-name" required=""></div>
-                <div class="column-2 w-col w-col-6"><label for="Name" class="field-label last-name">Last Name</label>
-                  <div id="wf-sign-up-name2" class="form-field last--name"></div>
-                </div>
+  <div class="edit-container w-container">
+    <div class="form-block w-form">
+      <form id="email-form" name="email-form" data-name="Email Form" action="{{route('create_organization')}}" method="POST" class="account-form-block edit-form" enctype='multipart/form-data'>
+
+        <h3 class="heading-2 organization">Create New Organization</h3>
+        @csrf
+          @if(session()->has('error'))
+              <div class="alert alert-danger" style = "color: #f7073f;">
+                  {{ session()->get('error') }}
               </div>
-            </div>
-            <div class="email"><label for="Email" class="field-label-2">Email</label><input type="email" id="wf-sign-up-email" placeholder="" maxlength="256" name="Email" class="form-field w-input" autocomplete="username" required="" data-wf-user-form-input-type="email"></div>
-            <div class="password">
-              <div class="columns w-row">
-                <div class="column-3 w-col w-col-6"><label for="Password" class="field-label-3">Password</label><input type="password" id="wf-sign-up-password" placeholder="" maxlength="256" name="Password" class="form-field w-input" required="" data-wf-user-form-input-type="password"></div>
-                <div class="column-4 w-col w-col-6"><label for="Password" class="field-label-3 confirm">Confirm Password</label>
-                  <div class="form-field confirm"></div>
-                </div>
-              </div>
-            </div>
-            <div class="country"><label for="Name" class="field-label country">Country</label>
-              <div data-delay="0" data-hover="false" class="dropdown w-dropdown">
-                <div class="dropdown-toggle w-dropdown-toggle">
-                  <div class="icon w-icon-dropdown-toggle"></div>
-                  <div class="text-block">Select Country</div>
-                </div>
-                <nav class="w-dropdown-list">
-                  <a href="#" class="w-dropdown-link">Link 1</a>
-                  <a href="#" class="w-dropdown-link">Link 2</a>
-                  <a href="#" class="w-dropdown-link">Link 3</a>
-                </nav>
-              </div>
-            </div>
-          </div><input type="submit" value="SIGN UP" data-wait="Please wait..." class="w-users-userformbutton button-primary signup w-button">
-          <div class="form-divider"></div>
-          <div class="w-users-userformfooter form-footer"><span class="text-color-gray-500">Have an account?</span>
-            <a href="log-in.html" class="link-2">Login now</a>
-          </div>
-        </form>
-        <div style="display:none" data-wf-user-form-error="true" class="w-users-userformerrorstate error-state w-form-fail">
-          <div class="user-form-error-msg" wf-signup-form-general-error-error="There was an error signing you up. Please try again, or contact us if you continue to have problems." wf-signup-form-not-allowed-error="You&#x27;re not allowed to access this site, please contact the admin for support." wf-signup-form-invalid-email-error="Make sure your email exists and is properly formatted (e.g., user@domain.com)." wf-signup-form-email-already_exist-error="An account with this email address already exists. Log in or reset your password." wf-signup-form-use-invite_email-error="Use the same email address your invitation was sent to." wf-signup-form-invalid-password-error="Your password must be at least 8 characters." wf-signup-form-not-verified-error="We couldn&#x27;t verify your account. Please try again, or contact us if you continue to have problems." wf-signup-form-expired-token-error="This verification link has expired. A new verification link has been sent to your email. Please try again, or contact us if you continue to have problems.">There was an error signing you up. Please try again, or contact us if you continue to have problems.</div>
+          @endif
+        <div style="text-align:center;">
+          <input type="file" id="imgupload" name="event_image" style="display:none"/>
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+          <img src="{{ asset('ui/images/green.png')}}" width="25px" height="25px" style="position: relative;left: 93px;bottom: 30px;" />
+          <img src="{{ asset('ui/images/pencil.png')}}" width="10px" height="10px" style="position: relative;left: 73px;bottom: 31px;" id="OpenImgUpload"/>
+          <img width="70px" height="70px" id="output"/>
         </div>
-        <div tabindex="-1" class="w-users-usersignupverificationmessage w-form-verification" data-wf-user-form-verification="true">
-          <div class="w-users-userformheader form-header">
-            <div class="account-icon-wrapper"><img src="https://d3e54v103j8qbb.cloudfront.net/img/email-72.67fa6be437.svg" alt="" class="icon-large"></div>
-            <div class="margin-bottom-08">
-              <h3>Verification Required</h3>
-            </div>
-            <p>Account verification required. Please check your email to find your unique verification link.</p>
-          </div>
+        <div class="edit-code"><label for="field-3" class="country-code">Phone Country Code</label><select id="field-3" name="country_code" data-name="Field 3" class="select-field-2 w-select">
+            <option value="">Please select</option>
+            <option value="First">First choice</option>
+            <option value="Second">Second choice</option>
+            <option value="Third">Third choice</option>
+          </select></div>
+        <div class="edit-phone">
+          <label for="name-3" class="phone">Phone number</label>
+          <input type="text" class="text-field-4 w-input" maxlength="256" name="phone_number" data-name="Name 2" placeholder="Type your response here" id="name-2">
         </div>
+        <div class="website">
+          <label for="name-3" class="website">Website</label>
+          <input type="text" class="website-field w-input" maxlength="256" name="website" data-name="Name 2" placeholder="Type your response here" id="name-2">
+        </div>
+        <div class="website twitter">
+          <label for="name-3" class="website twitter">Twitter</label>
+          <input type="text" class="twitter-field w-input" maxlength="256" name="twitter" data-name="Name 2" placeholder="Type your response here" id="name-2">
+        </div>
+        <div class="website telegram"><label for="name-3" class="website telegram">Telegram</label><input type="text" class="telegram-field w-input" maxlength="256" name="telegram" data-name="Name 2" placeholder="Type your response here" id="name-2"></div>
+        <div class="website github"><label for="name-3" class="website">Github</label><input type="text" class="github-field w-input" maxlength="256" name="github" data-name="Name 2" placeholder="Type your response here" id="name-2"></div>
+        <h1 class="heading-2">Summary</h1>
+        <div class="edit-role"><label for="name-2" class="summary">*Role</label><input type="text" class="summary-role w-input" maxlength="256" name="role" data-name="Name 2" placeholder="Type your response here" id="name-2" required=""></div>
+        <div class="edit-status"><label for="field-2" class="summary status">*Status</label><select id="field-2" name="status" data-name="Field 2" required="" class="select-field w-select">
+            <option value="">Select status</option>
+            <option value="First">First choice</option>
+            <option value="Second">Second choice</option>
+            <option value="Third">Third choice</option>
+          </select></div>
+        <div class="edit-intro"><label for="field" class="summary introduction">*Introduction</label><textarea placeholder="Write about your experience,industry and skills." maxlength="5000" id="field" name="introduction" data-name="Field" class="intro-area w-input"></textarea></div>
+        <div class="edit-role"><label for="name-2" class="summary location">*Current Location</label><input type="text" class="summary-loc w-input" maxlength="256" name="location" data-name="Name 2" placeholder="Type your response here" id="name-2" required=""></div>
+        <div class="edit-role"><label for="name-3" class="summary skills">Skills</label><input type="text" class="summary-skills w-input" maxlength="256" name="skills" data-name="Name 2" placeholder="Type your response here" id="name-2"></div>
+        <div class="edit-role"><label for="name-2" class="summary languages">Languages</label><input type="text" class="summary-lang w-input" maxlength="256" name="languages" data-name="Name 2" placeholder="Type your response here" id="name-2"></div><input type="submit" value="CREATE ORGANIZATION" data-wait="Please wait..." class="submit-button edit-profile w-button">
+      </form>
+      <div class="w-form-done">
+        <div>Thank you! Your submission has been received!</div>
+      </div>
+      <div class="w-form-fail">
+        <div>Oops! Something went wrong while submitting the form.</div>
       </div>
     </div>
   </div>
@@ -165,5 +157,20 @@
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=643d23859a03d460b5afe396" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
   <script src="js/webflow.js" type="text/javascript"></script>
   <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->
+  <script>
+    
+    // A $( document ).ready() block.
+    $( document ).ready(function() {
+      $('#OpenImgUpload').click(function(){ 
+        $('#imgupload').trigger('click'); 
+      });
+      $('#imgupload').change(function(){ 
+        var output = document.getElementById('output');
+        console.log(URL.createObjectURL(event.target.files[0]));
+        output.src = URL.createObjectURL(event.target.files[0]);
+      });
+    });
+    
+  </script>
 </body>
 </html>

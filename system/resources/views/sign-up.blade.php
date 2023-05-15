@@ -1,11 +1,9 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
 <!--  Last Published: Fri Apr 28 2023 08:34:19 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="644a2b84b49983007d6de129" data-wf-site="643d23859a03d460b5afe396">
+<html data-wf-page="643d23869a03d4062aafe3b6" data-wf-site="643d23859a03d460b5afe396">
 <head>
   <meta charset="utf-8">
-  <title>Post Jobs</title>
-  <meta content="Post Jobs" property="og:title">
-  <meta content="Post Jobs" property="twitter:title">
+  <title>Job Portal Site</title>
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta content="Webflow" name="generator">
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
@@ -23,6 +21,19 @@
 * {
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
+}
+label{
+  margin-left:107px !important;
+}
+
+  .form-field {
+    width: 513px !important;
+}
+.button-primary{
+  width : 82% !important;
+}
+.form-footer {
+    margin-left: 105px;
 }
 </style>
 </head>
@@ -56,38 +67,83 @@
       </div>
     </div>
   </div>
-  <div class="job-submit-section">
-    <div class="container-small">
-      <div data-w-id="c78ea06a-8927-fb5d-89c4-8c08edf5a4ab" style="-webkit-transform:translate3d(0, 44px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 44px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 44px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 44px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="title-wrap-center">
-        <div class="margin-bottom-12">
-          <h2 class="heading-19">Submit a Job</h2>
-        </div>
-      </div>
-      <div data-w-id="c78ea06a-8927-fb5d-89c4-8c08edf5a4af" style="-webkit-transform:translate3d(0, 44px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 44px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 44px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 44px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="job-submission-form-wrapper">
-        <div class="w-form">
-          <form id="email-form" name="email-form" data-name="Email Form" method="get" class="job-submission-form">
-            <div class="job-submission-form-section-wrapper">
-              <div id="w-node-c78ea06a-8927-fb5d-89c4-8c08edf5a4b3-7d6de129" class="job-submission-form-section">
-                <div class="margin-bottom-24">
-                  <h5 class="heading-20">Job Information</h5>
-                </div>
-                <div class="div-block-4"><label for="Job-Title" class="field-label-6">Job Title</label><input type="text" class="form-field title w-input" maxlength="256" name="Job-Title" data-name="Job Title" placeholder="" id="Job-Title"></div>
-                <div class="div-block-4"><label for="Job-Title-12" class="field-label-6">Job Category</label><input type="text" class="form-field title w-input" maxlength="256" name="Job-Title-12" data-name="Job Title 12" placeholder="" id="Job-Title-12"></div>
-                <div class="div-block-4"><label for="Job-Title-11" class="field-label-6">Employment Type</label><input type="text" class="form-field title w-input" maxlength="256" name="Job-Title-11" data-name="Job Title 11" placeholder="" id="Job-Title-11"></div>
-                <div class="div-block-4"><label for="Job-Title-10" class="field-label-6">Location (optional)</label><input type="text" class="form-field title w-input" maxlength="256" name="Job-Title-10" data-name="Job Title 10" placeholder="" id="Job-Title-10"></div>
-                <div class="div-block-4"><label for="Job-Title-9" class="field-label-6">Remote</label><input type="text" class="form-field title w-input" maxlength="256" name="Job-Title-9" data-name="Job Title 9" placeholder="" id="Job-Title-9"></div>
-                <div class="div-block-4"><label for="Job-Title-8" class="field-label-6">Job Description</label><textarea placeholder="" maxlength="5000" id="Job-Description-2" name="Job-Description-2" data-name="Job Description 2" class="form-field-large description w-input"></textarea></div>
-                <div class="div-block-4"><label for="Job-Title-7" class="field-label-6">Skills</label><input type="text" class="form-field title w-input" maxlength="256" name="Job-Title-7" data-name="Job Title 7" placeholder="" id="Job-Title-7"></div>
-                <div class="div-block-4"><label for="Job-Title-6" class="field-label-6">Salary</label><input type="text" class="form-field title w-input" maxlength="256" name="Job-Title-6" data-name="Job Title 6" placeholder="" id="Job-Title-6"></div>
-                <div class="div-block-4"><label for="Job-Title-5" class="field-label-6">Equity</label><input type="text" class="form-field title w-input" maxlength="256" name="Job-Title-5" data-name="Job Title 5" placeholder="" id="Job-Title-5"></div>
-              </div>
-            </div><input type="submit" value="Submit" data-wait="Please wait..." class="button-primary w-button">
-          </form>
-          <div class="success-message w-form-done">
-            <div>Thank you! Your submission has been received!</div>
+  <div class="w-users-userformpagewrap account-page-wrapper">
+    <div class="account-left-block">
+      <div class="w-users-usersignupformwrapper account-form-block">
+        <div tabindex="-1" class="w-users-userformsuccessstate w-form-success">
+          <div class="w-users-userformheader form-header">
+            <div class="account-icon-wrapper"><img src="https://d3e54v103j8qbb.cloudfront.net/img/thumbs-up-72.cbcaec93bc.svg" alt="" class="icon-large"></div>
+            <div class="margin-bottom-08">
+              <h3>Account activated</h3>
+            </div>
+            <p>Your account was created successfully. <br>You will be redirected shortly.</p>
+            <div data-wf-user-form-redirect="" class="redirect-block">
+              <a href="index.html">If nothing happens, click here.</a>
+            </div>
           </div>
-          <div class="error-message w-form-fail">
-            <div>Oops! Something went wrong while submitting the form.</div>
+        </div>
+        <form class="sign-up-form" action="{{route('create_user')}}" method="POST" data-wf-user-form-type="signup">
+          <div class="w-users-userformheader account-form-title">
+            <div class="margin-bottom-16">
+              <h3 class="signup">Create an account</h3>
+              <div class="signup-link"><img loading="lazy" src="images/Frame-6.png" alt="" class="facebook"><img loading="lazy" src="images/Frame-6_1.png" alt="" class="google"></div>
+            </div>
+            @csrf
+          @if(session()->has('error'))
+              <div class="alert alert-danger" style = "color: #f7073f;">
+                  {{ session()->get('error') }}
+              </div>
+          @endif
+            <div class="name">
+              <div class="columns-2 w-row">
+                <div class="column w-col w-col-6">
+                  <label for="Name" class="field-label first-name">First Name</label>
+                  <input type="text" class="form-field first-name w-input" maxlength="256" name="first_name" data-name="field" data-wf-user-field="wf-user-field-name" placeholder="Type your response here" id="wf-sign-up-name" required="" ></div>
+                <div class="column-2 w-col w-col-6">
+                  <label for="Name" class="field-label last-name">Last Name</label>
+                  <input type="text" class="form-field last-name w-input" maxlength="256" name="last_name" data-name="field" data-wf-user-field="wf-user-field-name" placeholder="Type your response here" id="wf-sign-up-name" required="" >
+                </div>
+              </div>
+            </div>
+            <div class="email">
+              <label for="Email" class="field-label-2">Email</label>
+              <input type="email" id="wf-sign-up-email" placeholder="Type your response here" maxlength="256" name="email" class="form-field w-input" autocomplete="username" required="" data-wf-user-form-input-type="email"></div>
+            <div class="password">
+              <div class="columns w-row">
+                <div class="column-3 w-col w-col-6">
+                  <label for="Password" class="field-label-3">Password</label>
+                  <input type="password" id="wf-sign-up-password" placeholder="Type your response here" maxlength="256" name="password" class="form-field w-input" required="" data-wf-user-form-input-type="password">
+                </div>
+                <div class="column-4 w-col w-col-6"><label for="Password" class="field-label-3 confirm">Confirm Password</label>
+                <input type="password" id="wf-sign-up-password" placeholder="Type your response here" maxlength="256" name="confirm_password" class="form-field w-input" required="" data-wf-user-form-input-type="password">
+                </div>
+              </div>
+            </div>
+            <div class="country">
+              <label for="Name" class="field-label country">Country</label>
+              <select name="country" class="form-control form-field" required>
+                    <option>-- Select --</option>
+                    <option value="southAfrica">South Africa</option>
+                    <option value="pakistan">Pakistan</option>
+                  </select>
+            </div>
+          </div>
+          <input type="submit" value="SIGN UP" data-wait="Please wait..." class="w-users-userformbutton button-primary signup w-button">
+          <div class="form-divider"></div>
+          <div class="w-users-userformfooter form-footer"><span class="text-color-gray-500">Have an account?</span>
+            <a href="{{route('log_in')}}" class="link-2">Login now</a>
+          </div>
+        </form>
+        <div style="display:none" data-wf-user-form-error="true" class="w-users-userformerrorstate error-state w-form-fail">
+          <div class="user-form-error-msg" wf-signup-form-general-error-error="There was an error signing you up. Please try again, or contact us if you continue to have problems." wf-signup-form-not-allowed-error="You&#x27;re not allowed to access this site, please contact the admin for support." wf-signup-form-invalid-email-error="Make sure your email exists and is properly formatted (e.g., user@domain.com)." wf-signup-form-email-already_exist-error="An account with this email address already exists. Log in or reset your password." wf-signup-form-use-invite_email-error="Use the same email address your invitation was sent to." wf-signup-form-invalid-password-error="Your password must be at least 8 characters." wf-signup-form-not-verified-error="We couldn&#x27;t verify your account. Please try again, or contact us if you continue to have problems." wf-signup-form-expired-token-error="This verification link has expired. A new verification link has been sent to your email. Please try again, or contact us if you continue to have problems.">There was an error signing you up. Please try again, or contact us if you continue to have problems.</div>
+        </div>
+        <div tabindex="-1" class="w-users-usersignupverificationmessage w-form-verification" data-wf-user-form-verification="true">
+          <div class="w-users-userformheader form-header">
+            <div class="account-icon-wrapper"><img src="https://d3e54v103j8qbb.cloudfront.net/img/email-72.67fa6be437.svg" alt="" class="icon-large"></div>
+            <div class="margin-bottom-08">
+              <h3>Verification Required</h3>
+            </div>
+            <p>Account verification required. Please check your email to find your unique verification link.</p>
           </div>
         </div>
       </div>

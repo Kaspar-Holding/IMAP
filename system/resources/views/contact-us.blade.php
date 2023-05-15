@@ -1,9 +1,11 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
 <!--  Last Published: Fri Apr 28 2023 08:34:19 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="643d23869a03d402ccafe3b1" data-wf-site="643d23859a03d460b5afe396">
+<html data-wf-page="643e87eef1121b3d91ec42c7" data-wf-site="643d23859a03d460b5afe396">
 <head>
   <meta charset="utf-8">
-  <title>Job Portal Site</title>
+  <title>Contact us</title>
+  <meta content="Contact us" property="og:title">
+  <meta content="Contact us" property="twitter:title">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta content="Webflow" name="generator">
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
@@ -24,7 +26,7 @@
 }
 </style>
 </head>
-<body>
+<body class="body">
   <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
     <div class="container-navigation">
       <div class="navigation-left">
@@ -33,11 +35,11 @@
       <div class="navigation-middle">
         <nav role="navigation" class="nav-menu w-nav-menu">
           <a href="index.html" class="nav-link home w-nav-link">Home</a>
-          <a href="about.html" class="nav-link jobs w-nav-link">Jobs</a>
-          <a href="about.html" class="nav-link about w-nav-link">About us</a>
-          <a href="about.html" class="nav-link faq w-nav-link">FAQ</a>
+          <a href="http://job-portal-site.webflow.io/companies" class="nav-link jobs w-nav-link">Jobs</a>
+          <a href="http://job-portal-site.webflow.io/about" class="nav-link about w-nav-link">About us</a>
+          <a href="http://job-portal-site.webflow.io/faq" class="nav-link faq w-nav-link">FAQ</a>
           <a href="blog.html" class="nav-link blog w-nav-link">Blog</a>
-          <a href="browse.html" class="nav-link contact w-nav-link">Contact us</a>
+          <a href="http://job-portal-site.webflow.io/contact-us" class="nav-link contact w-nav-link">Contact us</a>
           <div class="navbar-mobile-button-wrapper">
             <a href="#" class="button-primary w-button">Login</a>
           </div>
@@ -45,7 +47,7 @@
       </div>
       <div class="navigation-right">
         <div class="navigation-button-wrap">
-          <a href="log-in.html" aria-current="page" class="nav-link sign-in w-nav-link w--current">Sign In</a>
+          <a href="post-job.html" class="nav-link sign-in w-nav-link">Sign In</a>
           <a href="hire-talent.html" class="button-3 w-button">Hire Talent</a>
         </div>
         <div class="menu-button w-nav-button">
@@ -54,23 +56,59 @@
       </div>
     </div>
   </div>
-  <div class="w-users-userformpagewrap account-page-wrapper">
-    <div class="account-left-block">
-      <div class="w-users-userloginformwrapper account-form-block">
-        <form data-wf-user-form-type="login" data-wf-user-form-redirect="/" method="post">
-          <div class="w-users-userformheader account-form-title">
-            <div class="margin-bottom-16">
-              <h3 class="heading">Log in</h3>
-              <div class="login-link"><img src="images/Frame-6.png" loading="lazy" alt="" class="facebook"><img src="images/Frame-6_1.png" loading="lazy" alt="" class="google"></div>
-            </div>
-          </div><label for="Email" class="login-email">Email</label><input type="email" maxlength="256" placeholder="" name="Email" id="wf-log-in-email" class="form-field w-input" autocomplete="username" required="" data-wf-user-form-input-type="email"><label for="Password" class="login-password">Password</label><input type="password" maxlength="256" placeholder="" name="Password" id="wf-log-in-password" class="form-field w-input" required="" data-wf-user-form-input-type="password"><input type="submit" value="LOGIN" data-wait="Please wait..." class="w-users-userformbutton button-primary login-page w-button">
-          <div class="form-divider"></div>
-          <div class="w-users-userformfooter form-footer"><span class="text-color-gray-500">New to Cryptolancers?</span>
-            <a href="sign-up.html" class="link">Create an account</a>
+  <div class="contact-container w-container">
+    <div class="w-form">
+      <form id="email-form" name="email-form" data-name="Email Form" method="POST" action="{{ route('create_contact') }}" class="account-form-block contact">
+        @csrf
+        <h3 class="heading-2">Leave us a message</h3>
+        <div class="contact-name">
+          <div class="w-row">
+            <div class="w-col w-col-6"><label for="name" class="field-label-4">Name*</label><input type="text" class="text-field w-input" maxlength="256" name="name" data-name="Name" placeholder="" id="name"></div>
+            <div class="w-col w-col-6"><label for="email" class="field-label-5">Email*</label><input type="email" class="text-field-2 w-input" maxlength="256" name="email" data-name="Email" placeholder="" id="email" required=""></div>
           </div>
-        </form>
-        <div style="display:none" data-wf-user-form-error="true" class="w-users-userformerrorstate error-state w-form-fail">
-          <div class="user-form-error-msg" wf-login-form-general-error-error="We&#x27;re having trouble logging you in. Please try again, or contact us if you continue to have problems." wf-login-form-invalid-email_or_password-error="Invalid email or password. Please try again.">We&#x27;re having trouble logging you in. Please try again, or contact us if you continue to have problems.</div>
+        </div>
+        <div class="contact-subject"><label for="name-2" class="field-label-4">Subject</label><input type="text" class="text-field-3 w-input" maxlength="256" name="subject" data-name="Name 2" placeholder="" id="name-2"></div>
+        <div class="contatc-message"><label for="name-3" class="field-label-4">Your Message</label><input type="text" class="text-field-4 w-input" maxlength="256" name="message" data-name="Name 2" placeholder="" id="name-2"></div><input type="submit" value="SUBMIT" data-wait="Please wait..." class="submit-button w-button">
+      </form>
+      <div class="w-form-done">
+        <div>Thank you! Your submission has been received!</div>
+      </div>
+      <div class="w-form-fail">
+        <div>Oops! Something went wrong while submitting the form.</div>
+      </div>
+    </div>
+  </div>
+  <div class="location-container w-container">
+    <div class="wf-section">
+      <div class="columns-3 w-row">
+        <div class="w-col w-col-6"><img src="images/divmkdf-map-181047-1.png" loading="lazy" sizes="(max-width: 479px) 100vw, (max-width: 767px) 97vw, (max-width: 991px) 46vw, 460px" srcset="images/divmkdf-map-181047-1-p-500.png 500w, images/divmkdf-map-181047-1.png 630w" alt="" class="image"></div>
+        <div class="w-col w-col-6">
+          <h6 class="heading-3">Contact Details</h6>
+          <div class="location-coloum w-row">
+            <div class="column-5 w-col w-col-6"><img src="images/Vector.png" loading="lazy" alt="">
+              <div class="text-block-2">1-234-56789</div>
+            </div>
+            <div class="column-6 w-col w-col-6"><img src="images/Vector-1.png" loading="lazy" alt="">
+              <a href="#" class="link-3">cryptolancers@help.com</a>
+            </div>
+          </div>
+          <div class="div-block"><img src="images/Vector-2.png" loading="lazy" alt="">
+            <div class="text-block-3">184 Main Collins Street West Victoria 8007</div>
+          </div>
+          <div>
+            <div class="w-row">
+              <div class="w-col w-col-6">
+                <h6 class="heading-4">Opening Hours</h6>
+                <div class="text-block-4">Mon to Fri: 9am-9pm</div>
+                <div class="text-block-5">Sat to Sun: 9am-10pm</div>
+              </div>
+              <div class="w-col w-col-6">
+                <h6 class="heading-4 career">Careers</h6>
+                <div class="text-block-4 career">Please email us at:</div>
+                <a href="#" class="link-4">staffscout@qodeinteractive.com</a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

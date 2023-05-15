@@ -1,11 +1,11 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
 <!--  Last Published: Fri Apr 28 2023 08:34:19 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="643e87eef1121b3d91ec42c7" data-wf-site="643d23859a03d460b5afe396">
+<html data-wf-page="644a2b84b49983007d6de129" data-wf-site="643d23859a03d460b5afe396">
 <head>
   <meta charset="utf-8">
-  <title>Contact us</title>
-  <meta content="Contact us" property="og:title">
-  <meta content="Contact us" property="twitter:title">
+  <title>Post Jobs</title>
+  <meta content="Post Jobs" property="og:title">
+  <meta content="Post Jobs" property="twitter:title">
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta content="Webflow" name="generator">
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
@@ -26,7 +26,7 @@
 }
 </style>
 </head>
-<body class="body">
+<body>
   <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
     <div class="container-navigation">
       <div class="navigation-left">
@@ -35,11 +35,11 @@
       <div class="navigation-middle">
         <nav role="navigation" class="nav-menu w-nav-menu">
           <a href="index.html" class="nav-link home w-nav-link">Home</a>
-          <a href="http://job-portal-site.webflow.io/companies" class="nav-link jobs w-nav-link">Jobs</a>
-          <a href="http://job-portal-site.webflow.io/about" class="nav-link about w-nav-link">About us</a>
-          <a href="http://job-portal-site.webflow.io/faq" class="nav-link faq w-nav-link">FAQ</a>
+          <a href="about.html" class="nav-link jobs w-nav-link">Jobs</a>
+          <a href="about.html" class="nav-link about w-nav-link">About us</a>
+          <a href="about.html" class="nav-link faq w-nav-link">FAQ</a>
           <a href="blog.html" class="nav-link blog w-nav-link">Blog</a>
-          <a href="http://job-portal-site.webflow.io/contact-us" class="nav-link contact w-nav-link">Contact us</a>
+          <a href="browse.html" class="nav-link contact w-nav-link">Contact us</a>
           <div class="navbar-mobile-button-wrapper">
             <a href="#" class="button-primary w-button">Login</a>
           </div>
@@ -56,60 +56,53 @@
       </div>
     </div>
   </div>
-  <div class="contact-container w-container">
-    <div class="w-form">
-      <form id="email-form" name="email-form" data-name="Email Form" method="get" class="account-form-block contact">
-        <h3 class="heading-2">Leave us a message</h3>
-        <div class="contact-name">
-          <div class="w-row">
-            <div class="w-col w-col-6"><label for="name" class="field-label-4">Name*</label><input type="text" class="text-field w-input" maxlength="256" name="name" data-name="Name" placeholder="" id="name"></div>
-            <div class="w-col w-col-6"><label for="email" class="field-label-5">Email*</label><input type="email" class="text-field-2 w-input" maxlength="256" name="email" data-name="Email" placeholder="" id="email" required=""></div>
+  <div class="job-submit-section">
+    <div class="container-small">
+      
+        <div class="margin-bottom-12">
+          <h2 class="heading-19">Submit a Job</h2>
+        </div>
+     
+      
+        <div class="w-form">
+          <form id="email-form" name="email-form" data-name="Email Form" action="{{route('update_jobs')}}" method="POST" class="job-submission-form">
+            <div class="job-submission-form-section-wrapper">
+              <div id="w-node-c78ea06a-8927-fb5d-89c4-8c08edf5a4b3-7d6de129" class="job-submission-form-section">
+                <div class="margin-bottom-24">
+                  <h5 class="heading-20">Job Information</h5>
+                </div>
+                @csrf
+                  @if(session()->has('error'))
+                      <div class="alert alert-danger" style = "color: #f7073f;">
+                          {{ session()->get('error') }}
+                      </div>
+                  @endif
+                 
+                <div class="div-block-4"><label for="Job-Title" class="field-label-6">Job Title</label><input type="text" class="form-field title w-input" maxlength="256" name="title" data-name="Job Title" placeholder="Type your response here" id="Job-Title"></div>
+                <div class="div-block-4"><label for="Job-Title-12" class="field-label-6">Job Category</label><input type="text" class="form-field title w-input" maxlength="256" name="category" data-name="Job Title 12" placeholder="Type your response here" id="Job-Title-12"></div>
+                <div class="div-block-4"><label for="Job-Title-11" class="field-label-6">Employment Type</label><input type="text" class="form-field title w-input" maxlength="256" name="type" data-name="Job Title 11" placeholder="Type your response here" id="Job-Title-11"></div>
+                <div class="div-block-4"><label for="Job-Title-10" class="field-label-6">Location (optional)</label><input type="text" class="form-field title w-input" maxlength="256" name="location" data-name="Job Title 10" placeholder="Type your response here" id="Job-Title-10"></div>
+                <div class="div-block-4"><label for="Job-Title-9" class="field-label-6">Remote</label>
+                <select id="field-3" name="remote" data-name="Field 3" class="select-field-2 w-select" style = "width: 51% !important ; height: 46px !important; margin-left: 76px !important; margin-bottom: 25px; !important  ">
+            <option value="">Please select</option>
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+          </select></div>
+                <div class="div-block-4"><label for="Job-Title-8" class="field-label-6">Job Description</label><textarea placeholder="Type your response here" maxlength="5000" id="Job-Description-2" name="description" data-name="Job Description 2" class="form-field-large description w-input"></textarea></div>
+                <div class="div-block-4"><label for="Job-Title-7" class="field-label-6">Skills</label><input type="text" class="form-field title w-input" maxlength="256" name="skills" data-name="Job Title 7" placeholder="Type your response here" id="Job-Title-7"></div>
+                <div class="div-block-4"><label for="Job-Title-6" class="field-label-6">Salary</label><input type="text" class="form-field title w-input" maxlength="256" name="salary" data-name="Job Title 6" placeholder="Type your response here" id="Job-Title-6"></div>
+                <div class="div-block-4"><label for="Job-Title-5" class="field-label-6">Equity</label><input type="text" class="form-field title w-input" maxlength="256" name="equity" data-name="Job Title 5" placeholder="Type your response here" id="Job-Title-5"></div>
+              </div>
+            </div><input type="submit" value="Submit" data-wait="Please wait..." class="button-primary w-button">
+          </form>
+          <div class="success-message w-form-done">
+            <div>Thank you! Your submission has been received!</div>
+          </div>
+          <div class="error-message w-form-fail">
+            <div>Oops! Something went wrong while submitting the form.</div>
           </div>
         </div>
-        <div class="contact-subject"><label for="name-2" class="field-label-4">Subject</label><input type="text" class="text-field-3 w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="" id="name-2"></div>
-        <div class="contatc-message"><label for="name-3" class="field-label-4">Your Message</label><input type="text" class="text-field-4 w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="" id="name-2"></div><input type="submit" value="SUBMIT" data-wait="Please wait..." class="submit-button w-button">
-      </form>
-      <div class="w-form-done">
-        <div>Thank you! Your submission has been received!</div>
-      </div>
-      <div class="w-form-fail">
-        <div>Oops! Something went wrong while submitting the form.</div>
-      </div>
-    </div>
-  </div>
-  <div class="location-container w-container">
-    <div class="wf-section">
-      <div class="columns-3 w-row">
-        <div class="w-col w-col-6"><img src="images/divmkdf-map-181047-1.png" loading="lazy" sizes="(max-width: 479px) 100vw, (max-width: 767px) 97vw, (max-width: 991px) 46vw, 460px" srcset="images/divmkdf-map-181047-1-p-500.png 500w, images/divmkdf-map-181047-1.png 630w" alt="" class="image"></div>
-        <div class="w-col w-col-6">
-          <h6 class="heading-3">Contact Details</h6>
-          <div class="location-coloum w-row">
-            <div class="column-5 w-col w-col-6"><img src="images/Vector.png" loading="lazy" alt="">
-              <div class="text-block-2">1-234-56789</div>
-            </div>
-            <div class="column-6 w-col w-col-6"><img src="images/Vector-1.png" loading="lazy" alt="">
-              <a href="#" class="link-3">cryptolancers@help.com</a>
-            </div>
-          </div>
-          <div class="div-block"><img src="images/Vector-2.png" loading="lazy" alt="">
-            <div class="text-block-3">184 Main Collins Street West Victoria 8007</div>
-          </div>
-          <div>
-            <div class="w-row">
-              <div class="w-col w-col-6">
-                <h6 class="heading-4">Opening Hours</h6>
-                <div class="text-block-4">Mon to Fri: 9am-9pm</div>
-                <div class="text-block-5">Sat to Sun: 9am-10pm</div>
-              </div>
-              <div class="w-col w-col-6">
-                <h6 class="heading-4 career">Careers</h6>
-                <div class="text-block-4 career">Please email us at:</div>
-                <a href="#" class="link-4">staffscout@qodeinteractive.com</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      
     </div>
   </div>
   <div class="footer-section">

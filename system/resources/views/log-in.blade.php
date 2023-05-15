@@ -1,11 +1,9 @@
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
 <!--  Last Published: Fri Apr 28 2023 08:34:19 GMT+0000 (Coordinated Universal Time)  -->
-<html data-wf-page="643ea468923f5b4dabbf92bc" data-wf-site="643d23859a03d460b5afe396">
+<html data-wf-page="643d23869a03d402ccafe3b1" data-wf-site="643d23859a03d460b5afe396">
 <head>
   <meta charset="utf-8">
-  <title>Edit Profile</title>
-  <meta content="Edit Profile" property="og:title">
-  <meta content="Edit Profile" property="twitter:title">
+  <title>Job Portal Site</title>
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <meta content="Webflow" name="generator">
   <link href="css/normalize.css" rel="stylesheet" type="text/css">
@@ -24,9 +22,18 @@
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;
 }
+label{
+  margin-left:107px !important;
+}
+.button-primary{
+  width : 70% !important;
+}
+.form-footer {
+    margin-left: 105px;
+}
 </style>
 </head>
-<body class="body-2">
+<body>
   <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
     <div class="container-navigation">
       <div class="navigation-left">
@@ -34,12 +41,12 @@
       </div>
       <div class="navigation-middle">
         <nav role="navigation" class="nav-menu w-nav-menu">
-          <a href="index.html" class="nav-link home w-nav-link">Home</a>
-          <a href="about.html" class="nav-link jobs w-nav-link">Jobs</a>
-          <a href="about.html" class="nav-link about w-nav-link">About us</a>
-          <a href="about.html" class="nav-link faq w-nav-link">FAQ</a>
-          <a href="blog.html" class="nav-link blog w-nav-link">Blog</a>
-          <a href="browse.html" class="nav-link contact w-nav-link">Contact us</a>
+          <a href="{{ route('home')}}" class="nav-link w-nav-link">Home</a>
+          <a href="{{ route('companies')}}" class="nav-link w-nav-link">Jobs</a>
+          <a href="{{ route('about')}}" class="nav-link w-nav-link">About us</a>
+          <a href="{{ route('faq')}}" class="nav-link w-nav-link">FAQ</a>
+          <a href="{{ route('blog')}}" class="nav-link w-nav-link">Blog</a>
+          <a href="{{ route('contact_us')}}" class="nav-link w-nav-link">Contact us</a>
           <div class="navbar-mobile-button-wrapper">
             <a href="#" class="button-primary w-button">Login</a>
           </div>
@@ -47,8 +54,11 @@
       </div>
       <div class="navigation-right">
         <div class="navigation-button-wrap">
-          <a href="post-job.html" class="nav-link sign-in w-nav-link">Sign In</a>
-          <a href="hire-talent.html" class="button-3 w-button">Hire Talent</a>
+        <a href="{{ route('add_organization')}}" class="nav-link w-nav-link">Add</a>
+
+        <a href="{{ route('sign_up')}}" class="nav-link w-nav-link">Sign Up</a>
+          <a href="{{ route('log_in')}}" class="nav-link w-nav-link">Sign In</a>
+          <a href="{{route('hire_talent')}}" class="button-3 w-button">Hire Talent</a>
         </div>
         <div class="menu-button w-nav-button">
           <div class="w-icon-nav-menu"></div>
@@ -56,45 +66,31 @@
       </div>
     </div>
   </div>
-  <div class="edit-container w-container">
-    <div class="form-block w-form">
-      <form id="email-form" name="email-form" data-name="Email Form" method="get" class="account-form-block edit-form">
-        <h3 class="heading-2 edit-form">Basic Information</h3>
-        <div class="edit-name">
-          <div class="w-row">
-            <div class="w-col w-col-6"><label for="name" class="field-label-4">Name*</label><input type="text" class="text-field w-input" maxlength="256" name="name" data-name="Name" placeholder="" id="name"></div>
-            <div class="w-col w-col-6"><label for="email" class="field-label-5">Last Name*</label><input type="email" class="text-field-2 w-input" maxlength="256" name="email" data-name="Email" placeholder="" id="email" required=""></div>
+  <div class="w-users-userformpagewrap account-page-wrapper">
+    <div class="account-left-block">
+      <div class="w-users-userloginformwrapper account-form-block">
+        <form data-wf-user-form-type="login" data-wf-user-form-redirect="/" action="{{route('sign_in')}}" method="POST">
+          <div class="w-users-userformheader account-form-title">
+            <div class="margin-bottom-16">
+              <h3 class="heading">Log in</h3>
+
+              <div class="login-link"><img src="images/Frame-6.png" loading="lazy" alt="" class="facebook"><img src="images/Frame-6_1.png" loading="lazy" alt="" class="google"></div>
+            </div>
+            @csrf
+          @if(session()->has('error'))
+              <div class="alert alert-danger" style = "color: #f7073f;">
+                  {{ session()->get('error') }}
+              </div>
+          @endif
+          </div><label for="Email" class="login-email">Email</label><input type="email" maxlength="256" placeholder="" name="email" id="wf-log-in-email" class="form-field w-input" autocomplete="username" required="" data-wf-user-form-input-type="email"><label for="Password" class="login-password">Password</label><input type="password" maxlength="256" placeholder="" name="password" id="wf-log-in-password" class="form-field w-input" required="" data-wf-user-form-input-type="password"><input type="submit" value="LOGIN" data-wait="Please wait..." class="w-users-userformbutton button-primary login-page w-button">
+          <div class="form-divider"></div>
+          <div class="w-users-userformfooter form-footer"><span class="text-color-gray-500">New to Cryptolancers?</span>
+            <a href="{{route('sign_up')}}" class="link">Create an account</a>
           </div>
+        </form>
+        <div style="display:none" data-wf-user-form-error="true" class="w-users-userformerrorstate error-state w-form-fail">
+          <div class="user-form-error-msg" wf-login-form-general-error-error="We&#x27;re having trouble logging you in. Please try again, or contact us if you continue to have problems." wf-login-form-invalid-email_or_password-error="Invalid email or password. Please try again.">We&#x27;re having trouble logging you in. Please try again, or contact us if you continue to have problems.</div>
         </div>
-        <div class="edit-code"><label for="field-3" class="country-code">Phone Country Code</label><select id="field-3" name="field-3" data-name="Field 3" class="select-field-2 w-select">
-            <option value="">Please select</option>
-            <option value="First">First choice</option>
-            <option value="Second">Second choice</option>
-            <option value="Third">Third choice</option>
-          </select></div>
-        <div class="edit-phone"><label for="name-3" class="phone">Phone number</label><input type="text" class="text-field-4 w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="" id="name-2"></div>
-        <div class="website"><label for="name-3" class="website">Website</label><input type="text" class="website-field w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="" id="name-2"></div>
-        <div class="website twitter"><label for="name-3" class="website twitter">Twitter</label><input type="text" class="twitter-field w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="" id="name-2"></div>
-        <div class="website telegram"><label for="name-3" class="website telegram">Telegram</label><input type="text" class="telegram-field w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="" id="name-2"></div>
-        <div class="website github"><label for="name-3" class="website">Github</label><input type="text" class="github-field w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="" id="name-2"></div>
-        <h1 class="heading-2">Summary</h1>
-        <div class="edit-role"><label for="name-2" class="summary">*Role</label><input type="text" class="summary-role w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="" id="name-2" required=""></div>
-        <div class="edit-status"><label for="field-2" class="summary status">*Status</label><select id="field-2" name="field-2" data-name="Field 2" required="" class="select-field w-select">
-            <option value="">Select status</option>
-            <option value="First">First choice</option>
-            <option value="Second">Second choice</option>
-            <option value="Third">Third choice</option>
-          </select></div>
-        <div class="edit-intro"><label for="field" class="summary introduction">*Introduction</label><textarea placeholder="Write about your experience,industry and skills." maxlength="5000" id="field" name="field" data-name="Field" class="intro-area w-input"></textarea></div>
-        <div class="edit-role"><label for="name-2" class="summary location">*Current Location</label><input type="text" class="summary-loc w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="" id="name-2" required=""></div>
-        <div class="edit-role"><label for="name-3" class="summary skills">Skills</label><input type="text" class="summary-skills w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="" id="name-2"></div>
-        <div class="edit-role"><label for="name-2" class="summary languages">Languages</label><input type="text" class="summary-lang w-input" maxlength="256" name="name-2" data-name="Name 2" placeholder="" id="name-2"></div><input type="submit" value="SAVE CHANGES" data-wait="Please wait..." class="submit-button edit-profile w-button">
-      </form>
-      <div class="w-form-done">
-        <div>Thank you! Your submission has been received!</div>
-      </div>
-      <div class="w-form-fail">
-        <div>Oops! Something went wrong while submitting the form.</div>
       </div>
     </div>
   </div>
