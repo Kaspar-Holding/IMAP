@@ -13,7 +13,7 @@ use App\Models\User;
 use App\Models\user_infos;
 use App\Models\organization;
 use App\Models\post_jobs;
-
+use App\Models\news_letter;
 use App\Models\AccessCtrl;
 use DB;
  
@@ -297,5 +297,18 @@ class WebsiteController extends Controller
             return redirect('/contact_us');
         
     } 
+    function subscribe(Request $req){
+            $subscribe = $req->subscribe;
       
+        if(!empty($subscribe)){
+                    $news_letter = new news_letter;
+                    $news_letter->email = $subscribe;
+                    $news_letter->save();
+                    $jobs = post_jobs::all();
+            return view('home',['job_list'=>$jobs,]);
+        }
+       
+       
+       
+    }
 }

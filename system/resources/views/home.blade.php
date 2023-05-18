@@ -71,13 +71,14 @@
     <div class="container-6 w-container">
       <div>
         <div class="w-form">
-          <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get">
+          <form id="email-form-2" action="subscribe" method="POST" name="email-form-2" data-name="Email Form 2" method="get">
+            {{csrf_field()}}
             <div class="w-row">
               <div class="w-col w-col-1"></div>
               <div class="column-14 w-col w-col-4">
                 <h3 class="heading-18">Subscribe to news letter</h3>
               </div>
-              <div class="column-15 w-col w-col-3"><input type="text" class="text-field-5 w-input" maxlength="256" name="field-5" data-name="Field 5" placeholder="Your email" id="field-5" required=""></div>
+              <div class="column-15 w-col w-col-3"><input type="email" class="text-field-5 w-input" maxlength="256" name="subscribe" data-name="Field 5" placeholder="Your email" id="field-5" required=""></div>
               <div class="w-col w-col-4"><input type="submit" value="Subscribe" data-wait="Please wait..." class="submit-button-2 w-button"></div>
             </div>
           </form>

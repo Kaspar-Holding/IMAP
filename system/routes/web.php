@@ -54,6 +54,8 @@ Route::post('/update_profile', [WebsiteController::class, 'update_profile'])->na
 Route::post('/view_organization', [WebsiteController::class, 'view_organization'])->name('view_organization');
 Route::post('/create_user', [WebsiteController::class, 'create_user'])->name('create_user');
 Route::post('/sign_in', [WebsiteController::class, 'sign_in'])->name('sign_in');
+Route::post('/subscribe', [WebsiteController::class, 'subscribe'])->name('subscribe');
+
 Route::any('/search',function(){
     $key = Request::get ( 'keyword' );
     $loc = Request::get ( 'location' );
@@ -76,9 +78,13 @@ Route::any('/search',function(){
     if(count($jobs) > 0){
         return view('home',['job_list'=>$jobs,]);
     }
-   
+    else{
+        $jobs = post_jobs::all();
+        return view('home',['job_list'=>$jobs,]);
+    }
    
 });
+
 
 
 
