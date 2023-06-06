@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SocialAuthController;
+
 use App\Http\Controllers\WebsiteController;
 use Carbon\Carbon;
 use App\Models\post_jobs;
@@ -18,10 +20,14 @@ use App\Models\post_jobs;
 */
 Route::post('/update_password',[UserController::class, 'update_password'])->name('update_password');
 Route::get('/reset_password',[UserController::class, 'reset_password'])->name('reset_password');
+Route::get('/login-google',[SocialAuthController::class,'redirectToProvider'])->name('google.login');
+Route::get('/auth/google/callback',[SocialAuthController::class,'handleCallback'])->name('google.login.callback');
+
 Route::group(['middleware' =>[
     'auth:sanctum', 'verified'
 ]], function(){
     // Dashboard Routes
+    
     Route::get('/dashboard', [DashboardController::class, 'get_data'])->name('dashboard');
     Route::get('/layout', [DashboardController::class, 'layout'])->name('layout');
     // User Routes 
@@ -46,6 +52,8 @@ Route::get('/add_organization', [WebsiteController::class, 'add_organization'])-
 Route::get('/about', [WebsiteController::class, 'about'])->name('about');
 Route::get('/contact_us', [WebsiteController::class, 'contact_us'])->name('contact_us');
 Route::get('/post_jobs', [WebsiteController::class, 'post_jobs'])->name('post_jobs');
+Route::get('/edit_profile', [WebsiteController::class, 'edit_profile'])->name('edit_profile');
+
 
 //post request
 Route::post('/update_jobs', [WebsiteController::class, 'update_jobs'])->name('update_jobs');
@@ -82,6 +90,65 @@ Route::any('/search',function(){
         $jobs = post_jobs::all();
         return view('home',['job_list'=>$jobs,]);
     }
+    
+   
+});
+Route::any('/search_company',function(){
+    $key = Request::get ( 'keyword' );
+    $loc = Request::get ( 'location' );
+    $all = Request::get ( 'all' );
+    if($key != "" && $loc != "" && $all == ""){
+    $jobs = organization::where('name','LIKE','%'.$key.'%')->orWhere('role','LIKE','%'.$loc.'%')->orWhere('location','LIKE','%'.$loc.'%')->get();
+   
+    }
+    else if($key != "" && $loc == "" && $all == ""){
+        
+        $jobs = organization::where('name','LIKE','%'.$key.'%')->orWhere('role','LIKE','%'.$loc.'%')->get();
+        // echo json_encode($jobs);die();
+        }
+    else if($key == "" && $loc != "" && $all == ""){
+            $jobs = organization::where('location','LIKE','%'.$loc.'%')->get();
+            }
+    else if($key == "" && $loc == "" && $all != ""){
+                $jobs = organization::all();
+            }
+    if(count($jobs) > 0){
+        return view('companies',['job_list'=>$jobs,]);
+    }
+    else{
+        $jobs = post_jobs::all();
+        return view('companies',['job_list'=>$jobs,]);
+    }
+    
+   
+});
+Route::any('/search_talent',function(){
+    $key = Request::get ( 'keyword' );
+    $loc = Request::get ( 'location' );
+    $all = Request::get ( 'all' );
+    if($key != "" && $loc != "" && $all == ""){
+    $jobs = user_infos::where('skills','LIKE','%'.$key.'%')->orWhere('location','LIKE','%'.$loc.'%')->get();
+   
+    }
+    else if($key != "" && $loc == "" && $all == ""){
+        
+        $jobs = user_infos::where('skills','LIKE','%'.$key.'%')->get();
+        // echo json_encode($jobs);die();
+        }
+    else if($key == "" && $loc != "" && $all == ""){
+            $jobs = user_infos::where('location','LIKE','%'.$loc.'%')->get();
+            }
+    else if($key == "" && $loc == "" && $all != ""){
+                $jobs = user_infos::all();
+            }
+    if(count($jobs) > 0){
+        return view('hire-talent',['job_list'=>$jobs,]);
+    }
+    else{
+        $jobs = user_infos::all();
+        return view('hire-talent',['job_list'=>$jobs,]);
+    }
+    
    
 });
 

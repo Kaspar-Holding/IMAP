@@ -30,11 +30,11 @@
   <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
     <div class="container-navigation">
       <div class="navigation-left">
-        <a href="index.html" class="brand w-nav-brand"><img loading="lazy" src="images/Cryptolancers.png" alt="" class="logo"></a>
+        <a href="{{ route('home')}}" class="brand w-nav-brand"><img loading="lazy" src="images/Cryptolancers.png" alt="" class="logo"></a>
       </div>
       <div class="navigation-middle">
         <nav role="navigation" class="nav-menu w-nav-menu">
-          <a href="{{ route('home')}}" class="nav-link w-nav-link">Home</a>
+          <!-- <a href="{{ route('home')}}" class="nav-link w-nav-link">Home</a> -->
           <a href="{{ route('companies')}}" class="nav-link w-nav-link">Jobs</a>
           <a href="{{ route('about')}}" class="nav-link w-nav-link">About us</a>
           <a href="{{ route('faq')}}" class="nav-link w-nav-link">FAQ</a>
@@ -47,9 +47,9 @@
       </div>
       <div class="navigation-right">
         <div class="navigation-button-wrap">
-        <a href="{{ route('post_jobs')}}" class="nav-link w-nav-link">Add</a>
+        <a href="{{ route('add_organization')}}" class="nav-link w-nav-link">Add</a>
 
-        <a href="{{ route('sign_up')}}" class="nav-link w-nav-link">Sign Up</a>
+        <!-- <a href="{{ route('sign_up')}}" class="nav-link w-nav-link">Sign Up</a> -->
           <a href="{{ route('log_in')}}" class="nav-link w-nav-link">Sign In</a>
           <a href="{{route('hire_talent')}}" class="button-3 w-button">Hire Talent</a>
         </div>
@@ -76,6 +76,10 @@
           <img src="{{ asset('ui/images/green.png')}}" width="25px" height="25px" style="position: relative;left: 93px;bottom: 30px;" />
           <img src="{{ asset('ui/images/pencil.png')}}" width="10px" height="10px" style="position: relative;left: 73px;bottom: 31px;" id="OpenImgUpload"/>
           <img width="70px" height="70px" id="output"/>
+        </div>
+        <div class="edit-name">
+          <label for="name-3" class="phone">Name</label>
+          <input type="text" class="text-field-4 w-input" maxlength="256" name="name" data-name="Name 2" placeholder="Type your response here" id="name-2">
         </div>
         <div class="edit-code"><label for="field-3" class="country-code">Phone Country Code</label><select id="field-3" name="country_code" data-name="Field 3" class="select-field-2 w-select">
             <option value="">Please select</option>

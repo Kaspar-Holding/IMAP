@@ -56,7 +56,7 @@ label{
         <div class="navigation-button-wrap">
         <a href="{{ route('add_organization')}}" class="nav-link w-nav-link">Add</a>
 
-        <a href="{{ route('sign_up')}}" class="nav-link w-nav-link">Sign Up</a>
+        <!-- <a href="{{ route('sign_up')}}" class="nav-link w-nav-link">Sign Up</a> -->
           <a href="{{ route('log_in')}}" class="nav-link w-nav-link">Sign In</a>
           <a href="{{route('hire_talent')}}" class="button-3 w-button">Hire Talent</a>
         </div>

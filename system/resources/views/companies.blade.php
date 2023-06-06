@@ -41,12 +41,12 @@
       </div>
       <div class="navigation-middle">
         <nav role="navigation" class="nav-menu w-nav-menu">
-          <a href="index.html" class="nav-link home w-nav-link">Home</a>
-          <a href="http://job-portal-site.webflow.io/companies" class="nav-link jobs w-nav-link">Jobs</a>
-          <a href="http://job-portal-site.webflow.io/about" class="nav-link about w-nav-link">About us</a>
-          <a href="http://job-portal-site.webflow.io/faq" class="nav-link faq w-nav-link">FAQ</a>
-          <a href="blog.html" class="nav-link blog w-nav-link">Blog</a>
-          <a href="http://job-portal-site.webflow.io/contact-us" class="nav-link contact w-nav-link">Contact us</a>
+          <a href="{{ route('home')}}" class="nav-link w-nav-link">Home</a>
+          <a href="{{ route('companies')}}" class="nav-link w-nav-link">Jobs</a>
+          <a href="{{ route('about')}}" class="nav-link w-nav-link">About us</a>
+          <a href="{{ route('faq')}}" class="nav-link w-nav-link">FAQ</a>
+          <a href="{{ route('blog')}}" class="nav-link w-nav-link">Blog</a>
+          <a href="{{ route('contact_us')}}" class="nav-link w-nav-link">Contact us</a>
           <div class="navbar-mobile-button-wrapper">
             <a href="#" class="button-primary w-button">Login</a>
           </div>
@@ -54,8 +54,11 @@
       </div>
       <div class="navigation-right">
         <div class="navigation-button-wrap">
-          <a href="post-job.html" class="nav-link sign-in w-nav-link">Sign In</a>
-          <a href="hire-talent.html" class="button-3 w-button">Hire Talent</a>
+        <a href="{{ route('add_organization')}}" class="nav-link w-nav-link">Add</a>
+
+        <!-- <a href="{{ route('sign_up')}}" class="nav-link w-nav-link">Sign Up</a> -->
+          <a href="{{ route('log_in')}}" class="nav-link w-nav-link">Sign In</a>
+          <a href="{{route('hire_talent')}}" class="button-3 w-button">Hire Talent</a>
         </div>
         <div class="menu-button w-nav-button">
           <div class="w-icon-nav-menu"></div>
@@ -65,11 +68,12 @@
   </div>
   <div class="organizations wf-section">
     <div class="container-2 w-container">
-      <h3 class="heading-11 companies">Search Top Hiring Companies</h3>
+      <h3 class="heading-11 companies" style="margin-left:10px;">Search Top Hiring Companies</h3>
       <div>
         <div class="w-form">
-          <form id="email-form" name="email-form" data-name="Email Form" method="get">
-            <div class="columns-5 w-row">
+        <form id="email-form" action="search_company" method="POST" role="search" name="email-form" data-name="Email Form" method="get">
+            {{ csrf_field() }}
+            <div class="columns-5 w-row" style = "margin-left:1px;">
               <div class="w-col w-col-3"><input type="text" class="w-input" maxlength="256" name="field" data-name="Field" placeholder="Keywords" id="field" required=""></div>
               <div class="w-col w-col-3"><input type="text" class="w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Location" id="field-2" required=""></div>
               <div class="w-col w-col-3"><input type="text" class="w-input" maxlength="256" name="field-3" data-name="Field 3" placeholder="All Categories" id="field-3" required=""></div>
@@ -86,10 +90,14 @@
           </div>
         </div>
       </div>
-      <h3 class="heading-8 talent">2757 total talent available</h3>
+      @if(isset($job_list))
+      <h3 class="heading-8 talent" style="margin-left:10px;" >{{count($job_list)}} Hiring Companies Listed</h3>
+      @else
+      <h3 class="heading-8 talent" style="margin-left:10px;" >{{count($data)}} Hiring Companies Listed</h3>
+      @endif
       <div class="div-block-2">
-        <div class="w-row">
-          <div class="column-7 w-col w-col-1"><img src="images/job-user-img-6-100x100.png.png" loading="lazy" alt="" class="image-2"></div>
+        <div class="w-row" style="margin-left:0px !important; margin-right : 0px !important;">
+          <div class="column-7 w-col w-col-1"><img src="images/job-user-img-6-100x100.png.png" loading="lazy" alt="" class="image-2" style="margin-left:10px;"></div>
           <div class="column-12 w-col w-col-11">
             <div>
               <div class="w-row">
@@ -121,6 +129,83 @@
           </div>
         </div>
       </div>
+      @if(!empty($job_list))
+      @foreach($job_list as $job)
+      
+      <div class="div-block-2">
+        <div class="w-row" style="margin-left:0px !important; margin-right : 0px !important;">
+          <div class="column-7 w-col w-col-1"><img src="{{asset('image/'.$job['profile_picture'])}}" loading="lazy" alt="" class="image-2" style="margin-left:10px;"></div>
+          <div class="column-12 w-col w-col-11">
+            <div>
+              <div class="w-row">
+                <div class="w-col w-col-4">
+                  <h3 class="heading-org">{{$job['name']}}</h3>
+                </div>
+                <div class="column-13 w-col w-col-7">
+                  <a href="#" class="button org w-button">CAREERS</a>
+                  <a href="#" class="button org edu w-button">EDUCATION</a>
+                </div>
+                <div class="column-8 w-col w-col-1"><img src="images/Vector-3.png" loading="lazy" alt="" class="edit"></div>
+              </div>
+              <div class="detail">
+                <div class="text-block-6">{{$job['introduction']}} </div>
+                <!-- <a href="#" class="link-5">Read More</a> -->
+              </div>
+            </div>
+            <div class="columns-4 w-row">
+              <div class="column-9 w-col w-col-2"><img src="images/Vector-4.png" loading="lazy" alt="" class="image-4">
+                <div class="text-block-7">Since Oct 2014</div>
+              </div>
+              <div class="column-10 w-col w-col-3"><img src="images/Vector-2.png" loading="lazy" alt="">
+                <div class="text-block-8">{{$job['location']}}, Pakistan</div>
+              </div>
+              <div class="column-11 w-col w-col-7"><img src="images/Vector-7.png" loading="lazy" alt="" class="image-6"><img src="images/Vector-6.png" loading="lazy" alt="" class="image-5">
+                <div class="text-block-9">100-500 Employees</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+      @endforeach
+      @else
+        @foreach($data as $job_data)
+        <div class="div-block-2">
+          <div class="w-row" style="margin-left:0px !important; margin-right : 0px !important;">
+            <div class="column-7 w-col w-col-1"><img src="{{asset('image/'.$job_data['profile_picture'])}}" loading="lazy" alt="" class="image-2" style="margin-left:10px;"></div>
+            <div class="column-12 w-col w-col-11">
+              <div>
+                <div class="w-row">
+                  <div class="w-col w-col-4">
+                    <h3 class="heading-org">{{$job_data['name']}}</h3>
+                  </div>
+                  <div class="column-13 w-col w-col-7">
+                    <a href="#" class="button org w-button">CAREERS</a>
+                    <a href="#" class="button org edu w-button">EDUCATION</a>
+                  </div>
+                  <div class="column-8 w-col w-col-1"><img src="images/Vector-3.png" loading="lazy" alt="" class="edit"></div>
+                </div>
+                <div class="detail">
+                  <div class="text-block-6">{{$job_data['introduction']}} </div>
+                  <!-- <a href="#" class="link-5">Read More</a> -->
+                </div>
+              </div>
+              <div class="columns-4 w-row">
+                <div class="column-9 w-col w-col-2"><img src="images/Vector-4.png" loading="lazy" alt="" class="image-4">
+                  <div class="text-block-7">Since Oct 2014</div>
+                </div>
+                <div class="column-10 w-col w-col-3"><img src="images/Vector-2.png" loading="lazy" alt="">
+                  <div class="text-block-8">{{$job_data['location']}}, Pakistan</div>
+                </div>
+                <div class="column-11 w-col w-col-7"><img src="images/Vector-7.png" loading="lazy" alt="" class="image-6"><img src="images/Vector-6.png" loading="lazy" alt="" class="image-5">
+                  <div class="text-block-9">100-500 Employees</div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      @endforeach
+      @endif
     </div>
   </div>
   <div class="footer-section">

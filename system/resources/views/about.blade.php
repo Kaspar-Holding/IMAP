@@ -41,12 +41,12 @@
       </div>
       <div class="navigation-middle">
         <nav role="navigation" class="nav-menu w-nav-menu">
-          <a href="index.html" class="nav-link home w-nav-link">Home</a>
-          <a href="http://job-portal-site.webflow.io/companies" class="nav-link jobs w-nav-link">Jobs</a>
-          <a href="about.html" aria-current="page" class="nav-link about w-nav-link w--current">About us</a>
-          <a href="http://job-portal-site.webflow.io/faq" class="nav-link faq w-nav-link">FAQ</a>
-          <a href="blog.html" class="nav-link blog w-nav-link">Blog</a>
-          <a href="http://job-portal-site.webflow.io/contact-us" class="nav-link contact w-nav-link">Contact us</a>
+          <a href="{{ route('home')}}" class="nav-link w-nav-link">Home</a>
+          <a href="{{ route('companies')}}" class="nav-link w-nav-link">Jobs</a>
+          <a href="{{ route('about')}}" class="nav-link w-nav-link">About us</a>
+          <a href="{{ route('faq')}}" class="nav-link w-nav-link">FAQ</a>
+          <a href="{{ route('blog')}}" class="nav-link w-nav-link">Blog</a>
+          <a href="{{ route('contact_us')}}" class="nav-link w-nav-link">Contact us</a>
           <div class="navbar-mobile-button-wrapper">
             <a href="#" class="button-primary w-button">Login</a>
           </div>
@@ -54,8 +54,11 @@
       </div>
       <div class="navigation-right">
         <div class="navigation-button-wrap">
-          <a href="post-job.html" class="nav-link sign-in w-nav-link">Sign In</a>
-          <a href="hire-talent.html" class="button-3 w-button">Hire Talent</a>
+        <a href="{{ route('add_organization')}}" class="nav-link w-nav-link">Add</a>
+
+        <!-- <a href="{{ route('sign_up')}}" class="nav-link w-nav-link">Sign Up</a> -->
+          <a href="{{ route('log_in')}}" class="nav-link w-nav-link">Sign In</a>
+          <a href="{{route('hire_talent')}}" class="button-3 w-button">Hire Talent</a>
         </div>
         <div class="menu-button w-nav-button">
           <div class="w-icon-nav-menu"></div>

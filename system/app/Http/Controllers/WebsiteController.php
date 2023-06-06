@@ -45,10 +45,12 @@ class WebsiteController extends Controller
         return view("contact-us");
     }
     function companies(){
-        return view("companies");
+        $jobs = organization::get();
+        return view("companies",['data'=>$jobs]);
     }
     function hire_talent(){
-        return view("hire-talent");
+        $jobs = user_infos::get();
+        return view("hire-talent",['data'=>$jobs]);
     }
     function edit_profile(){
         return view("edit-profile");
@@ -142,7 +144,7 @@ class WebsiteController extends Controller
         else{
           
           $validator = \Validator::make($req->all(), [
-           
+           'name' => 'required',
             'country_code' => 'required',
             'phone_number' => 'required',
             'twitter' => 'required',
@@ -161,6 +163,7 @@ class WebsiteController extends Controller
           }
           else{
             $web_users = new organization;
+            $web_users->name = $req->name;
             $web_users->country_code = $req->country_code;
             $web_users->phone_number = $req->phone_number;
             $web_users->twitter = $req->twitter;

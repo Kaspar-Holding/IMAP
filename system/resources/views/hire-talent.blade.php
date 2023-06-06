@@ -34,12 +34,12 @@
       </div>
       <div class="navigation-middle">
         <nav role="navigation" class="nav-menu w-nav-menu">
-          <a href="index.html" class="nav-link home w-nav-link">Home</a>
-          <a href="about.html" class="nav-link jobs w-nav-link">Jobs</a>
-          <a href="about.html" class="nav-link about w-nav-link">About us</a>
-          <a href="about.html" class="nav-link faq w-nav-link">FAQ</a>
-          <a href="blog.html" class="nav-link blog w-nav-link">Blog</a>
-          <a href="browse.html" class="nav-link contact w-nav-link">Contact us</a>
+          <a href="{{ route('home')}}" class="nav-link w-nav-link">Home</a>
+          <a href="{{ route('companies')}}" class="nav-link w-nav-link">Jobs</a>
+          <a href="{{ route('about')}}" class="nav-link w-nav-link">About us</a>
+          <a href="{{ route('faq')}}" class="nav-link w-nav-link">FAQ</a>
+          <a href="{{ route('blog')}}" class="nav-link w-nav-link">Blog</a>
+          <a href="{{ route('contact_us')}}" class="nav-link w-nav-link">Contact us</a>
           <div class="navbar-mobile-button-wrapper">
             <a href="#" class="button-primary w-button">Login</a>
           </div>
@@ -47,8 +47,11 @@
       </div>
       <div class="navigation-right">
         <div class="navigation-button-wrap">
-          <a href="post-job.html" class="nav-link sign-in w-nav-link">Sign In</a>
-          <a href="hire-talent.html" aria-current="page" class="button-3 w-button w--current">Hire Talent</a>
+        <a href="{{ route('add_organization')}}" class="nav-link w-nav-link">Add</a>
+
+        <!-- <a href="{{ route('sign_up')}}" class="nav-link w-nav-link">Sign Up</a> -->
+          <a href="{{ route('log_in')}}" class="nav-link w-nav-link">Sign In</a>
+          <a href="{{route('hire_talent')}}" class="button-3 w-button">Hire Talent</a>
         </div>
         <div class="menu-button w-nav-button">
           <div class="w-icon-nav-menu"></div>
@@ -58,11 +61,13 @@
   </div>
   <div class="talent wf-section">
     <div class="container-2 w-container">
-      <h3 class="heading-11">What skills are you looking for?</h3>
+      <h3 class="heading-11" style="margin-left:15px;">What skills are you looking for?</h3>
       <div>
         <div class="w-form">
-          <form id="email-form" name="email-form" data-name="Email Form" method="get">
-            <div class="columns-5 w-row">
+        <form id="email-form" action="search_talent" method="POST" role="search" name="email-form" data-name="Email Form" method="get">
+            {{ csrf_field() }}
+          
+            <div class="columns-5 w-row" style = "margin-left:7px;">
               <div class="w-col w-col-3"><input type="text" class="w-input" maxlength="256" name="field" data-name="Field" placeholder="Keywords" id="field" required=""></div>
               <div class="w-col w-col-3"><input type="text" class="w-input" maxlength="256" name="field-2" data-name="Field 2" placeholder="Location" id="field-2" required=""></div>
               <div class="w-col w-col-3"><input type="text" class="w-input" maxlength="256" name="field-3" data-name="Field 3" placeholder="All Categories" id="field-3" required=""></div>
@@ -79,10 +84,14 @@
           </div>
         </div>
       </div>
-      <h3 class="heading-8 talent">2757 total talent available</h3>
+      @if(isset($job_list))
+      <h3 class="heading-8 talent" style="margin-left:16px;" >{{count($job_list)}} Total Talent Available</h3>
+      @else
+      <h3 class="heading-8 talent" style="margin-left:16px;" >{{count($data)}} Total Talent Available</h3>
+      @endif
       <div class="div-block-2">
-        <div class="columns-6 w-row">
-          <div class="column-7 w-col w-col-1"><img src="images/job-user-img-6-100x100.png-1.png" loading="lazy" alt="" class="image-2 talent"></div>
+        <div class="columns-6 w-row" style="margin-left:5px;">
+          <div class="column-7 w-col w-col-1"><img src="images/job-user-img-6-100x100.png-1.png" style = "margin-left:13px;" loading="lazy" alt="" class="image-2 talent"></div>
           <div class="column-12 w-col w-col-11">
             <div>
               <div class="w-row">
@@ -110,6 +119,90 @@
             </div>
           </div>
         </div>
+      </div>
+      @if(!empty($job_list))
+      @foreach($job_list as $job)
+      @if(!empty($job['role']))
+      <div class="div-block-2">
+        <div class="columns-6 w-row" style="margin-left:5px;">
+          <div class="column-7 w-col w-col-1"><img src="images/job-user-img-6-100x100.png-1.png" style = "margin-left:13px;" loading="lazy" alt="" class="image-2 talent"></div>
+          <div class="column-12 w-col w-col-11">
+            <div>
+              <div class="w-row">
+                <div class="w-col w-col-4">
+                  <h3 class="heading-org talent">{{$job['skills']}}</h3>
+                </div>
+                <div class="column-13 w-col w-col-8">
+                  <a href="#" class="button talent w-button">{{$job['role']}}</a>
+                </div>
+              </div>
+              <div class="detail">
+                <div class="text-block-6">{{$job['introduction']}} </div>
+                <!-- <a href="#" class="link-5">Read More</a> -->
+              </div>
+            </div>
+            <div class="columns-4 talent w-row">
+              <div class="column-9 talent w-col w-col-3"><img src="images/Vector-2.png" loading="lazy" alt="">
+                <div class="text-block-8">{{$job['location']}}</div>
+              </div>
+              <div class="column-10 talent w-col w-col-9">
+                @php
+                $skills = $job['skills'];
+                @endphp
+                @if(!empty($skills))
+                @foreach($skills as $skill)
+                <a href="#" class="button org hire w-button">{{$skill}}</a>
+                @endforeach
+                @endif
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      @endif
+      @endforeach
+      @else
+        @foreach($data as $job_data)
+        @if(!empty($job_data['role']))
+        <div class="div-block-2">
+          <div class="columns-6 w-row" style="margin-left:5px;">
+          <div class="column-7 w-col w-col-1"><img src="images/job-user-img-6-100x100.png-1.png" style = "margin-left:13px;" loading="lazy" alt="" class="image-2 talent"></div>
+          <div class="column-12 w-col w-col-11">
+            <div>
+              <div class="w-row">
+                <div class="w-col w-col-4">
+                  <h3 class="heading-org talent">{{$job_data['skills']}}</h3>
+                </div>
+                <div class="column-13 w-col w-col-8">
+                  <a href="#" class="button talent w-button">{{$job_data['role']}}</a>
+                </div>
+              </div>
+              <div class="detail">
+                <div class="text-block-6">{{$job_data['introduction']}} </div>
+                <!-- <a href="#" class="link-5">Read More</a> -->
+              </div>
+            </div>
+            <div class="columns-4 talent w-row">
+              <div class="column-9 talent w-col w-col-3"><img src="images/Vector-2.png" loading="lazy" alt="">
+                <div class="text-block-8">{{$job_data['location']}}</div>
+              </div>
+              <div class="column-10 talent w-col w-col-9">
+                @php
+                $skills = $job_data['skills'];
+                @endphp
+                @if(!empty($skills))
+                @foreach($skills as $skill)
+                <a href="#" class="button org hire w-button">{{$skill}}</a>
+                @endforeach
+                @endif
+              </div>
+            </div>
+          </div>
+         </div>
+      </div>
+      @endif
+        @endforeach
+      @endif
       </div>
     </div>
   </div>

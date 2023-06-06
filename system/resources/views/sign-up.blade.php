@@ -86,7 +86,9 @@ label{
           <div class="w-users-userformheader account-form-title">
             <div class="margin-bottom-16">
               <h3 class="signup">Create an account</h3>
-              <div class="signup-link"><img loading="lazy" src="images/Frame-6.png" alt="" class="facebook"><img loading="lazy" src="images/Frame-6_1.png" alt="" class="google"></div>
+              <div class="signup-link"><img loading="lazy" src="images/Frame-6.png" alt="" class="facebook">
+              
+              <a href="{{ route('google.login') }}"><img loading="lazy" src="images/Frame-6_1.png" alt="" class="google"></a></div>
             </div>
             @csrf
           @if(session()->has('error'))
