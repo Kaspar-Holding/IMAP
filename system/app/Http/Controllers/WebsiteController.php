@@ -14,6 +14,7 @@ use App\Models\user_infos;
 use App\Models\organization;
 use App\Models\post_jobs;
 use App\Models\news_letter;
+use App\Models\talent_skills;
 use App\Models\AccessCtrl;
 use DB;
  
@@ -267,7 +268,7 @@ class WebsiteController extends Controller
     }
     function update_jobs(Request $req){
         $type = "application/json";
-        
+        $job_skills = $req->skills;
             $jobs = new post_jobs;
             $jobs->title = $req->title;
             $jobs->category = $req->category;
@@ -275,14 +276,16 @@ class WebsiteController extends Controller
             $jobs->location = $req->location;
             $jobs->remote = $req->remote;
             $jobs->description = $req->description;
-            $jobs->skills = $req->skills;
+            // $jobs->skills = $req->skills;
             $jobs->salary = $req->salary;
             $jobs->equity = $req->equity;
-           
-
-
             $jobs->save();
-           
+            foreach($job_skills as $job_skill){
+           $skills = new talent_skills;
+           $skills->job_id = $jobs->id ;
+           $skills->skill = $job_skill;
+           $skills->save();
+            }
             return view("home");
 
             // return back()->with('error', 'The error message here!');

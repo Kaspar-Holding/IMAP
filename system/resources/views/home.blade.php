@@ -1,3 +1,4 @@
+@extends('layouts.app')
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
 <!--  Last Published: Fri Apr 28 2023 08:34:19 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="643d23869a03d4a73aafe39a" data-wf-site="643d23859a03d460b5afe396">
@@ -50,6 +51,31 @@
 .button.job-timing {
  padding-top:10px !important;
 }
+.button.org {
+   
+    padding-top: 2px !important;
+}
+.read-span {
+    position: relative;
+}
+.cursor{
+  cursor : pointer;
+  position: absolute;
+  bottom: 29px;
+  right: 272px;
+}
+.carousel{
+  max-width : 600px;
+}
+.apply-btn{
+  margin-bottom:18px;
+  margin-left: 9px;
+}
+.apply-span{
+  border-radius: 24px;
+  padding-left: 14px;
+  padding-right: 14px;
+}
 </style>
 </head>
 <body class="body-3">
@@ -60,11 +86,11 @@
       </div>
       <div class="navigation-middle">
         <nav role="navigation" class="nav-menu w-nav-menu">
-          <a href="{{ route('home')}}" class="nav-link w-nav-link">Home</a>
-          <a href="{{ route('companies')}}" class="nav-link w-nav-link">Jobs</a>
+          <!-- <a href="{{ route('home')}}" class="nav-link w-nav-link">Home</a> -->
+          <a href="{{ route('companies')}}" class="nav-link w-nav-link">Comapnies</a>
           <a href="{{ route('about')}}" class="nav-link w-nav-link">About us</a>
-          <a href="{{ route('faq')}}" class="nav-link w-nav-link">FAQ</a>
-          <a href="{{ route('blog')}}" class="nav-link w-nav-link">Blog</a>
+          <!-- <a href="{{ route('faq')}}" class="nav-link w-nav-link">FAQ</a> -->
+          <a href="{{ route('post_jobs')}}" class="nav-link w-nav-link">Post a Job</a>
           <a href="{{ route('contact_us')}}" class="nav-link w-nav-link">Contact us</a>
           <div class="navbar-mobile-button-wrapper">
             <a href="#" class="button-primary w-button">Login</a>
@@ -143,6 +169,9 @@
       
       @if(!empty($job_list))
       @foreach($job_list as $job)
+      @php
+      $skill = App\Models\talent_skills::where('job_id',$job['id'])->get();
+      @endphp
         <div class="div-block-2">
           <div class="w-row" style="margin-left:7px;">
           <div class="column-7 w-col w-col-1">
@@ -160,10 +189,29 @@
                 <div class="column-8 w-col w-col-1"><img src="images/Vector-3.png" loading="lazy" alt="" class="edit"></div>
               </div>
               <div class="detail">
-                <div class="text-block-6">{{$job['description']}} </div>
-                <!-- <a href="#" class="link-5">Read More</a> -->
-                <div class="job-details link-5" id="job-{{ $job['type'] }}" style="display: none;">
-              </div>
+           
+                <div class="job-details link-5 read-span"  id="job-{{ $job['id'] }}" style="display: none;">
+                  <div class="text-block-6">{{$job['description']}} </div><br>
+                  <div>
+                    <button class="form-control apply-btn">Apply Now</button>
+                  </div>
+                  @if(!empty($skill))
+                  @foreach($skill as $skills)
+                  <a href="#" class="button org hire w-button">{{$skills['skill']}}</a>
+                  @endforeach
+                  @endif
+                </div><br>
+                <div class="text-block-6 dummy" id = "dummy" style="padding-right: 10px;">{{ \Illuminate\Support\Str::limit($job['description'] ?? '',70,' ...') }} </div>
+                
+               
+                  <h8 class="job-title link-5 cursor" data-job-id="{{ $job_data['id'] }}" >Read More</h8>
+              
+                
+                
+              
+               <!-- </div> -->
+               
+            </div>
             </div>
             <div class="columns-4 home-page w-row">
               <div class="column-9 w-col w-col-3"><img src="images/Ellipse-12.png" loading="lazy" alt="" class="image-4 job">
@@ -182,6 +230,10 @@
         @endforeach
         @else
         @foreach($data as $job_data)
+        @php
+        $skill = App\Models\talent_skills::where('job_id',$job_data['id'])->get();
+        @endphp
+       
         <div class="div-block-2">
           <div class="w-row" style="margin-left:7px;">
           <div class="column-7 w-col w-col-1"><img src="images/job-user-img-6-100x100.png-2.png" style="margin-left:13px;" loading="lazy" alt="" class="job-img"></div>
@@ -197,9 +249,27 @@
                 <div class="column-8 w-col w-col-1"><img src="images/Vector-3.png" loading="lazy" alt="" class="edit"></div>
               </div>
               <div class="detail">
-                <div class="text-block-6">{{$job_data['description']}} </div>
-                <!-- <a href="#" class="link-5">Read More</a> -->
-              </div>
+           
+               <div class="job-details link-5 carousel read-span"  id="job-{{ $job_data['id'] }}" style="display: none;">
+                <div class="text-block-6">{{$job_data['description']}} </div><br>
+                  <div class="apply-btn">
+                    <button class="form-control apply-span">Apply Now</button>
+                  </div>
+                @if(!empty($skill))
+                @foreach($skill as $skills)
+                <a href="#" class="button org hire w-button">{{$skills['skill']}}</a>
+                @endforeach
+                @endif
+                </div><br>
+                <div class="text-block-6 dummy" id = "dummy" style="padding-right: 10px;">{{ \Illuminate\Support\Str::limit($job_data['description'] ?? '',70,' ...') }} </div>
+                
+        
+                <h8 class="job-title link-5 cursor" data-job-id="{{ $job_data['id'] }}" >Read More</h8>               
+               
+                
+              
+               <!-- </div> -->
+               
             </div>
             <div class="columns-4 home-page w-row">
               <div class="column-9 w-col w-col-3"><img src="images/Ellipse-12.png" loading="lazy" alt="" class="image-4 job">
