@@ -1,20 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-
+use Mail;
+use Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Models\Contact;
+use App\Models\contact;
 use Illuminate\Support\Str;
 use App\UserEmails;
 use App\Models\User;
 use App\Models\user_infos;
+use App\Models\user_details;
 use App\Models\organization;
 use App\Models\post_jobs;
 use App\Models\news_letter;
 use App\Models\talent_skills;
+use App\Models\user_skills;
 use App\Models\AccessCtrl;
 use DB;
  
@@ -56,12 +59,23 @@ class WebsiteController extends Controller
     function edit_profile(){
         return view("edit-profile");
     }
+    function privacy_policy(){
+        return view("privacy-policy");
+    }
     function home(){
         $jobs = post_jobs::get();
         return view("home",['data'=>$jobs]);
     }
     function post_jobs(){
-        return view("post-jobs");
+        $user = Session::get('user');
+        if($user == ""){
+            
+            return view("log-in");
+        }else{
+            $companies = organization::get();
+            return view("post-jobs",['companies' => $companies]);
+        }
+       
     }
     function add_organization(){
         return view("organization-profile");
@@ -96,10 +110,110 @@ class WebsiteController extends Controller
               $user_infos->email            = $req->email;
               $user_infos->password         = Hash::make($req->password);
               $user_infos->country           = $req->country;
-
+              $user_profile   = $req->user_profile;
+                if($user_profile == "Hire Talent"){
+                    $validator = \Validator::make($req->all(), [
+                        'name' => 'required',
+                         'country_code' => 'required',
+                         'phone_number' => 'required',
+                         'twitter' => 'required',
+                         'website' => 'required',
+                         'telegram' => 'required',
+                         'github' => 'required',
+                         'introduction' => 'required',
+                         'skills' => 'required',
+                         'location'        => 'required',
+                         'role'     => 'required',
+                         'languages'   => 'required'
+                       ]);
+                       if ($validator->fails()) {
+                         $responseArr['message'] = $validator->errors();
+                         return response()->json($responseArr);
+                       }
+                       else{
+                         $web_users = new organization;
+                         $web_users->name = $req->name;
+                         $web_users->country_code = $req->country_code;
+                         $web_users->phone_number = $req->phone_number;
+                         $web_users->twitter = $req->twitter;
+                         $web_users->website = $req->website;
+                         $web_users->telegram = $req->telegram;
+                         $web_users->github = $req->github;
+                         $web_users->introduction = $req->introduction;
+                        //  $web_users->skills = $req->skills;
+                         $web_users->role = $req->role;
+                         $web_users->location = $req->location;
+                         $web_users->languages = $req->languages;
+                         $web_users->status = $req->status;
+                         if ($req->hasFile('event_image')) {
+                             $eventPic             = time().'.'.$req->event_image->extension();  
+                             $req->event_image->move(public_path('image'), $eventPic);
+                             $web_users->profile_picture = $eventPic;
+                         }
+                         // $file = $req->image;
+                         // $name = Str::random(10);
+                         // // $url = Storage::putFileAs('images', $file, $name . '.' . $file->extension()); 
+                         // $imageName = $name . '.' . $file->extension();  
+                         // echo json_encode($imageName);die();
+                         // $request->image->move(public_path('images'), $imageName);
+                         // echo json_encode($imageName);die();
+                         
+                         // $web_users->profile_picture = $imageName;
+                         $web_users->save();
+                        }
+                    }
+                if($user_profile == "Find Jobs"){
+                    $validator = \Validator::make($req->all(), [
+                       
+                         'country_code1' => 'required',
+                         'phone_number1' => 'required',
+                       
+                         'skills1' => 'required',
+                         'location1'        => 'required',
+                        //  'role1'     => 'required',
+                         'languages1'   => 'required'
+                       ]);
+                       if ($validator->fails()) {
+                         $responseArr['message'] = $validator->errors();
+                         return response()->json($responseArr);
+                       }
+                       else{
+                        
+                         $user_infos->country_code = $req->country_code1;
+                         $user_infos->phone_number = $req->phone_number1;
+                        
+                        //  $user_infos->skills = $req->skills1;
+                        //  $user_infos->role = $req->role1;
+                         $user_infos->location = $req->location1;
+                         $user_infos->languages = $req->languages1;
+                         
+                         if ($req->hasFile('event_image')) {
+                             $eventPic             = time().'.'.$req->event_image1->extension();  
+                             $req->event_image->move(public_path('image'), $eventPic);
+                             $user_infos->profile_picture = $eventPic;
+                         }
+                         // $file = $req->image;
+                         // $name = Str::random(10);
+                         // // $url = Storage::putFileAs('images', $file, $name . '.' . $file->extension()); 
+                         // $imageName = $name . '.' . $file->extension();  
+                         // echo json_encode($imageName);die();
+                         // $request->image->move(public_path('images'), $imageName);
+                         // echo json_encode($imageName);die();
+                         
+                         // $web_users->profile_picture = $imageName;
+                        
+                        }
+                    }
               $user_infos->save();
+              $skills = $_POST['skills1'];
+              foreach($skills as $skill){
+                 $skills = new user_skills;
+                 $skills->user_id = $user_infos->id;
+                 $skills->skill = $skill;
+              }
               return redirect('/log_in')->with('success','Account Created!');
-            }else{
+            }
+            else{
                 return redirect('/sign_up')->with('error','Email already exists!');
             }
           }
@@ -117,6 +231,11 @@ class WebsiteController extends Controller
         else{
             $email=$request->email;
             $password=$request->password;
+            $data = $request->input();
+            Session::put('user', $data);
+            // $request->session()->put('user',$data);
+            $user_data = Session::get('user');
+            // echo json_encode($user_data);die();
             $user_infos=user_infos::where('email',$request->email)->first();
             if(!empty($user_infos)){
                 if(Hash::check($request->password,$user_infos->password)){
@@ -203,6 +322,37 @@ class WebsiteController extends Controller
         }
         
     }
+    public function logout(Request $request) {
+        Session::flush();
+        // $user = Session::get('user');
+        // if($user == ""){
+        //     echo json_encode("no user");
+        // }else{
+        //     echo json_encode($user);die();
+        // }
+        $jobs = post_jobs::get();
+        return view("home",['data'=>$jobs]);
+      }
+    function update_user_details(Request $req){
+        $type = "application/json";
+        return Auth::id();
+        // $file = $req->cv;
+        // $filename='cv'.time().'.'.$file->getClientOriginalExtension();
+        // $req->cv->move(public_path('CV'),$filename);
+        
+        // $file1 = $req->cover;
+        // $filename1='cover'.time().'.'.$file1->getClientOriginalExtension();
+        // $req->cover->move(public_path('CV'),$filename1);
+
+      
+        // $details = new user_details;
+        // $details->user_id = $req->session()->get('id');;
+        // $details->cv = $filename;
+        // $details->cover = $filename1;
+        // $details->save();
+        // $jobs = post_jobs::get();
+        // return view("home",['data'=>$jobs]);
+    }
     function update_profile(Request $req){
         $type = "application/json";
         $org_phone = organizations::where('phone_number','=',$req->phone_no)->first();
@@ -268,13 +418,13 @@ class WebsiteController extends Controller
     }
     function update_jobs(Request $req){
         $type = "application/json";
-        $job_skills = $req->skills;
+        $job_skills = $_POST['skills'];
             $jobs = new post_jobs;
             $jobs->title = $req->title;
             $jobs->category = $req->category;
             $jobs->type = $req->type;
             $jobs->location = $req->location;
-            $jobs->remote = $req->remote;
+           
             $jobs->description = $req->description;
             // $jobs->skills = $req->skills;
             $jobs->salary = $req->salary;
@@ -286,21 +436,22 @@ class WebsiteController extends Controller
            $skills->skill = $job_skill;
            $skills->save();
             }
-            return view("home");
-
+            // $jobs = post_jobs::all();
+            // return view('home',['job_list'=>$jobs,]);
+            return redirect('/');
             // return back()->with('error', 'The error message here!');
             // return response()->json(["message" => "Registration Successfull" ,'code'=>'200'], 200);
     }
     function create_contact(Request $req){
         $type = "application/json";
         
-            $contact = new Contact;
+            $contact = new contact;
             $contact->name = $req->name;
             $contact->email = $req->email;
             $contact->message = $req->message;
             $contact->save();
             UserEmails::contact($req->name, $req->email,$req->message);
-            return redirect('/contact_us');
+            return view("contact-us");
         
     } 
     function subscribe(Request $req){
@@ -316,5 +467,15 @@ class WebsiteController extends Controller
        
        
        
+    }
+    function mail(Request $req){
+        $to_name = 'Misbah Ayaz';
+        $to_email = 'misbahayaz921@gmail.com';
+        $data = array('name'=>'Ogbonna Vitalis(sender_name)', 'body' => 'A test mail');
+        Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
+        $message->to($to_email, $to_name)
+        ->subject('Laravel Test Mail');
+        $message->from('SENDER_EMAIL_ADDRESS','Test Mail');
+        });
     }
 }

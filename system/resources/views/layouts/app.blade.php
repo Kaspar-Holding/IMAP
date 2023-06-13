@@ -16,24 +16,24 @@
       <!-- site icon -->
       <!-- <link rel="icon" href="{{ asset('new/images/fevicon.png')}}" type="image/png" /> -->
       <!-- bootstrap css -->
-      <!-- <link rel="stylesheet" href="{{ asset('new/css/bootstrap.min.css')}}" /> -->
+      <link rel="stylesheet" href="{{ asset('new/css/bootstrap.min.css')}}" />
       <!-- site css -->
-      <!-- <link rel="stylesheet" href="{{ asset('new/style.css')}}" /> -->
+      <link rel="stylesheet" href="{{ asset('new/style.css')}}" />
       <!-- responsive css -->
-      <!-- <link rel="stylesheet" href="{{ asset('new/css/responsive.css')}}" /> -->
+      <link rel="stylesheet" href="{{ asset('new/css/responsive.css')}}" />
       <!-- color css -->
-      <!-- <link rel="stylesheet" href="{{ asset('new/css/colors.css')}}" /> -->
+      <link rel="stylesheet" href="{{ asset('new/css/colors.css')}}" />
       <!-- select bootstrap -->
       <!-- <link rel="stylesheet" href="{{ asset('new/css/bootstrap-select.css')}}" /> -->
       <!-- scrollbar css -->
-      <!-- <link rel="stylesheet" href="{{ asset('new/css/perfect-scrollbar.css')}}" /> -->
+      <link rel="stylesheet" href="{{ asset('new/css/perfect-scrollbar.css')}}" />
       <!-- custom css -->
-      <!-- <link rel="stylesheet" href="{{ asset('new/css/custom.css')}}" /> -->
-      <!-- <link rel="stylesheet" href="{{ asset('new/css/select2.min.css')}}" /> -->
+      <link rel="stylesheet" href="{{ asset('new/css/custom.css')}}" />
+      <link rel="stylesheet" href="{{ asset('new/css/select2.min.css')}}" />
       <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      <![endif]-->
+      <![endif] -->
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
@@ -101,25 +101,62 @@
             var jobId = $(this).data('job-id');
             $('#job-' + jobId).toggle();
             $('.dummy').toggle();
-            var closebtns = $('.cursor').
-            var i;
-            console.log(closebtns)
-            for (i = 0; i < closebtns.length; i++) {
-                console.log("hi")
-                var txt = closebtns[i].text();
-                // if(txt = "Read More"){
-                //     closebtns[i].text("Read Less");
-                // }
-            // closebtns[i].addEventListener("click", function() {
-            //     this.parentElement.style.display = 'none';
-            // });
-            }
+            document.querySelector('#cursor').innerHTML = 'Read Less';
+            // var closebtns = $('.cursor').
+            // var i;
+            // console.log(closebtns)
+            // for (i = 0; i < closebtns.length; i++) {
+            //     console.log("hi")
+            //     var txt = closebtns[i].text();
+            //     // if(txt = "Read More"){
+            //     //     closebtns[i].text("Read Less");
+            //     // }
+            // // closebtns[i].addEventListener("click", function() {
+            // //     this.parentElement.style.display = 'none';
+            // // });
+            // }
           
          
            
         });
     
 </script>
+<script>
+  function showDiv() {
+    var selectValue = document.getElementById("mySelect").value;
+    
+    // Hide all divs
+    var divs = document.getElementsByClassName("profile");
+    for (var i = 0; i < divs.length; i++) {
+      divs[i].style.display = "none";
+    }
+    
+    // Show the selected div
+    if (selectValue) {
+      document.getElementById(selectValue).style.display = "block";
+    }
+  }
+</script>
+<script>
+  $('#exampleModal').on('shown.bs.modal', function () {
+  $('#myInput').trigger('focus')
+})
+</script>
+<script>
+    
+    // A $( document ).ready() block.
+    $( document ).ready(function() {
+      $('#OpenImgUpload').click(function(){ 
+        $('#imgupload').trigger('click'); 
+      });
+      $('#imgupload').change(function(){ 
+        var output = document.getElementById('output');
+        console.log(URL.createObjectURL(event.target.files[0]));
+        output.src = URL.createObjectURL(event.target.files[0]);
+      });
+    });
+    
+  </script>
 </body>
             
 </html>

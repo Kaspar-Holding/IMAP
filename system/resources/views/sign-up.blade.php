@@ -1,3 +1,4 @@
+@extends('layouts.app')
 <!DOCTYPE html><!--  This site was created in Webflow. https://www.webflow.com  -->
 <!--  Last Published: Fri Apr 28 2023 08:34:19 GMT+0000 (Coordinated Universal Time)  -->
 <html data-wf-page="643d23869a03d4062aafe3b6" data-wf-site="643d23859a03d460b5afe396">
@@ -35,22 +36,28 @@ label{
 .form-footer {
     margin-left: 105px;
 }
+.form-control {
+    background: #fff !important;
+    border-radius: 0 !important;
+    border: 0 !important;
+    color: #999 !important;
+}
 </style>
 </head>
 <body>
   <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
-    <div class="container-navigation">
+  <div class="container-navigation">
       <div class="navigation-left">
-        <a href="index.html" class="brand w-nav-brand"><img loading="lazy" src="images/Cryptolancers.png" alt="" class="logo"></a>
+        <a href="{{ route('home')}}" aria-current="page" class="brand w-nav-brand w--current"><img loading="lazy" src="images/Cryptolancers.png" alt="" class="logo"></a>
       </div>
       <div class="navigation-middle">
         <nav role="navigation" class="nav-menu w-nav-menu">
-          <a href="index.html" class="nav-link home w-nav-link">Home</a>
-          <a href="about.html" class="nav-link jobs w-nav-link">Jobs</a>
-          <a href="about.html" class="nav-link about w-nav-link">About us</a>
-          <a href="about.html" class="nav-link faq w-nav-link">FAQ</a>
-          <a href="blog.html" class="nav-link blog w-nav-link">Blog</a>
-          <a href="browse.html" class="nav-link contact w-nav-link">Contact us</a>
+          <!-- <a href="{{ route('home')}}" class="nav-link w-nav-link">Home</a> -->
+          <a href="{{ route('companies')}}" class="nav-link w-nav-link">Companies</a>
+          <a href="{{ route('about')}}" class="nav-link w-nav-link">About us</a>
+          <!-- <a href="{{ route('faq')}}" class="nav-link w-nav-link">FAQ</a> -->
+          <a href="{{ route('post_jobs')}}" class="nav-link w-nav-link">Post a Job</a>
+          <a href="{{ route('contact_us')}}" class="nav-link w-nav-link">Contact us</a>
           <div class="navbar-mobile-button-wrapper">
             <a href="#" class="button-primary w-button">Login</a>
           </div>
@@ -58,8 +65,16 @@ label{
       </div>
       <div class="navigation-right">
         <div class="navigation-button-wrap">
-          <a href="post-job.html" class="nav-link sign-in w-nav-link">Sign In</a>
-          <a href="hire-talent.html" class="button-3 w-button">Hire Talent</a>
+        <!-- <a href="{{ route('add_organization')}}" class="nav-link w-nav-link">Add</a> -->
+
+        @if(Session::get('user') == "")
+          <a href="{{ route('log_in')}}" class="nav-link w-nav-link">Sign In</a>
+        @else
+          <a href="{{ route('logout') }}">Logout                              
+        </a>
+        @endif
+       
+          <a href="{{route('hire_talent')}}" class="button-3 w-button">Hire Talent</a>
         </div>
         <div class="menu-button w-nav-button">
           <div class="w-icon-nav-menu"></div>
@@ -82,7 +97,7 @@ label{
             </div>
           </div>
         </div>
-        <form class="sign-up-form" action="{{route('create_user')}}" method="POST" data-wf-user-form-type="signup">
+        <form class="sign-up-form"  action="{{route('create_user')}}" method="POST" enctype="multipart/form-data" data-wf-user-form-type="signup">
           <div class="w-users-userformheader account-form-title">
             <div class="margin-bottom-16">
               <h3 class="signup">Create an account</h3>
@@ -129,7 +144,100 @@ label{
                     <option value="pakistan">Pakistan</option>
                   </select>
             </div>
+          <div class="profile-type">
+              <label for="Name" class="field-label country">Profile Type</label>
+              <select name="user_profile" class="form-control form-field" id="mySelect" onchange="showDiv()" required>
+                    <option>-- Select --</option>
+                    <option value="Hire Talent">Hire Talent</option>
+                    <option value="Find Jobs">Find Jobs</option>
+                  </select>
+            </div>
           </div>
+        
+
+
+      <div class = "organization-profile profile" id = "Hire Talent" style="display: none;">
+        <div style="text-align:center;">
+         <h1 class="heading-2">Organization Profile</h1>
+          <input type="file" id="imgupload" name="event_image" style="display:none"/>
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+          <img src="{{ asset('ui/images/green.png')}}" width="25px" height="25px" style="position: relative;left: 93px;bottom: 30px;" />
+          <img src="{{ asset('ui/images/pencil.png')}}" width="10px" height="10px" style="position: relative;left: 73px;bottom: 31px;" id="OpenImgUpload"/>
+          <img width="70px" height="70px" id="output"/>
+        </div>
+        @if(session()->has('error'))
+              <div class="alert alert-danger" style = "color: #f7073f;">
+                  {{ session()->get('error') }}
+              </div>
+          @endif
+        <div class="edit-name">
+          <label for="name-3" class="phone">Name</label>
+          <input type="text" class="form-field w-input" maxlength="256" name="name" data-name="Name 2" placeholder="Type your response here" id="name-2">
+        </div>
+        <div class="edit-code"><label for="field-3" class="country-code">Phone Country Code</label><select id="field-3" name="country_code" data-name="Field 3" class="form-control form-field">
+            <option value="">Please select</option>
+            <option value="First">First choice</option>
+            <option value="Second">Second choice</option>
+            <option value="Third">Third choice</option>
+          </select></div>
+        <div class="edit-phone">
+          <label for="name-3" class="phone">Phone number</label>
+          <input type="text" class="form-field w-input" maxlength="256" name="phone_number" data-name="Name 2" placeholder="Type your response here" id="name-2">
+        </div>
+        <div class="website">
+          <label for="name-3" class="website">Website</label>
+          <input type="text" class="form-field w-input" maxlength="256" name="website" data-name="Name 2" placeholder="Type your response here" id="name-2">
+        </div>
+        <div class="website twitter">
+          <label for="name-3" class="website twitter">Twitter</label>
+          <input type="text" class="form-field w-input" maxlength="256" name="twitter" data-name="Name 2" placeholder="Type your response here" id="name-2">
+        </div>
+        <div class="website telegram"><label for="name-3" class="website telegram">Telegram</label><input type="text" class="telegram form-field w-input" maxlength="256" name="telegram" data-name="Name 2" placeholder="Type your response here" id="name-2"></div>
+        <div class="website github"><label for="name-3" class="website">Github</label><input type="text" class="github form-field w-input" maxlength="256" name="github" data-name="Name 2" placeholder="Type your response here" id="name-2"></div>
+        <h3 class="heading-2 organization">Summary</h3>
+        <!-- <div class="edit-role"><label for="name-2" class="summary">*Role</label><input type="text" class="form-field w-input" maxlength="256" name="role" data-name="Name 2" placeholder="Type your response here" id="name-2"></div> -->
+        <!-- <div class="edit-status"><label for="field-2" class="summary status">*Status</label><select id="field-2" name="status" data-name="Field 2" required="" class="select-field w-select">
+            <option value="">Select status</option>
+            <option value="First">First choice</option>
+            <option value="Second">Second choice</option>
+            <option value="Third">Third choice</option>
+          </select></div> -->
+        <div class="edit-intro"><label for="field" class="summary introduction">*Introduction</label><textarea placeholder="Write about your experience,industry and skills." maxlength="5000" id="field" name="introduction" data-name="Field" class="intro-area form-field w-input"></textarea></div>
+        <div class="edit-role"><label for="name-2" class="summary location">*Current Location</label><input type="text" class="form-field w-input" maxlength="256" name="location" data-name="Name 2" placeholder="Type your response here" id="name-2"></div>
+        <!-- <div class="edit-role"><label for="name-3" class="summary skills">Skills</label><input type="text" class="summary-skills form-field w-input" maxlength="256" name="skills" data-name="Name 2" placeholder="Type your response here" id="name-2"></div> -->
+        <div class="edit-role"><label for="name-2" class="summary languages">Languages</label><input type="text" class="summary-lang form-field w-input" maxlength="256" name="languages" data-name="Name 2" placeholder="Type your response here" id="name-2"></div>
+      </div>
+  <!-- Talent Profile -->
+<div class = "talent-profile profile" id = "Find Jobs" style="display: none;">
+        <div style="text-align:center;">
+         <h1 class="heading-2">Job Profile</h1>
+          <input type="file" id="imgupload" name="event_image1" style="display:none"/>
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+          <img src="{{ asset('ui/images/green.png')}}" width="25px" height="25px" style="position: relative;left: 93px;bottom: 30px;" />
+          <img src="{{ asset('ui/images/pencil.png')}}" width="10px" height="10px" style="position: relative;left: 73px;bottom: 31px;" id="OpenImgUpload"/>
+          <img width="70px" height="70px" id="output"/>
+        </div>
+        @if(session()->has('error'))
+              <div class="alert alert-danger" style = "color: #f7073f;">
+                  {{ session()->get('error') }}
+              </div>
+          @endif
+        <div class="edit-code"><label for="field-3" class="country-code">Phone Country Code</label><select id="field-3" name="country_code1" data-name="Field 3" class="form-control form-field">
+            <option value="">Please select</option>
+            <option value="First">First choice</option>
+            <option value="Second">Second choice</option>
+            <option value="Third">Third choice</option>
+          </select></div>
+        <div class="edit-phone">
+          <label for="name-3" class="phone">Phone number</label>
+          <input type="text" class="form-field w-input" maxlength="256" name="phone_number1" data-name="Name 2" placeholder="Type your response here" id="name-2">
+        </div>
+        <div class="edit-role"><label for="name-2" class="summary">*Role</label><input type="text" class="form-field w-input" maxlength="256" name="role1" data-name="Name 2" placeholder="Type your response here" id="name-2" required=""></div>
+     
+        <div class="edit-role"><label for="name-2" class="summary location">*Current Location</label><input type="text" class="form-field w-input" maxlength="256" name="location1" data-name="Name 2" placeholder="Type your response here" id="name-2" required=""></div>
+        <div class="edit-role"><label for="name-3" class="summary skills">Skills</label><input type="text" class="summary-skills form-field w-input" maxlength="256" name="skills1[]" data-name="Name 2" placeholder="Type your response here" id="name-2"></div>
+        <div class="edit-role"><label for="name-2" class="summary languages">Languages</label><input type="text" class="summary-lang form-field w-input" maxlength="256" name="languages1" data-name="Name 2" placeholder="Type your response here" id="name-2"></div>
+      </div>
           <input type="submit" value="SIGN UP" data-wait="Please wait..." class="w-users-userformbutton button-primary signup w-button">
           <div class="form-divider"></div>
           <div class="w-users-userformfooter form-footer"><span class="text-color-gray-500">Have an account?</span>

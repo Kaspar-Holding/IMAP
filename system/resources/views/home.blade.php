@@ -38,7 +38,7 @@
   margin-left: 13px !important; 
 }
 .intro{
-  line-height : 0.1px !important;
+  line-height : 7.1px !important;
 }
 .top{
   padding-top:7px;
@@ -49,7 +49,7 @@
   margin-bottom : 13px !important;
 }
 .button.job-timing {
- padding-top:10px !important;
+ padding-top:7px !important;
 }
 .button.org {
    
@@ -70,6 +70,7 @@
 .apply-btn{
   margin-bottom:18px;
   margin-left: 9px;
+  margin-top:12px;
 }
 .apply-span{
   border-radius: 24px;
@@ -82,12 +83,12 @@
   <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
     <div class="container-navigation">
       <div class="navigation-left">
-        <a href="index.html" aria-current="page" class="brand w-nav-brand w--current"><img loading="lazy" src="images/Cryptolancers.png" alt="" class="logo"></a>
+        <a href="{{ route('home')}}" aria-current="page" class="brand w-nav-brand w--current"><img loading="lazy" src="images/Cryptolancers.png" alt="" class="logo"></a>
       </div>
       <div class="navigation-middle">
         <nav role="navigation" class="nav-menu w-nav-menu">
           <!-- <a href="{{ route('home')}}" class="nav-link w-nav-link">Home</a> -->
-          <a href="{{ route('companies')}}" class="nav-link w-nav-link">Comapnies</a>
+          <a href="{{ route('companies')}}" class="nav-link w-nav-link">Companies</a>
           <a href="{{ route('about')}}" class="nav-link w-nav-link">About us</a>
           <!-- <a href="{{ route('faq')}}" class="nav-link w-nav-link">FAQ</a> -->
           <a href="{{ route('post_jobs')}}" class="nav-link w-nav-link">Post a Job</a>
@@ -99,10 +100,15 @@
       </div>
       <div class="navigation-right">
         <div class="navigation-button-wrap">
-        <a href="{{ route('add_organization')}}" class="nav-link w-nav-link">Add</a>
+        <!-- <a href="{{ route('add_organization')}}" class="nav-link w-nav-link">Add</a> -->
 
-        <!-- <a href="{{ route('sign_up')}}" class="nav-link w-nav-link">Sign Up</a> -->
+        @if(Session::get('user') == "")
           <a href="{{ route('log_in')}}" class="nav-link w-nav-link">Sign In</a>
+        @else
+          <a href="{{ route('logout') }}">Logout                              
+        </a>
+        @endif
+
           <a href="{{route('hire_talent')}}" class="button-3 w-button">Hire Talent</a>
         </div>
         <div class="menu-button w-nav-button">
@@ -184,7 +190,10 @@
                   <h3 class="job-heading">{{$job['title']}}</h3>
                 </div>
                 <div class="column-13 w-col w-col-7">
-                  <a href="#" class="button job-timing w-button">{{$job['type']}}<br>‍</a>
+                  <a href="#" class="button job-timing w-button">@if($job['type'] == 0) on-site
+                  @else remote
+                  @endif  
+                  <br>‍</a>
                 </div>
                 <div class="column-8 w-col w-col-1"><img src="images/Vector-3.png" loading="lazy" alt="" class="edit"></div>
               </div>
@@ -192,19 +201,53 @@
            
                 <div class="job-details link-5 read-span"  id="job-{{ $job['id'] }}" style="display: none;">
                   <div class="text-block-6">{{$job['description']}} </div><br>
-                  <div>
-                    <button class="form-control apply-btn">Apply Now</button>
+                  <!-- Button trigger modal -->
+                  <div class="apply-btn">
+                    <button type="button" class="form-control apply-span" data-toggle="modal" data-target="#exampleModal" >Apply Now</button>
                   </div>
+                 
+                 
+
                   @if(!empty($skill))
                   @foreach($skill as $skills)
                   <a href="#" class="button org hire w-button">{{$skills['skill']}}</a>
                   @endforeach
                   @endif
+                  <div class="apply-btn">
+                  <button type="button" data-toggle="modal" data-target="#exampleModal" class="del btn-apply apply-span">Apply Now</button>
+                </div>
+                
+                  <div class="modal modal-danger fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" style = "margin-top:15px !important;" style="color:black !important;" id="exampleModalLabel">Apply Now</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">  
+                              <div class="">
+                              <form id="email-form" name="email-form" data-name="Email Form" action="{{route('update_user_details')}}" method="POST" class="job-submission-form" enctype = "multipart/form-data">
+                              @csrf
+                                <div class="div-block-4"><label for="cv" class="field-label-6">Upload CV *</label><input type="file" class="form-field title w-input" maxlength="256" name="cv" data-name="cv" placeholder="Type your response here" id="cv"></div>
+
+                                <div class="div-block-4"><label for="cover" class="field-label-6">Upload Cover Letter *</label><input type="file" class="form-field title w-input" maxlength="256" name="cover" data-name="cover" placeholder="Type your response here" id="cover"></div>
+                                   
+                                   
+                                </div><input type="submit" value="Submit" data-wait="Please wait..." class="button-primary w-button">
+                              </form>
+                              
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
                 </div><br>
                 <div class="text-block-6 dummy" id = "dummy" style="padding-right: 10px;">{{ \Illuminate\Support\Str::limit($job['description'] ?? '',70,' ...') }} </div>
                 
                
-                  <h8 class="job-title link-5 cursor" data-job-id="{{ $job_data['id'] }}" >Read More</h8>
+                  <h8 class="job-title link-5 cursor" data-job-id="{{ $job['id'] }}" >Read More</h8>
               
                 
                 
@@ -244,7 +287,9 @@
                   <h3 class="job-heading">{{$job_data['title']}}</h3>
                 </div>
                 <div class="column-13 w-col w-col-7">
-                  <a href="#" class="button job-timing w-button">{{$job_data['type']}}<br>‍</a>
+                <a href="#" class="button job-timing w-button">@if($job_data['type'] == 0) on-site
+                  @else remote
+                  @endif <br> </a>
                 </div>
                 <div class="column-8 w-col w-col-1"><img src="images/Vector-3.png" loading="lazy" alt="" class="edit"></div>
               </div>
@@ -252,19 +297,49 @@
            
                <div class="job-details link-5 carousel read-span"  id="job-{{ $job_data['id'] }}" style="display: none;">
                 <div class="text-block-6">{{$job_data['description']}} </div><br>
-                  <div class="apply-btn">
-                    <button class="form-control apply-span">Apply Now</button>
-                  </div>
+                 
                 @if(!empty($skill))
                 @foreach($skill as $skills)
                 <a href="#" class="button org hire w-button">{{$skills['skill']}}</a>
                 @endforeach
                 @endif
+                <div class="apply-btn">
+                  <button type="button" data-toggle="modal" data-target="#exampleModal" class="del btn-apply apply-span">Apply Now</button>
+                </div>
+                
+                  <div class="modal modal-danger fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="Delete" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" style = "margin-top:15px !important;" style="color:black !important;" id="exampleModalLabel">Apply Now</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">  
+                              <div class="">
+                              <form id="email-form" name="email-form" data-name="Email Form" action="{{route('update_user_details')}}" method="POST" class="job-submission-form" enctype = "multipart/form-data">
+                              @csrf
+                                <div class="div-block-4"><label for="cv" class="field-label-6">Upload CV *</label><input type="file" class="form-field title w-input" maxlength="256" name="cv" data-name="cv" placeholder="Type your response here" id="cv"></div>
+
+                                <div class="div-block-4"><label for="cover" class="field-label-6">Upload Cover Letter *</label><input type="file" class="form-field title w-input" maxlength="256" name="cover" data-name="cover" placeholder="Type your response here" id="cover"></div>
+                                   
+                                   
+                                </div><input type="submit" value="Submit" data-wait="Please wait..." class="button-primary w-button">
+                              </form>
+                              
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  
+                
                 </div><br>
                 <div class="text-block-6 dummy" id = "dummy" style="padding-right: 10px;">{{ \Illuminate\Support\Str::limit($job_data['description'] ?? '',70,' ...') }} </div>
                 
-        
-                <h8 class="job-title link-5 cursor" data-job-id="{{ $job_data['id'] }}" >Read More</h8>               
+                
+                <h8 class="job-title link-5 cursor" id = "cursor" data-job-id="{{ $job_data['id'] }}" >Read More</h8>               
                
                 
               
@@ -293,7 +368,13 @@
     <div data-w-id="27694c21-cbfc-58f0-1e5c-e47458f6d8b6" class="container-regular">
       <a href="#" class="footer-logo-link w-inline-block"><img src="images/Cryptolancers.png" loading="lazy" alt="Brand" class="footer-logo">
         <div class="footer-form-wrapper">
-          <div class="margin-bottom-16">News</div>
+        <a href="{{ route('companies')}}" class="margin-bottom-16">Companies</a>
+        <a href="{{ route('blog')}}" class="margin-bottom-16">Blog</a>
+        <a href="{{ route('privacy_policy')}}" class="margin-bottom-16">Privacy Policy</a>
+        <a href="{{ route('faq')}}" class="margin-bottom-16">FAQs</a>
+        <a href="{{ route('companies')}}" class="margin-bottom-16">Companies</a>
+
+          <!-- <div class="margin-bottom-16">News</div> -->
           <div class="margin-bottom-16">Companies</div>
           <div class="margin-bottom-16">Find Talent</div>
           <div class="margin-bottom-16">Terms of Use</div>
@@ -325,6 +406,8 @@
       </div>
     </div>
   </div>
+   
+  
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=643d23859a03d460b5afe396" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
   <script src="js/webflow.js" type="text/javascript"></script>
   <!-- [if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif] -->

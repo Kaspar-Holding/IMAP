@@ -22,14 +22,15 @@ Route::post('/update_password',[UserController::class, 'update_password'])->name
 Route::get('/reset_password',[UserController::class, 'reset_password'])->name('reset_password');
 Route::get('/login-google',[SocialAuthController::class,'redirectToProvider'])->name('google.login');
 Route::get('/auth/google/callback',[SocialAuthController::class,'handleCallback'])->name('google.login.callback');
-
+Route::get('/logout', [WebsiteController::class, 'logout'])->name('logout');
 Route::group(['middleware' =>[
     'auth:sanctum', 'verified'
 ]], function(){
     // Dashboard Routes
     
-    Route::get('/dashboard', [DashboardController::class, 'get_data'])->name('dashboard');
-    Route::get('/layout', [DashboardController::class, 'layout'])->name('layout');
+    // Route::get('/dashboard', [DashboardController::class, 'get_data'])->name('dashboard');
+    // Route::get('/layout', [DashboardController::class, 'layout'])->name('layout');
+    
     // User Routes 
 }
 
@@ -53,17 +54,22 @@ Route::get('/about', [WebsiteController::class, 'about'])->name('about');
 Route::get('/contact_us', [WebsiteController::class, 'contact_us'])->name('contact_us');
 Route::get('/post_jobs', [WebsiteController::class, 'post_jobs'])->name('post_jobs');
 Route::get('/edit_profile', [WebsiteController::class, 'edit_profile'])->name('edit_profile');
+Route::get('/privacy_policy', [WebsiteController::class, 'privacy_policy'])->name('privacy_policy');
 
 
 //post request
 Route::post('/update_jobs', [WebsiteController::class, 'update_jobs'])->name('update_jobs');
 Route::post('/create_organization', [WebsiteController::class, 'create_organization'])->name('create_organization');
+
+
 Route::post('/update_profile', [WebsiteController::class, 'update_profile'])->name('update_profile');
 Route::post('/view_organization', [WebsiteController::class, 'view_organization'])->name('view_organization');
 Route::post('/create_user', [WebsiteController::class, 'create_user'])->name('create_user');
 Route::post('/sign_in', [WebsiteController::class, 'sign_in'])->name('sign_in');
 Route::post('/subscribe', [WebsiteController::class, 'subscribe'])->name('subscribe');
-
+Route::post('/mail', [WebsiteController::class, 'mail'])->name('mail');
+Route::post('/create_contact', [WebsiteController::class, 'create_contact'])->name('create_contact');
+Route::post('/update_user_details', [WebsiteController::class, 'update_user_details'])->name('update_user_details');
 Route::any('/search',function(){
     $key = Request::get ( 'keyword' );
     $loc = Request::get ( 'location' );

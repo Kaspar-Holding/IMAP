@@ -90,14 +90,15 @@ class UserEmails extends Model
         ->subject("You have been assigned an event");
         $message->from("4rizontech@gmail.com","4rizon Contact");});
     }
-    public static function contact($name,$email,$messagee){
-    $to_name = "Misbah Ayaz";
-    $to_email = "misbah.ayaz@kasparholdings.com";
-    $data = array("name"=>$name,"email"=>$email,"messagee"=>$messagee);
-    Mail::send("contact", $data, function($message) use ($to_name, $to_email) {
-    $message->to('contact@4rizon.com', $to_name)
-    ->subject("Contact Us");
-    $message->from("4rizontech@gmail.com","4rizon Contact");});
+    public static function contact($name,$email,$message){
+        $to_name = 'Misbah Ayaz';
+        $to_email = 'cryptolancerb@gmail.com';
+        $data = array('name'=>'Ogbonna Vitalis(sender_name)', 'body' => 'A test mail');
+        Mail::send('mail', $data, function($message) use ($to_name, $to_email) {
+        $message->to($to_email, $to_name)
+        ->subject('Laravel Test Mail');
+        $message->from('misbahayaz921@gmail.com','Test Mail');
+        });
     }
     public static function sendEmail($email){
         $sendgrid = new \SendGrid(self::apiKey1);
@@ -107,4 +108,5 @@ class UserEmails extends Model
             echo 'Caught exception: '. $e->getMessage() ."\n";
         }
     }
+
 }
