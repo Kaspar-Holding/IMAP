@@ -114,7 +114,7 @@ class WebsiteController extends Controller
                 if($user_profile == "Hire Talent"){
                     $validator = \Validator::make($req->all(), [
                         'name' => 'required',
-                         'country_code' => 'required',
+                        //  'country_code' => 'required',
                          'phone_number' => 'required',
                          'twitter' => 'required',
                          'website' => 'required',
@@ -122,8 +122,8 @@ class WebsiteController extends Controller
                          'github' => 'required',
                          'introduction' => 'required',
                          'skills' => 'required',
-                         'location'        => 'required',
-                         'role'     => 'required',
+                        //  'location'        => 'required',
+                        //  'role'     => 'required',
                          'languages'   => 'required'
                        ]);
                        if ($validator->fails()) {
@@ -133,16 +133,18 @@ class WebsiteController extends Controller
                        else{
                          $web_users = new organization;
                          $web_users->name = $req->name;
-                         $web_users->country_code = $req->country_code;
+                        //  $web_users->country_code = $req->country_code;
                          $web_users->phone_number = $req->phone_number;
                          $web_users->twitter = $req->twitter;
                          $web_users->website = $req->website;
                          $web_users->telegram = $req->telegram;
                          $web_users->github = $req->github;
+                         $web_users->linkedin = $req->linkedin;
+
                          $web_users->introduction = $req->introduction;
                         //  $web_users->skills = $req->skills;
-                         $web_users->role = $req->role;
-                         $web_users->location = $req->location;
+                        //  $web_users->role = $req->role;
+                        //  $web_users->location = $req->location;
                          $web_users->languages = $req->languages;
                          $web_users->status = $req->status;
                          if ($req->hasFile('event_image')) {
@@ -165,11 +167,11 @@ class WebsiteController extends Controller
                 if($user_profile == "Find Jobs"){
                     $validator = \Validator::make($req->all(), [
                        
-                         'country_code1' => 'required',
+                        //  'country_code1' => 'required',
                          'phone_number1' => 'required',
                        
                          'skills1' => 'required',
-                         'location1'        => 'required',
+                        //  'location1'        => 'required',
                         //  'role1'     => 'required',
                          'languages1'   => 'required'
                        ]);
@@ -179,12 +181,12 @@ class WebsiteController extends Controller
                        }
                        else{
                         
-                         $user_infos->country_code = $req->country_code1;
+                        //  $user_infos->country_code = $req->country_code1;
                          $user_infos->phone_number = $req->phone_number1;
                         
                         //  $user_infos->skills = $req->skills1;
                         //  $user_infos->role = $req->role1;
-                         $user_infos->location = $req->location1;
+                        //  $user_infos->location = $req->location1;
                          $user_infos->languages = $req->languages1;
                          
                          if ($req->hasFile('event_image')) {
