@@ -16,7 +16,7 @@
       <!-- site icon -->
       <!-- <link rel="icon" href="{{ asset('new/images/fevicon.png')}}" type="image/png" /> -->
       <!-- bootstrap css -->
-      <link rel="stylesheet" href="{{ asset('new/css/bootstrap.min.css')}}" />
+      <!-- <link rel="stylesheet" href="{{ asset('new/css/bootstrap.min.css')}}" /> -->
       <!-- site css -->
       <link rel="stylesheet" href="{{ asset('new/style.css')}}" />
       <!-- responsive css -->
@@ -24,7 +24,7 @@
       <!-- color css -->
       <link rel="stylesheet" href="{{ asset('new/css/colors.css')}}" />
       <!-- select bootstrap -->
-      <!-- <link rel="stylesheet" href="{{ asset('new/css/bootstrap-select.css')}}" /> -->
+      <link rel="stylesheet" href="{{ asset('new/css/bootstrap-select.css')}}" />
       <!-- scrollbar css -->
       <link rel="stylesheet" href="{{ asset('new/css/perfect-scrollbar.css')}}" />
       <!-- custom css -->

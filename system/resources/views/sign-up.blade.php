@@ -136,14 +136,14 @@ label{
                 </div>
               </div>
             </div>
-            <div class="country">
+            <!-- <div class="country">
               <label for="Name" class="field-label country">Country</label>
               <select name="country" class="form-control form-field" required>
                     <option>-- Select --</option>
                     <option value="southAfrica">South Africa</option>
                     <option value="pakistan">Pakistan</option>
                   </select>
-            </div>
+            </div> -->
           <div class="profile-type">
               <label for="Name" class="field-label country">Profile Type</label>
               <select name="user_profile" class="form-control form-field" id="mySelect" onchange="showDiv()" required>
@@ -204,7 +204,7 @@ label{
             <option value="Third">Third choice</option>
           </select></div> -->
         <div class="edit-intro"><label for="field" class="summary introduction">*Introduction</label><textarea placeholder="Write about your experience,industry and skills." maxlength="5000" id="field" name="introduction" data-name="Field" class="intro-area form-field w-input"></textarea></div>
-        <!-- <div class="edit-role"><label for="name-2" class="summary location">*Country</label><input type="text" class="form-field w-input" maxlength="256" name="location" data-name="Name 2" placeholder="Type your response here" id="name-2"></div> -->
+        <div class="edit-role"><label for="name-2" class="summary location">*Country</label><input type="text" class="form-field w-input" maxlength="256" name="location" data-name="Name 2" placeholder="Type your response here" id="name-2"></div>
         <!-- <div class="edit-role"><label for="name-3" class="summary skills">Skills</label><input type="text" class="summary-skills form-field w-input" maxlength="256" name="skills" data-name="Name 2" placeholder="Type your response here" id="name-2"></div> -->
         <div class="edit-role"><label for="name-2" class="summary languages">*Languages</label><input type="text" class="summary-lang form-field w-input" maxlength="256" name="languages" data-name="Name 2" placeholder="Type your response here" id="name-2"></div>
       </div>
@@ -235,7 +235,7 @@ label{
         </div>
         <!-- <div class="edit-role"><label for="name-2" class="summary">*Role</label><input type="text" class="form-field w-input" maxlength="256" name="role1" data-name="Name 2" placeholder="Type your response here" id="name-2" required=""></div> -->
      
-        <!-- <div class="edit-role"><label for="name-2" class="summary location">*Country</label><input type="text" class="form-field w-input" maxlength="256" name="location1" data-name="Name 2" placeholder="Type your response here" id="name-2" required=""></div> -->
+        <div class="edit-role"><label for="name-2" class="summary location">*Country</label><input type="text" class="form-field w-input" maxlength="256" name="location1" data-name="Name 2" placeholder="Type your response here" id="name-2" required=""></div>
         <div class="edit-role"><label for="name-3" class="summary skills">*Skills</label><input type="text" class="summary-skills form-field w-input" maxlength="256" name="skills1[]" data-name="Name 2" placeholder="Type your response here" id="name-2"></div>
         <div class="edit-role"><label for="name-2" class="summary languages">*Languages</label><input type="text" class="summary-lang form-field w-input" maxlength="256" name="languages1" data-name="Name 2" placeholder="Type your response here" id="name-2"></div>
       </div>

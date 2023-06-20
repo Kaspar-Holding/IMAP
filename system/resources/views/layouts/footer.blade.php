@@ -1,24 +1,86 @@
+<style>
+  ul{
+    margin-left: 40px !important;
+  }
+  .elements{
+    margin-top:10px !important;
+  }
+  li{
+    padding-top:7px;
+  }
+  </style>
 <div class="footer-section">
     <div data-w-id="27694c21-cbfc-58f0-1e5c-e47458f6d8b6" class="container-regular">
-      <a href="#" class="footer-logo-link w-inline-block"><img src="images/Cryptolancers.png" loading="lazy" alt="Brand" class="footer-logo">
-        <div class="footer-form-wrapper">
-        <!-- <a href="{{ route('companies')}}" class="margin-bottom-16">Companies</a> -->
-        <!-- <a href="{{ route('blog')}}" class="margin-bottom-16">Blog</a>
-        <a href="{{ route('privacy_policy')}}" class="margin-bottom-16">Privacy Policy</a>
-        <a href="{{ route('faq')}}" class="margin-bottom-16">FAQs</a>
-        <a href="{{ route('hire_talent')}}" class="margin-bottom-16">Find Talent</a> -->
+      <!-- <a href="#" class="footer-logo-link w-inline-block"><img src="images/Cryptolancers.png" loading="lazy" alt="Brand" class="footer-logo"> -->
+        <!-- <div class="footer-form-wrapper"> -->
+      <div class = "row">
+        <div class = "col-md-4">
+          <h2 style = "font-size:18px; font-weight:900;"><b>For Talents:</b></h2><br>
+          <div class = talent-footer style = "color : #64727c">
+              <div class = "elements">
+                Find a Job
+                <ul>
+                  <li>By Categories</li>
+                  <li>By Skills</li>
+                  <li>By Locations</li>
+                </ul>
+              </div>
+              <div class = "elements">
 
-          <!-- <div class="margin-bottom-16"><a href="{{ route('companies')}}">Companies</a></div> -->
-          <div class="margin-bottom-16">Companies</div>
+                Get Hired
+                <ul>
+                  <li>Update Talent Profile</li>
+              
+                </ul>
+              </div>
+              <div class = "elements">
+                Join Events
+              </div>
+          </div>
+        </div>
+        <div class = "col-md-4">
+          <h2 style = "font-size:18px; font-weight:900;"><b>For Companies:</b></h2><br>
+          <div class = companies-footer style = "color : #64727c">
+            <div class = "elements">
+              
+              <ul>
+                <li>Post a Job</li>
+                <li>Find Talents</li>
+                <li>Create Event</li>
+                <li>Pricing</li>
+              </ul>
+            </div>
+         
+          </div>
+        </div>
+        <div class = "col-md-4">
+          <h2 style = "font-size:18px; font-weight:900;"><b>About Us:</b></h2><br>
+          <div class = companies-footer style = "color : #64727c">
+            <div class = "elements">
+              
+              <ul>
+                <li>About Us</li>
+                <li>Contact Us</li>
+                <li>Partner with Us</li>
+                <li>Blog</li>
+                <li>FAQ</li>
+                <li>Privacy Policy</li>
+
+              </ul>
+            </div>
+         
+          </div>
+        </div>
+          <!-- <div class="margin-bottom-16">Companies</div>
           <div class="margin-bottom-16">Blog</div>
 
           <div class="margin-bottom-16">Find Talent</div>
           <div class="margin-bottom-16">Terms of Use</div>
           <div class="margin-bottom-16">Privacy Policy</div>
         </div>
-      </a>
-      <div class="footer-grid"></div>
-      <div class="footer-bottom">
+      </a> -->
+      <!-- <div class="footer-grid"></div> -->
+      <!-- <div class="footer-bottom">
         <div class="footer-legal-links">
           <div class="footer-link">© 2023 Cryptolancers.com. All Rights Reserved<span></span></div>
         </div>
@@ -39,8 +101,8 @@
               </svg></div>
           </a>
         </div>
-      </div>
-    </div>
+      </div> -->
+    <!-- </div> -->
   </div>
    
   

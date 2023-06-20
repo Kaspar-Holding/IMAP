@@ -97,7 +97,7 @@ class WebsiteController extends Controller
               'email'        => 'required',
               'password'     => 'required',
               'confirm_password'   => 'required',
-              'country'  => 'required',
+            //   'country'  => 'required',
             ]);
             if ($validator->fails()) {
               $responseArr['message'] = $validator->errors();
@@ -109,12 +109,11 @@ class WebsiteController extends Controller
               $user_infos->last_name        = $req->last_name;
               $user_infos->email            = $req->email;
               $user_infos->password         = Hash::make($req->password);
-              $user_infos->country           = $req->country;
+              $user_infos->user_type           = $req->user_profile;
               $user_profile   = $req->user_profile;
                 if($user_profile == "Hire Talent"){
                     $validator = \Validator::make($req->all(), [
                         'name' => 'required',
-                        //  'country_code' => 'required',
                          'phone_number' => 'required',
                          'twitter' => 'required',
                          'website' => 'required',
@@ -122,8 +121,7 @@ class WebsiteController extends Controller
                          'github' => 'required',
                          'introduction' => 'required',
                          'skills' => 'required',
-                        //  'location'        => 'required',
-                        //  'role'     => 'required',
+                         'location'        => 'required',
                          'languages'   => 'required'
                        ]);
                        if ($validator->fails()) {
@@ -133,7 +131,6 @@ class WebsiteController extends Controller
                        else{
                          $web_users = new organization;
                          $web_users->name = $req->name;
-                        //  $web_users->country_code = $req->country_code;
                          $web_users->phone_number = $req->phone_number;
                          $web_users->twitter = $req->twitter;
                          $web_users->website = $req->website;
@@ -142,9 +139,8 @@ class WebsiteController extends Controller
                          $web_users->linkedin = $req->linkedin;
 
                          $web_users->introduction = $req->introduction;
-                        //  $web_users->skills = $req->skills;
-                        //  $web_users->role = $req->role;
-                        //  $web_users->location = $req->location;
+                       
+                         $web_users->location = $req->location;
                          $web_users->languages = $req->languages;
                          $web_users->status = $req->status;
                          if ($req->hasFile('event_image')) {
@@ -152,27 +148,16 @@ class WebsiteController extends Controller
                              $req->event_image->move(public_path('image'), $eventPic);
                              $web_users->profile_picture = $eventPic;
                          }
-                         // $file = $req->image;
-                         // $name = Str::random(10);
-                         // // $url = Storage::putFileAs('images', $file, $name . '.' . $file->extension()); 
-                         // $imageName = $name . '.' . $file->extension();  
-                         // echo json_encode($imageName);die();
-                         // $request->image->move(public_path('images'), $imageName);
-                         // echo json_encode($imageName);die();
-                         
-                         // $web_users->profile_picture = $imageName;
+                        
                          $web_users->save();
                         }
                     }
                 if($user_profile == "Find Jobs"){
                     $validator = \Validator::make($req->all(), [
                        
-                        //  'country_code1' => 'required',
                          'phone_number1' => 'required',
-                       
                          'skills1' => 'required',
-                        //  'location1'        => 'required',
-                        //  'role1'     => 'required',
+                         'location1'        => 'required',
                          'languages1'   => 'required'
                        ]);
                        if ($validator->fails()) {
@@ -181,12 +166,8 @@ class WebsiteController extends Controller
                        }
                        else{
                         
-                        //  $user_infos->country_code = $req->country_code1;
                          $user_infos->phone_number = $req->phone_number1;
-                        
-                        //  $user_infos->skills = $req->skills1;
-                        //  $user_infos->role = $req->role1;
-                        //  $user_infos->location = $req->location1;
+                         $user_infos->location = $req->location1;
                          $user_infos->languages = $req->languages1;
                          
                          if ($req->hasFile('event_image')) {
