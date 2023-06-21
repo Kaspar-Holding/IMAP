@@ -18,6 +18,12 @@ use App\Models\post_jobs;
 use App\Models\news_letter;
 use App\Models\talent_skills;
 use App\Models\user_skills;
+use App\Models\user_languages;
+
+use App\Models\countries;
+use App\Models\skills;
+use App\Models\languages;
+
 use App\Models\AccessCtrl;
 use DB;
  
@@ -28,7 +34,11 @@ class WebsiteController extends Controller
     // }
     
     function sign_up(){
-        return view("sign-up");
+        $countries = countries::get();
+        $languages = languages::get();
+
+        $skills = skills::get();
+        return view("sign-up",['countries' => $countries,'skills' => $skills,'languages' => $languages]);
     }
     function log_in(){
         return view("log-in");
@@ -121,7 +131,7 @@ class WebsiteController extends Controller
                          'github' => 'required',
                          'introduction' => 'required',
                          'skills' => 'required',
-                         'location'        => 'required',
+                         'country'        => 'required',
                          'languages'   => 'required'
                        ]);
                        if ($validator->fails()) {
@@ -129,6 +139,7 @@ class WebsiteController extends Controller
                          return response()->json($responseArr);
                        }
                        else{
+                        
                          $web_users = new organization;
                          $web_users->name = $req->name;
                          $web_users->phone_number = $req->phone_number;
@@ -140,7 +151,7 @@ class WebsiteController extends Controller
 
                          $web_users->introduction = $req->introduction;
                        
-                         $web_users->location = $req->location;
+                         $web_users->country = $req->country;
                          $web_users->languages = $req->languages;
                          $web_users->status = $req->status;
                          if ($req->hasFile('event_image')) {
@@ -157,8 +168,8 @@ class WebsiteController extends Controller
                        
                          'phone_number1' => 'required',
                          'skills1' => 'required',
-                         'location1'        => 'required',
-                         'languages1'   => 'required'
+                       
+                         'country1'   => 'required'
                        ]);
                        if ($validator->fails()) {
                          $responseArr['message'] = $validator->errors();
@@ -167,33 +178,52 @@ class WebsiteController extends Controller
                        else{
                         
                          $user_infos->phone_number = $req->phone_number1;
-                         $user_infos->location = $req->location1;
-                         $user_infos->languages = $req->languages1;
+                         $user_infos->country = $req->country1;
+                        //  $user_infos->languages = $req->languages1;
                          
                          if ($req->hasFile('event_image')) {
                              $eventPic             = time().'.'.$req->event_image1->extension();  
                              $req->event_image->move(public_path('image'), $eventPic);
                              $user_infos->profile_picture = $eventPic;
                          }
-                         // $file = $req->image;
-                         // $name = Str::random(10);
-                         // // $url = Storage::putFileAs('images', $file, $name . '.' . $file->extension()); 
-                         // $imageName = $name . '.' . $file->extension();  
-                         // echo json_encode($imageName);die();
-                         // $request->image->move(public_path('images'), $imageName);
-                         // echo json_encode($imageName);die();
-                         
-                         // $web_users->profile_picture = $imageName;
+                     
                         
                         }
                     }
               $user_infos->save();
-              $skills = $_POST['skills1'];
-              foreach($skills as $skill){
-                 $skills = new user_skills;
-                 $skills->user_id = $user_infos->id;
-                 $skills->skill = $skill;
-              }
+                    if(!empty($req->skills1)){
+                        $skills = $req->skills1;
+                        $count_array = count($skills);
+                        for($i=0; $i<$count_array; $i++){
+                            $users = new user_skills;
+                            $skill_id = $skills[$i];
+                            $users->user_id            = $user_infos->id;
+                            $users->skill  = $skill_id;
+                            $users->save();
+                        }
+                    }
+                    if(!empty($req->languages)){
+                        $languages = $req->languages;
+                        $count_array = count($languages);
+                        for($i=0; $i<$count_array; $i++){
+                            $lang = new user_languages;
+                            $lang_id = $languages[$i];
+                            $lang->user_id            = $user_infos->id;
+                            $lang->language_id  = $lang_id;
+                            $lang->save();
+                        }
+                    }
+                    if(!empty($req->languages1)){
+                        $languages = $req->languages1;
+                        $count_array = count($languages);
+                        for($i=0; $i<$count_array; $i++){
+                            $lang = new user_languages;
+                            $lang_id = $languages[$i];
+                            $lang->user_id            = $user_infos->id;
+                            $lang->language_id  = $lang_id;
+                            $lang->save();
+                        }
+                    }
               return redirect('/log_in')->with('success','Account Created!');
             }
             else{

@@ -13,8 +13,8 @@
     <div data-w-id="27694c21-cbfc-58f0-1e5c-e47458f6d8b6" class="container-regular">
       <!-- <a href="#" class="footer-logo-link w-inline-block"><img src="images/Cryptolancers.png" loading="lazy" alt="Brand" class="footer-logo"> -->
         <!-- <div class="footer-form-wrapper"> -->
-      <div class = "row">
-        <div class = "col-md-4">
+      <div class = "w-row">
+        <div class = "w-col w-col-4">
           <h2 style = "font-size:18px; font-weight:900;"><b>For Talents:</b></h2><br>
           <div class = talent-footer style = "color : #64727c">
               <div class = "elements">
@@ -38,14 +38,14 @@
               </div>
           </div>
         </div>
-        <div class = "col-md-4">
+        <div class = "w-col w-col-4">
           <h2 style = "font-size:18px; font-weight:900;"><b>For Companies:</b></h2><br>
           <div class = companies-footer style = "color : #64727c">
             <div class = "elements">
               
               <ul>
-                <li>Post a Job</li>
-                <li>Find Talents</li>
+                <li><a href="{{ route('post_jobs')}}">Post a Job</a></li>
+                <li><a href="{{ route('hire_talent')}}">Find Talents</a></li>
                 <li>Create Event</li>
                 <li>Pricing</li>
               </ul>
@@ -53,18 +53,18 @@
          
           </div>
         </div>
-        <div class = "col-md-4">
+        <div class = "w-col w-col-4">
           <h2 style = "font-size:18px; font-weight:900;"><b>About Us:</b></h2><br>
-          <div class = companies-footer style = "color : #64727c">
+          <div class = about-footer style = "color : #64727c">
             <div class = "elements">
               
               <ul>
-                <li>About Us</li>
-                <li>Contact Us</li>
+                <li><a href="{{ route('about')}}">About Us</a></li>
+                <li><a href="{{ route('contact_us')}}">Contact Us</a></li>
                 <li>Partner with Us</li>
-                <li>Blog</li>
-                <li>FAQ</li>
-                <li>Privacy Policy</li>
+                <li><a href="{{ route('blog')}}">Blog</a></li>
+                <li><a href="{{ route('faq')}}">FAQ</a></li>
+                <li><a href="{{ route('privacy_policy')}}">Privacy Policy</a></li>
 
               </ul>
             </div>
@@ -103,6 +103,8 @@
         </div>
       </div> -->
     <!-- </div> -->
+  </div>
+  </div>
   </div>
    
   

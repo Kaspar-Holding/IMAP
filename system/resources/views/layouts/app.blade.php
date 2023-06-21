@@ -25,11 +25,11 @@
       <link rel="stylesheet" href="{{ asset('new/css/colors.css')}}" />
       <!-- select bootstrap -->
       <link rel="stylesheet" href="{{ asset('new/css/bootstrap-select.css')}}" />
+      <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
       <!-- scrollbar css -->
       <link rel="stylesheet" href="{{ asset('new/css/perfect-scrollbar.css')}}" />
       <!-- custom css -->
       <link rel="stylesheet" href="{{ asset('new/css/custom.css')}}" />
-      <link rel="stylesheet" href="{{ asset('new/css/select2.min.css')}}" />
       <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -59,7 +59,6 @@
       <!-- <script src="{{ asset('new/js/Chart.bundle.min.js')}}"></script> -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.js" integrity="sha512-Lii3WMtgA0C0qmmkdCpsG0Gjr6M0ajRyQRQSbTF6BsrVh/nhZdHpVZ76iMIPvQwz1eoXC3DmAg9K51qT5/dEVg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-      <script src="{{ asset('new/js/select2.full.min.js')}}"></script>
       <script src="{{ asset('new/js/utils.js')}}"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <!-- <script src="{{ asset('new/js/analyser.js')}}"></script> -->
@@ -68,6 +67,7 @@
       <script>
          var ps = new PerfectScrollbar('#sidebar');
       </script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
 
       <!-- custom js -->
       <script src="{{ asset('new/js/custom.js')}}"></script>
@@ -156,6 +156,11 @@
       });
     });
     
+  </script>
+  <script type="text/javascript">
+     $(document).ready(function() {
+      $(".js-example-basic-single").select2();
+      });
   </script>
 </body>
             

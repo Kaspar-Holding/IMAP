@@ -42,6 +42,15 @@ label{
     border: 0 !important;
     color: #999 !important;
 }
+
+.select2 .selection {
+    width: 82% !important;
+    margin-left: 105px !important;
+    height: 58px !important;
+}
+.select2-container--default .select2-selection--multiple {
+    height: 43px !important;
+}
 </style>
 </head>
 <body>
@@ -204,9 +213,19 @@ label{
             <option value="Third">Third choice</option>
           </select></div> -->
         <div class="edit-intro"><label for="field" class="summary introduction">*Introduction</label><textarea placeholder="Write about your experience,industry and skills." maxlength="5000" id="field" name="introduction" data-name="Field" class="intro-area form-field w-input"></textarea></div>
-        <div class="edit-role"><label for="name-2" class="summary location">*Country</label><input type="text" class="form-field w-input" maxlength="256" name="location" data-name="Name 2" placeholder="Type your response here" id="name-2"></div>
+        <div class="edit-role"><label for="name-2" class="summary location">*Country</label><select id="field-2" name="country" data-name="Field 2"  class="form-field w-input">
+            <option value="">Select country</option>
+            @foreach($countries as $country)
+            <option value="{{$country['id']}}">{{$country['name']}}</option>
+            @endforeach
+          </select></div>
         <!-- <div class="edit-role"><label for="name-3" class="summary skills">Skills</label><input type="text" class="summary-skills form-field w-input" maxlength="256" name="skills" data-name="Name 2" placeholder="Type your response here" id="name-2"></div> -->
-        <div class="edit-role"><label for="name-2" class="summary languages">*Languages</label><input type="text" class="summary-lang form-field w-input" maxlength="256" name="languages" data-name="Name 2" placeholder="Type your response here" id="name-2"></div>
+        <div class="edit-role"><label for="name-2" class="summary languages">*Languages</label><select id="field-2" name="languages[]" data-name="Field 2" class="form-field w-input js-example-basic-single" multiple>
+            <option value="">Select Language</option>
+            @foreach($languages as $language)
+            <option value="{{$language['id']}}">{{$language['language_name']}}</option>
+            @endforeach
+          </select></div>
       </div>
   <!-- Talent Profile -->
 <div class = "talent-profile profile" id = "Find Jobs" style="display: none;">
@@ -235,9 +254,24 @@ label{
         </div>
         <!-- <div class="edit-role"><label for="name-2" class="summary">*Role</label><input type="text" class="form-field w-input" maxlength="256" name="role1" data-name="Name 2" placeholder="Type your response here" id="name-2" required=""></div> -->
      
-        <div class="edit-role"><label for="name-2" class="summary location">*Country</label><input type="text" class="form-field w-input" maxlength="256" name="location1" data-name="Name 2" placeholder="Type your response here" id="name-2" required=""></div>
-        <div class="edit-role"><label for="name-3" class="summary skills">*Skills</label><input type="text" class="summary-skills form-field w-input" maxlength="256" name="skills1[]" data-name="Name 2" placeholder="Type your response here" id="name-2"></div>
-        <div class="edit-role"><label for="name-2" class="summary languages">*Languages</label><input type="text" class="summary-lang form-field w-input" maxlength="256" name="languages1" data-name="Name 2" placeholder="Type your response here" id="name-2"></div>
+        <div class="edit-role"><label for="name-2" class="summary location">*Country</label><select id="field-2" name="country1" data-name="Field 2" required="" class="form-field w-input">
+            <option value="">Select country</option>
+            @foreach($countries as $country)
+            <option value="{{$country['id']}}">{{$country['name']}}</option>
+            @endforeach
+          </select></div>
+        <div class="edit-role"><label for="name-3" class="summary skills">*Skills</label><select id="field-2" name="skills1[]" data-name="Field 2" required="" class="form-field w-input js-example-basic-single" multiple>
+            <option value="">Select skills</option>
+            @foreach($skills as $skill)
+            <option value="{{$skill['id']}}">{{$skill['skill_name']}}</option>
+            @endforeach
+          </select></div>
+        <div class="edit-role"><label for="name-2" class="summary languages">*Languages</label><select id="field-2" name="languages1[]" data-name="Field 2" required="" class="form-field w-input js-example-basic-single" multiple>
+            <option value="">Select Language</option>
+            @foreach($languages as $language)
+            <option value="{{$language['id']}}">{{$language['language_name']}}</option>
+            @endforeach
+          </select></div>
       </div>
           <input type="submit" value="SIGN UP" data-wait="Please wait..." class="w-users-userformbutton button-primary signup w-button">
           <div class="form-divider"></div>
