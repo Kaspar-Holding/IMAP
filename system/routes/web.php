@@ -6,8 +6,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SocialAuthController;
 
 use App\Http\Controllers\WebsiteController;
+use App\Http\Controllers\FormsController;
+use App\Http\Controllers\MapController;
+use App\Http\Controllers\TutorialController;
 use Carbon\Carbon;
-use App\Models\post_jobs;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,11 +21,7 @@ use App\Models\post_jobs;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::post('/update_password',[UserController::class, 'update_password'])->name('update_password');
-Route::get('/reset_password',[UserController::class, 'reset_password'])->name('reset_password');
-Route::get('/login-google',[SocialAuthController::class,'redirectToProvider'])->name('google.login');
-Route::get('/auth/google/callback',[SocialAuthController::class,'handleCallback'])->name('google.login.callback');
-Route::get('/logout', [WebsiteController::class, 'logout'])->name('logout');
+
 Route::group(['middleware' =>[
     'auth:sanctum', 'verified'
 ]], function(){
@@ -38,96 +37,38 @@ Route::group(['middleware' =>[
 // Route::get('/yoco', function () {
 //     return redirect("/yoco/inline");
 // }); 
-Route::get('/yoco', [ChargeController::class, 'Charge'])->name('Yoco');
-// Route::get('/yoco', function () {
-//     return view("yoco.inline");
-// });  
-Route::get('/', [WebsiteController::class, 'home'])->name('home');
+Route::post('/search_results', [WebsiteController::class, 'search_results'])->name('search_results');
+
+Route::get('/show-map',[MapController::class, 'showMap'])->name('showMap');
+Route::get('/',  [WebsiteController::class, 'log_in'])->name('log_in');
+Route::get('/test_connection', [TutorialController::class, 'test_connection'])->name('test_connection');
 Route::get('/sign_up', [WebsiteController::class, 'sign_up'])->name('sign_up');
+Route::get('/sidebar', [WebsiteController::class, 'sidebar'])->name('sidebar');
 Route::get('/log_in', [WebsiteController::class, 'log_in'])->name('log_in');
-Route::get('/hire_talent', [WebsiteController::class, 'hire_talent'])->name('hire_talent');
-Route::get('/faq', [WebsiteController::class, 'faq'])->name('faq');
-Route::get('/blog', [WebsiteController::class, 'blog'])->name('blog');
-Route::get('/companies', [WebsiteController::class, 'companies'])->name('companies');
-Route::get('/add_organization', [WebsiteController::class, 'add_organization'])->name('add_organization');
-Route::get('/about', [WebsiteController::class, 'about'])->name('about');
-Route::get('/contact_us', [WebsiteController::class, 'contact_us'])->name('contact_us');
-Route::get('/post_jobs', [WebsiteController::class, 'post_jobs'])->name('post_jobs');
-Route::get('/edit_profile', [WebsiteController::class, 'edit_profile'])->name('edit_profile');
-Route::get('/privacy_policy', [WebsiteController::class, 'privacy_policy'])->name('privacy_policy');
+Route::post('/edit_basic', [FormsController::class, 'edit_basic'])->name('edit_basic');
+Route::post('/additional_information', [FormsController::class, 'additional_information'])->name('additional_information');
+Route::post('/aerial_imagery_assessment', [FormsController::class, 'aerial_imagery_assessment'])->name('aerial_imagery_assessment');
+Route::post('/built_component', [FormsController::class, 'built_component'])->name('built_component');
+Route::post('/cultural_period_assignment', [FormsController::class, 'cultural_period_assignment'])->name('cultural_period_assignment');
+Route::post('/environmental_information', [FormsController::class, 'environmental_information'])->name('environmental_information');
+Route::post('/form_and_interpretation', [FormsController::class, 'form_and_interpretation'])->name('form_and_interpretation');
+// Route::post('/heritage_protection_status', [FormsController::class, 'heritage_protection_status'])->name('heritage_protection_status');
+// Route::post('/historic_maps_assessment', [FormsController::class, 'historic_maps_assessment'])->name('historic_maps_assessment');
+Route::post('/keywords_and_themes', [FormsController::class, 'keywords_and_themes'])->name('keywords_and_themes');
+// Route::post('/location', [FormsController::class, 'location'])->name('location');
+// Route::post('/name', [FormsController::class, 'name'])->name('name');
+Route::post('/vessel_tonnage', [FormsController::class, 'vessel_tonnage'])->name('vessel_tonnage');
+Route::post('/site_depth_information', [FormsController::class, 'site_depth_information'])->name('site_depth_information');
+// Route::post('/vessel_information', [FormsController::class, 'vessel_information'])->name('vessel_information');
+Route::post('/condition_assessment', [FormsController::class, 'condition_assessment'])->name('condition_assessment');
+Route::get('/add_form', [WebsiteController::class, 'add_form'])->name('add_form');
+Route::post('/add_record', [WebsiteController::class, 'add_record'])->name('add_record');
+Route::get('/show_report', [WebsiteController::class, 'show_report'])->name('show_report');
+Route::get('/dashboard', [WebsiteController::class, 'dashboard'])->name('dashboard');
 
-
-//post request
-Route::post('/update_jobs', [WebsiteController::class, 'update_jobs'])->name('update_jobs');
-Route::post('/create_organization', [WebsiteController::class, 'create_organization'])->name('create_organization');
-
-
-Route::post('/update_profile', [WebsiteController::class, 'update_profile'])->name('update_profile');
-Route::post('/view_organization', [WebsiteController::class, 'view_organization'])->name('view_organization');
 Route::post('/create_user', [WebsiteController::class, 'create_user'])->name('create_user');
-Route::post('/sign_in', [WebsiteController::class, 'sign_in'])->name('sign_in');
-Route::post('/subscribe', [WebsiteController::class, 'subscribe'])->name('subscribe');
-Route::post('/mail', [WebsiteController::class, 'mail'])->name('mail');
-Route::post('/create_contact', [WebsiteController::class, 'create_contact'])->name('create_contact');
-Route::post('/update_user_details', [WebsiteController::class, 'update_user_details'])->name('update_user_details');
-Route::any('/search',function(){
-    $key = Request::get ( 'keyword' );
-    $loc = Request::get ( 'location' );
-    $all = Request::get ( 'all' );
-    if($key != "" && $loc != "" && $all == ""){
-    $jobs = post_jobs::where('title','LIKE','%'.$key.'%')->orWhere('location','LIKE','%'.$loc.'%')->get();
-   
-    }
-    else if($key != "" && $loc == "" && $all == ""){
-        
-        $jobs = post_jobs::where('title','LIKE','%'.$key.'%')->get();
-        // echo json_encode($jobs);die();
-        }
-    else if($key == "" && $loc != "" && $all == ""){
-            $jobs = post_jobs::where('location','LIKE','%'.$loc.'%')->get();
-            }
-    else if($key == "" && $loc == "" && $all != ""){
-                $jobs = post_jobs::all();
-            }
-    if(count($jobs) > 0){
-        return view('home',['job_list'=>$jobs,]);
-    }
-    else{
-        $jobs = post_jobs::all();
-        return view('home',['job_list'=>$jobs,]);
-    }
-    
-   
-});
-Route::any('/search_company',function(){
-    $key = Request::get ( 'keyword' );
-    $loc = Request::get ( 'location' );
-    $all = Request::get ( 'all' );
-    if($key != "" && $loc != "" && $all == ""){
-    $jobs = organization::where('name','LIKE','%'.$key.'%')->orWhere('role','LIKE','%'.$loc.'%')->orWhere('location','LIKE','%'.$loc.'%')->get();
-   
-    }
-    else if($key != "" && $loc == "" && $all == ""){
-        
-        $jobs = organization::where('name','LIKE','%'.$key.'%')->orWhere('role','LIKE','%'.$loc.'%')->get();
-        // echo json_encode($jobs);die();
-        }
-    else if($key == "" && $loc != "" && $all == ""){
-            $jobs = organization::where('location','LIKE','%'.$loc.'%')->get();
-            }
-    else if($key == "" && $loc == "" && $all != ""){
-                $jobs = organization::all();
-            }
-    if(count($jobs) > 0){
-        return view('companies',['job_list'=>$jobs,]);
-    }
-    else{
-        $jobs = post_jobs::all();
-        return view('companies',['job_list'=>$jobs,]);
-    }
-    
-   
-});
+Route::post('/home', [WebsiteController::class, 'home'])->name('home');
+
 Route::any('/search_talent',function(){
     $key = Request::get ( 'keyword' );
     $loc = Request::get ( 'location' );

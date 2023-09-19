@@ -1,0 +1,340 @@
+
+* {
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+label{
+  font-family: 'Gotham', sans-serif !important;
+    font-weight : 700px !important;
+    text-transform : uppercase;
+  font-size : 13px !important;
+  margin-left:65px !important;
+}
+
+.button-primary{
+  width : 70% !important;
+}
+
+
+.edit_data {
+    /* background-color: #8080806e !important; */
+    color: #0e0e0e !important;
+    padding: 3px 14px !important;
+    border-radius: 5px !important;
+    /* margin-top: 10px !important; */
+    cursor: pointer;
+    width: 21px !important;
+    font-size: 16px !important;
+    left: 240px !important;
+    bottom: 44px !important;
+    position: relative !important;
+}
+@font-face {
+            font-family: 'Gotham';
+            src: url("./system/public/fonts/GothamMedium.ttf") format('truetype'); 
+           
+            font-style: normal;
+        }
+/* .edit_data {
+    background-color : #8080806e !important;
+    color : #ebebef !important;
+    padding : 5px 25px !important;
+    border-radius : 5px !important;
+    margin-top : 10px !important;
+    cursor : pointer;
+    width : 121px !important;
+} */
+.submit_data {
+  font-size : 12px !important;
+    background-color : #134B86 !important;
+    color : #ebebef !important;
+    padding : 10px 42px !important;
+    border-radius : 5px !important;
+    margin-top : 15px !important;
+}
+.form-footer {
+    margin-left: 105px;
+}
+.label2{
+  
+  font-family: 'Gotham', sans-serif !important;
+  margin-left : 65px;
+  border : none;
+  font-size : 12px !important;
+    font-weight:normal !important;
+    margin-bottom : 15px !important;
+}
+.form-control {
+    background: #fff !important;
+    border-radius: 0 !important;
+    border: none !important;
+    color: #999 !important;
+}
+.account-page-wrapper {
+  background-color: #f5f5f5 !important;
+}
+.login-email, .login-password {
+    color: #030407 !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    font-family: 'Gotham', sans-serif !important;
+    width: 46px !important;
+    height: 13px !important;
+}
+.button-primary {
+  margin-top : 15px !important;
+    width: 20% !important;
+    background-color: #134b86 !important;
+    border-radius: 6px !important;
+    align-self: right !important;
+    margin-left: 417px !important;
+    margin-bottom:15px !important;
+}
+
+.text-color-gray-500 {
+  font-family: 'Gotham', sans-serif !important;
+    color: #606476 !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+}
+.font_fam{
+  font-family: 'Gotham', sans-serif !important;
+}
+.form-field {
+    background-color: #F5F5F5 !important;
+}
+.login-link2 {
+    text-align: center !important;
+    margin-top: 0 !important;
+    margin-bottom: 0px !important;
+}
+.login-link{
+    
+    margin-bottom: 0px !important;
+}
+.account-form-title{
+    margin-bottom : 0px !important;
+}
+.margin-bottom-16 {
+  text-transform: uppercase;
+  
+    margin-bottom: 0px;
+    padding-left: 47px;
+}
+h5{
+  color : black !important;
+  font-family: 'Gotham', sans-serif !important;
+}
+.loginForm{
+    border-radius: 8px !important;
+    margin-bottom : 30px !important;
+}
+  .loginCard{
+  background-color: #ffffff !important;
+}
+.account-left-block{
+  margin-top : 0px !important;
+  width: 85% !important;
+}
+h5{
+  font-weight : 700;
+  font-size:16px;
+  /* margin-left:16px !important;
+    padding-top : 15px !important; */
+}
+
+#map{
+  width: 550px; 
+  height: 350px; 
+  border-radius : 20px;
+}
+/** For Large Screen */
+@media screen and (min-width: 1440px){
+  .button-primary {
+  margin-left: 248px !important;
+  width : 27% !important;
+  }
+  .form-field{
+    
+    height: 48px;
+    max-width: 74.9962%;
+    border: 1px solid #ebebef;
+    margin-bottom: 24px;
+    margin-left: 106px;
+    padding: 12px;
+}
+ .facebook{
+  margin-right:135px;
+ }
+.margin-bottom-16 {
+    
+    padding-left: 50px !important;
+    
+}
+.account-form-block {
+  margin-top: 0px !important;
+}
+}
+
+/** For Tablets */
+@media screen and (max-width: 780px){
+  .button-primary {
+  margin-left: 399px !important;
+  }
+  .account-left-block{
+  width: 85% !important;
+}
+}
+
+/** For Mobile */
+@media screen and (max-width: 450px){
+.account-form-block {
+  margin-left: 10px !important;
+}
+.account-left-block{
+  width: 72% !important;
+}
+.form-field {
+  margin-left: 50px !important;
+}
+label {
+  
+    margin-left: 50px !important;
+}
+.form-field {
+  margin-left: 50px !important;
+}
+.button-primary {
+    width: 23% !important;
+    margin-left: 181px !important;
+}
+.form-field{
+  max-width: 69.9962%;
+  margin-left: 50px !important;
+}
+.facebook{
+  margin-right:50px;
+}
+
+}
+.review_id{
+    color: gray;
+    font-weight: 400;
+    font-size: 12px;
+}
+.styled-submit-button i {
+    font-size: 20px;
+}
+.navbar {
+  height: 90px !important;
+  background-color:#134b86 !important;
+  display: flex;
+  gap: 2em;
+}
+.navbar a:first-child {
+
+  margin-right: auto;
+}
+.navLink{
+  
+
+ font-family : 'Montserrat', sans-serif !important;
+    color: #FFFFFF !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+
+}
+.fa-sign-out{
+  font-size: 22px !important;
+    margin-right: -24px !important;
+    color : #FFFFFF !important;
+}
+.name{
+  font-size : 8px !important;
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 102px;
+}
+.page-heading{
+  padding-top : 0px !important;
+  right : 90px !important;
+  font-family: 'Gotham', sans-serif !important;
+    font-size: 23px;
+  bottom: 0px;
+    position: relative;
+margin-left: 0px !important;
+}
+.submit-form{
+  background-color: whitesmoke;
+    position: relative;
+    padding-top: 25px;
+    padding-left: 44%;
+}
+.card-style{
+    padding-left : 0px !important;
+    margin-left : 0px !important;
+}
+.blue_bar{
+    height : 45px !important;
+    font-family: 'Gotham', sans-serif !important;
+    background-color:#134b86 !important;
+    padding: 15px 20px 10px 32px !important;
+    color: white !important;
+    font-size: 15px !important;
+    border-top-right-radius: 26px !important;
+    border-top-left-radius: 26px !important;
+    text-transform: uppercase !important;
+    font-weight : 200px !important;
+
+}
+.card{
+    margin-left : 20px;
+    margin-top : 30px !important;
+}
+.btn-secondary{
+    color: #fff;
+    background-color: #134b86;
+    border-color: #134b86;
+    /* padding-top : 0px !important; */
+    margin-top : -6px;
+
+}
+.row-card{
+    margin-top : 120px !important;
+}
+.right-label{
+    float : right !important;
+    margin-right : 20px !important;
+    font-weight : 100;
+}
+.left-label{
+    margin-left : 20px !important;
+}
+.container{
+    max-width : 2000px !important;
+}
+.images-row{
+    margin-left: 20px !important;
+    /* margin-top: 100px !important; */
+}
+.img-fluid{
+    border-radius : 10px;
+}
+@media screen and (min-width: 51%) and (max-width: 75%) {
+  /* Styles for medium laptops */
+  .navbar{
+    width : 2479px !important;
+ }
+}
+@media screen and (max-width: 50%) {
+  /* Styles for small laptops */
+}
+@media screen and (min-width: 76%) {
+  /* Styles for large laptops */
+}

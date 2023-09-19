@@ -4,7 +4,7 @@
 <html data-wf-page="643d23869a03d4a73aafe39a" data-wf-site="643d23859a03d460b5afe396">
 <head>
   <meta charset="utf-8">
-  <title>CryptoLancer - Webflow HTML Website Template</title>
+  <title>IMAP Site</title>
   <meta content="CryptoLancer is a responsive, high-converting, and beautifully designed job board for technology businesses. Bright, vibrant, and easily adapted, it offers the perfect starting point for numerous business types." name="description">
   <meta content="CryptoLancer - Webflow HTML Website Template" property="og:title">
   <meta content="CryptoLancer is a responsive, high-converting, and beautifully designed job board for technology businesses. Bright, vibrant, and easily adapted, it offers the perfect starting point for numerous business types." property="og:description">

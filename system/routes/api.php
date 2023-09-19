@@ -25,7 +25,7 @@ Route::group(['middleware' =>[
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+    
     Route::post('/register_user' , [UserController::class, 'register_user'])->name('register_user');
     Route::get('/users_list_api' ,  [UserController::class, 'users_list_api'])->name('users_list_api');
     Route::post('/mail', [WebsiteController::class, 'mail'])->name('mail');

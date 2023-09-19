@@ -1,3 +1,4 @@
+
 <style>
   ul{
     margin-left: 40px !important;
@@ -8,6 +9,34 @@
   li{
     padding-top:7px;
   }
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
   </style>
 <div class="footer-section">
     <div data-w-id="27694c21-cbfc-58f0-1e5c-e47458f6d8b6" class="container-regular">
@@ -18,10 +47,46 @@
           <h2 style = "font-size:18px; font-weight:900;"><b>For Talents:</b></h2><br>
           <div class = talent-footer style = "color : #64727c">
               <div class = "elements">
-                Find a Job
+                Find a Site
                 <ul>
-                  <li>By Categories</li>
-                  <li>By Skills</li>
+                  
+                <li>
+                      <div class="dropdown">
+                      <a class="dropbtn">By Category</a>
+                      <div class="dropdown-content">
+                      @php
+                        $cat = \App\Models\skills::groupBy('category')->select('category')->get();
+                        
+                           
+                      @endphp
+                      @foreach($cat as $cats)
+                      @php
+                      $id = $cats['category'];
+                      @endphp
+                        <a href="{{route('footer_category', ['id' => $id])}}">{{$cats['category']}}</a>
+                   @endforeach
+                      </div>
+                    </div>
+                  </li>
+                 
+                  <li>
+                      <div class="dropdown">
+                      <a class="dropbtn">By Skill</a>
+                      <div class="dropdown-content">
+                      @php
+                    
+                        $skill = \App\Models\skills::groupBy('skill_name')->select('skill_name')->get();
+                           
+                      @endphp
+                      @foreach($skill as $skills)
+                      @php
+                      $id = $skills['skill_name'];
+                      @endphp
+                        <a href="{{route('footer_category', ['id' => $id])}}">{{$skills['skill_name']}}</a>
+                      @endforeach
+                      </div>
+                    </div>
+                  </li>
                   <li>By Locations</li>
                 </ul>
               </div>

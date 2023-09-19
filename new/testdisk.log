@@ -1,0 +1,62 @@
+
+
+Tue Sep 12 07:55:14 2023
+Command line: TestDisk
+
+TestDisk 7.1, Data Recovery Utility, July 2019
+Christophe GRENIER <grenier@cgsecurity.org>
+https://www.cgsecurity.org
+OS: Linux, kernel 5.15.0-1021-azure (#26~20.04.1-Ubuntu SMP Fri Sep 23 16:58:44 UTC 2022) x86_64
+Compiler: GCC 9.2
+ext2fs lib: 1.45.5, ntfs lib: libntfs-3g, reiserfs lib: none, ewf lib: none, curses lib: ncurses 6.1
+User is not root!
+Hard disk list
+
+
+TestDisk exited normally.
+Using locale 'C.UTF-8'.
+
+
+Tue Sep 12 07:55:14 2023
+Command line: TestDisk /debug
+
+TestDisk 7.1, Data Recovery Utility, July 2019
+Christophe GRENIER <grenier@cgsecurity.org>
+https://www.cgsecurity.org
+OS: Linux, kernel 5.15.0-1021-azure (#26~20.04.1-Ubuntu SMP Fri Sep 23 16:58:44 UTC 2022) x86_64
+Compiler: GCC 9.2
+ext2fs lib: 1.45.5, ntfs lib: libntfs-3g, reiserfs lib: none, ewf lib: none, curses lib: ncurses 6.1
+Warning: can't get size for Disk /dev/mapper/control - 0 B - 0 sectors, sector size=512
+Warning: can't get size for Disk /dev/loop5 - 0 B - 0 sectors (RO), sector size=512
+Warning: can't get size for Disk /dev/loop9 - 0 B - 0 sectors, sector size=512
+Hard disk list
+Disk /dev/sda - 137 GB / 128 GiB - CHS 16709 255 63, sector size=512 - Msft Virtual Disk, FW:1.0
+Disk /dev/sdb - 17 GB / 16 GiB - CHS 2088 255 63, sector size=512 - Msft Virtual Disk, FW:1.0
+Disk /dev/loop0 - 42 MB / 40 MiB - 83648 sectors (RO), sector size=512
+Disk /dev/loop1 - 66 MB / 63 MiB - 129520 sectors (RO), sector size=512
+Disk /dev/loop2 - 42 MB / 40 MiB - 83648 sectors (RO), sector size=512
+Disk /dev/loop3 - 96 MB / 91 MiB - 188072 sectors (RO), sector size=512
+Disk /dev/loop4 - 66 MB / 63 MiB - 129944 sectors (RO), sector size=512
+Disk /dev/loop6 - 52 MB / 49 MiB - 101664 sectors (RO), sector size=512
+Disk /dev/loop7 - 96 MB / 91 MiB - 188032 sectors (RO), sector size=512
+Disk /dev/loop8 - 66 MB / 63 MiB - 129976 sectors (RO), sector size=512
+
+Partition table type (auto): EFI GPT
+LBA28 limitation
+Disk /dev/sda - 137 GB / 128 GiB - Msft Virtual Disk
+Partition table type: Intel
+
+Interface Advanced
+Geometry from i386 MBR: head=256 sector=63
+check_part_i386 1 type EE: no test
+ 1 P EFI GPT                  0   0  2 16709  85 16  268435455
+Partition table type (auto): Intel
+Disk /dev/sdb - 17 GB / 16 GiB - Msft Virtual Disk
+Partition table type: Intel
+
+Interface Advanced
+Geometry from i386 MBR: head=255 sector=63
+check_part_i386 failed for partition type 07
+ 1 P HPFS - NTFS              0  32 33  2088 137 33   33550336
+
+TestDisk exited normally.
