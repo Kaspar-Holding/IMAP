@@ -32,7 +32,7 @@ label{
   font-family: 'Gotham', sans-serif !important;
 font-weight : 700px !important;
 text-transform : uppercase;
-  font-size : 13px !important;
+  font-size : 12px !important;
   margin-left:65px !important;
 }
 .button-primary{
@@ -52,11 +52,19 @@ text-transform : uppercase;
     position: relative !important;
 }
 @font-face {
-            font-family: 'Gotham';
-            src: url("./system/public/fonts/GothamMedium.ttf") format('truetype'); 
-           
-            font-style: normal;
-        }
+    font-family: 'Gotham';
+    src: url("./system/public/fonts/GothamLight.ttf") format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+/* Define 'Gotham' with font-weight 600 */
+@font-face {
+    font-family: 'Gotham';
+    src: url("./system/public/fonts/GothamBold.ttf") format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
 /* .edit_data {
     background-color : #8080806e !important;
     color : #ebebef !important;
@@ -160,9 +168,15 @@ h5{
 }
 h5{
   font-weight : 700;
-  font-size:16px;
+  font-size:13px;
   margin-left:16px !important;
     padding-top : 15px !important;
+}
+@media screen and (min-width: 1024px) and (max-width : 1440px){
+  .edit_data {
+  left: 185px !important;
+ 
+  }
 }
 /** For Large Screen */
 @media screen and (min-width: 1440px){
@@ -254,7 +268,7 @@ label {
 .navLink{
   
 
- font-family : 'Montserrat', sans-serif !important;
+  font-family: 'Gotham', sans-serif !important;
     color: #FFFFFF !important;
     font-size: 16px !important;
     font-weight: 400 !important;
@@ -281,7 +295,7 @@ label {
   padding-top : 0px !important;
   right : 90px !important;
   font-family: 'Gotham', sans-serif !important;
-    font-size: 23px;
+    font-size: 16px;
   bottom: 0px;
     position: relative;
 margin-left: 0px !important;
@@ -297,9 +311,9 @@ margin-left: 0px !important;
 <body>
 <div class="navbar" id="myHeader">
   <a class="nav-logo"><img src="images/space-logo-imap.png" loading="lazy" alt="" ></a>
-  <a href="#!" class = "navLink" style = " padding-right: 30px;">HOME</a>
-  <a href="#!" class = "navLink" style = " padding-right: 30px;">DATABASE</a>
-  <a href="{{route('add_form')}}" class = "navLink" style = " padding-right: 30px;">CREATE A RECORD</a>
+  <a href="#!" class = "navLink" style = " padding-right: 15px;">HOME</a>
+  <a href="{{route('dashboard')}}" class = "navLink" style = " padding-right: 15px;">DATABASE</a>
+  <a href="{{route('add_form')}}" class = "navLink" style = " padding-right: 15px;">CREATE A RECORD</a>
   <!-- <a href="#!" class = "navLink">ABOUT US</a> -->
  
   <i class="fa fa-sign-out" aria-hidden="true"></i><a href="log_in" class = "navLink">LOGOUT <br> <span class = "name"></span> </a>
@@ -662,7 +676,246 @@ margin-left: 0px !important;
             </div>
           </div>
 </div>
+<div class = "loginForm loginCard">
+            <div class="w-users-userformheader account-form-title">
+            <div class="margin-bottom-16">
+            
+
+            <h5> Heritage Protection Status  <span class = "review_id"> (IMAP ID {{$basic_site_information['imap_id']}} )</span> </h5> <br>
+              <!-- <div class="login-link2"><img src="images/Frame(1).png" loading="lazy" alt="" class="facebook"></div> -->
+            </div>
+            @csrf
         
+          </div>
+          <div class = "row" id = "editableSection11" >
+            <div class = "col-md-3">
+              <label>Level of Protection</label>
+              <input class = "label2" type = "text" id = "field1" name = "level_of_protection" value = "{{$heritage_protection_status['level_of_protection']}}" readonly>
+
+              <label>Relevant Legislation</label>
+              <input class = "label2" type = "text" id = "field2" name = "relevant_legislation" value = "{{$heritage_protection_status['relevant_legislation']}}" readonly>
+              <label>Protected Designation Status</label>
+              <input class = "label2" type = "text" id = "field2" name = "protected_designation_status" value = "{{$heritage_protection_status['protected_designation_status']}}" readonly>
+
+              
+            </div>
+
+            <div class = "col-md-3">
+           <label>Land Ownership</label>
+              <input class = "label2" type = "text" id = "field2" name = "land_ownership" value = "{{$heritage_protection_status['land_ownership']}}" readonly>
+             
+
+          
+            </div>
+            <div class = "col-md-3">
+          
+            </div>
+       
+              <input  name = "imap_id" value = "{{$basic_site_information['imap_id']}}" hidden>
+         
+     
+            <div class = "col-md-3">
+              <div id="edit-button11" class = "edit_data" ><i class="fa fa-edit"></i> </div>
+              
+          
+            </div>
+          </div>
+</div>  
+<div class = "loginForm loginCard">
+            <div class="w-users-userformheader account-form-title">
+            <div class="margin-bottom-16">
+            
+
+            <h5> Historic Maps Assessment  <span class = "review_id"> (IMAP ID {{$basic_site_information['imap_id']}} )</span> </h5> <br>
+              <!-- <div class="login-link2"><img src="images/Frame(1).png" loading="lazy" alt="" class="facebook"></div> -->
+            </div>
+            @csrf
+        
+          </div>
+          <div class = "row" id = "editableSection12" >
+            <div class = "col-md-3">
+              <label>HM Legend</label>
+              <input class = "label2" type = "text" id = "field1" name = "hm_legend" value = "{{$historic_maps_assessment['hm_legend']}}" readonly>
+
+              <label>HM Notes</label>
+              <input class = "label2" type = "text" id = "field2" name = "hm_notes" value = "{{$historic_maps_assessment['hm_notes']}}" readonly>
+              <label>Config</label>
+              <input class = "label2" type = "text" id = "field2" name = "config" value = "{{$historic_maps_assessment['config']}}" readonly>
+
+              
+            </div>
+
+            <div class = "col-md-3">
+           <label>Pin Date</label>
+              <input class = "label2" type = "text" id = "field2" name = "pin_date" value = "{{$historic_maps_assessment['pin_date']}}" readonly>
+             
+              <label>HM Source</label>
+              <input class = "label2" type = "text" id = "field2" name = "hm_source" value = "{{$historic_maps_assessment['hm_source']}}" readonly>
+              <label>Pin Date</label>
+              <input class = "label2" type = "text" id = "field2" name = "assess_by" value = "{{$historic_maps_assessment['assess_by']}}" readonly>
+          
+            </div>
+            <div class = "col-md-3">
+          
+            </div>
+       
+              <input  name = "imap_id" value = "{{$basic_site_information['imap_id']}}" hidden>
+         
+     
+            <div class = "col-md-3">
+              <div id="edit-button12" class = "edit_data" ><i class="fa fa-edit"></i> </div>
+              
+          
+            </div>
+          </div>
+</div> 
+<div class = "loginForm loginCard">
+            <div class="w-users-userformheader account-form-title">
+            <div class="margin-bottom-16">
+            
+
+            <h5> Location  <span class = "review_id"> (IMAP ID {{$basic_site_information['imap_id']}} )</span> </h5> <br>
+              <!-- <div class="login-link2"><img src="images/Frame(1).png" loading="lazy" alt="" class="facebook"></div> -->
+            </div>
+            @csrf
+        
+          </div>
+          <div class = "row" id = "editableSection13" >
+            <div class = "col-md-3">
+              <label>Maritime Zone</label>
+              <input class = "label2" type = "text" id = "field1" name = "maritime_zone" value = "{{$location['maritime_zone']}}" readonly>
+
+              <label>District</label>
+              <input class = "label2" type = "text" id = "field2" name = "district" value = "{{$location['district']}}" readonly>
+              <label>Tehsil</label>
+              <input class = "label2" type = "text" id = "field2" name = "tehsil" value = "{{$location['tehsil']}}" readonly>
+
+              
+            </div>
+
+            <div class = "col-md-3">
+           <label>Datum</label>
+              <input class = "label2" type = "text" id = "field2" name = "pin_date" value = "{{$location['datum']}}" readonly>
+             
+              <label>Directions to site</label>
+              <input class = "label2" type = "text" id = "field2" name = "directions_to_site" value = "{{$location['directions_to_site']}}" readonly>
+              <label>Site Coordinates1</label>
+              <input class = "label2" type = "text" id = "field2" name = "site_coordinates1" value = "{{$location['site_coordinates1']}}" readonly>
+          
+            </div>
+            <div class = "col-md-3">
+
+            <label>Primary Location</label>
+            <input class = "label2" type = "text" id = "field2" name = "primary_location" value = "{{$location['primary_location']}}" readonly>
+            <label>Source 2</label>
+            <input class = "label2" type = "text" id = "field2" name = "location_information_source2" value = "{{$location['location_information_source2']}}" readonly>
+            <label>Geometry</label>
+            <input class = "label2" type = "text" id = "field2" name = "geometry_recording_method" value = "{{$location['geometry_recording_method']}}" readonly>
+
+
+            </div>
+       
+              <input  name = "imap_id" value = "{{$basic_site_information['imap_id']}}" hidden>
+         
+     
+            <div class = "col-md-3">
+              <div id="edit-button13" class = "edit_data" ><i class="fa fa-edit"></i> </div>
+              
+          
+            </div>
+          </div>
+</div> 
+<div class = "loginForm loginCard">
+            <div class="w-users-userformheader account-form-title">
+            <div class="margin-bottom-16">
+            
+
+            <h5> Name  <span class = "review_id"> (IMAP ID {{$basic_site_information['imap_id']}} )</span> </h5> <br>
+              <!-- <div class="login-link2"><img src="images/Frame(1).png" loading="lazy" alt="" class="facebook"></div> -->
+            </div>
+            @csrf
+        
+          </div>
+          <div class = "row" id = "editableSection14" >
+            <div class = "col-md-3">
+              <label>Site Name</label>
+              <input class = "label2" type = "text" id = "field1" name = "site_name" value = "{{$name['site_name']}}" readonly>
+
+              <label>Name Type</label>
+              <input class = "label2" type = "text" id = "field2" name = "name_type" value = "{{$name['name_type']}}" readonly>
+              <label>Primary Name</label>
+              <input class = "label2" type = "text" id = "field2" name = "primary_name" value = "{{$name['primary_name']}}" readonly>
+
+              
+            </div>
+
+            <div class = "col-md-3">
+          
+            </div>
+            <div class = "col-md-3">
+          
+            </div>
+       
+              <input  name = "imap_id" value = "{{$basic_site_information['imap_id']}}" hidden>
+         
+     
+            <div class = "col-md-3">
+              <div id="edit-button14" class = "edit_data" ><i class="fa fa-edit"></i> </div>
+              
+          
+            </div>
+          </div>
+</div>   
+<div class = "loginForm loginCard">
+            <div class="w-users-userformheader account-form-title">
+            <div class="margin-bottom-16">
+            
+
+            <h5> Vessel Information <span class = "review_id"> (IMAP ID {{$basic_site_information['imap_id']}} )</span> </h5> <br>
+              <!-- <div class="login-link2"><img src="images/Frame(1).png" loading="lazy" alt="" class="facebook"></div> -->
+            </div>
+            @csrf
+        
+          </div>
+          <div class = "row" id = "editableSection15" >
+            <div class = "col-md-3">
+              <label>Vessel ID</label>
+              <input class = "label2" type = "text" id = "field1" name = "vessel_id" value = "{{$vessel_information['vessel_id']}}" readonly>
+
+              <label>Vessel Type</label>
+              <input class = "label2" type = "text" id = "field2" name = "vessel_type" value = "{{$vessel_information['vessel_type']}}" readonly>
+              <label>Vessel Construction</label>
+              <input class = "label2" type = "text" id = "field2" name = "vessel_construction" value = "{{$vessel_information['vessel_construction']}}" readonly>
+
+              
+            </div>
+
+            <div class = "col-md-3">
+            <label>Where Built</label>
+              <input class = "label2" type = "text" id = "field1" name = "where_built" value = "{{$vessel_information['where_built']}}" readonly>
+
+              <label>When Built</label>
+              <input class = "label2" type = "text" id = "field2" name = "when_built" value = "{{$vessel_information['when_built']}}" readonly>
+              <label>When Loss</label>
+              <input class = "label2" type = "text" id = "field2" name = "when_loss" value = "{{$vessel_information['when_loss']}}" readonly>
+            </div>
+            <div class = "col-md-3">
+            <label>Reason Loss</label>
+              <input class = "label2" type = "text" id = "field2" name = "reason_loss" value = "{{$vessel_information['reason_loss']}}" readonly>
+              <label>Nationality</label>
+              <input class = "label2" type = "text" id = "field2" name = "nationality" value = "{{$vessel_information['nationality']}}" readonly>
+            </div>
+       
+              <input  name = "imap_id" value = "{{$basic_site_information['imap_id']}}" hidden>
+         
+     
+            <div class = "col-md-3">
+              <div id="edit-button15" class = "edit_data" ><i class="fa fa-edit"></i> </div>
+              
+          
+            </div>
+          </div>
+</div>  
 <div class = "loginForm loginCard">
             <div class="w-users-userformheader account-form-title">
             <div class="margin-bottom-16">

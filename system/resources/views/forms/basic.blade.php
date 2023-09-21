@@ -39,7 +39,7 @@ label{
     border-bottom-right-radius: 16px !important;
     border-top-right-radius: 16px !important;
     color : black !important;
-    font-weight : 600 !important;
+    font-weight : 800 !important;
     font-family: 'Gotham', sans-serif !important;
 
     width : 390px !important
@@ -77,7 +77,7 @@ label{
 
 }
 .signupForm{
- 
+  margin-top:45px ;
   margin-left : 150px;
   background-color: #FFFFFF !important;
     border-radius: 26px !important;
@@ -85,7 +85,7 @@ label{
 .login-email, .login-password {
     color: #030407 !important;
     font-weight: 700 !important;
-    font-size: 14px !important;
+    font-size: 12px !important;
     font-family: 'Gotham', sans-serif !important;
 
     
@@ -133,11 +133,19 @@ label{
     margin-bottom: 0px !important
 }
 @font-face {
-            font-family: 'Gotham';
-            src: url("./system/public/fonts/GothamMedium.ttf") format('truetype'); 
-           
-            font-style: normal;
-        }
+    font-family: 'Gotham';
+    src: url("./system/public/fonts/GothamLight.ttf") format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+/* Define 'Gotham' with font-weight 600 */
+@font-face {
+    font-family: 'Gotham';
+    src: url("./system/public/fonts/GothamBold.ttf") format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
        
 .field-label{
   color : #383838 !important;
@@ -249,11 +257,12 @@ a:hover {
 }
 }
 .add_data{
-  padding-top : 15px !important;
+  font-weight:800;
+  padding-top : 20px !important;
   color : black !important;
   font-family: 'Gotham', sans-serif !important;
   /* margin-top : 12px; */
-  padding-bottom: 15px !important;
+  padding-bottom: 12px !important;
   padding-left : 0px !important;
 }
 .para{
@@ -262,11 +271,12 @@ a:hover {
   background-color : #fff !important;
 }
 .add_para{
-  
+  font-weight:600;
+
   color : #969696 !important;
   font-family: 'Gotham', sans-serif !important;
   padding-bottom:10px !important;
-  font-size : 11px !important;
+  font-size : 10px !important;
   line-height : 0px !important;
   
 }
@@ -275,17 +285,18 @@ a:hover {
     background-color:#134b86;
     padding: 15px 20px 10px 32px;
     color: white;
-    font-size: 15px;
+    font-size: 14px;
     border-top-right-radius: 26px;
     border-top-left-radius: 26px;
     text-transform: uppercase;
-    font-weight : 200px !important;
+   
 
 }
 .background-col{
   background-color: #ffffff !important;
 }
 .site_button {
+  
   margin-top: 10px !important;
     margin-left: 10px !important;
     border-radius: 8px !important;
@@ -297,11 +308,12 @@ a:hover {
 }
 .radio-button{
   margin-left : 10px !important;
-    font-size: 14px !important;
+    font-size: 13px !important;
     /* margin-top: 19px; */
     padding-top: 15px !important;
     color: #030407 !important;
     cursor : pointer;
+    font-weight : 800;
     
     
 }
@@ -309,7 +321,7 @@ a:hover {
   /* margin-left : 80px !important; */
   float: right;
     margin-right: 23px;
-    margin-top: 3px;
+    margin-top: 0px;
 }
 .radio1{
   /* margin-left : 39px !important; */
@@ -396,7 +408,7 @@ a:hover {
   background-color : #ffffff !important;
   position: relative !important;
     top: 0% !important;
-    height : 88px;
+    height : 70px;
 }
 
 /* Adjust icon size and color */
@@ -414,10 +426,10 @@ a:hover {
 }
 .navLink{
   
-
+  font-family: 'Gotham', sans-serif !important;
     color: #FFFFFF !important;
     font-size: 16px !important;
-    font-weight: 400 !important;
+    font-weight: 100 !important;
 
 }
 .fa-sign-out{
@@ -451,9 +463,9 @@ a:hover {
   <!-- <a href="{{route('add_form')}}" class = "navLink">PHASES</a> -->
   <!-- <a href="#!" class = "navLink">OUR TEAM</a>
   <a href="#!" class = "navLink">ABOUT US</a> -->
-  <a href="#!" class = "navLink" style = " padding-right: 30px;">HOME</a>
-  <a href="#!" class = "navLink" style = " padding-right: 30px;">DATABASE</a>
-  <a href="{{route('add_form')}}" class = "navLink" style = " padding-right: 30px;">CREATE A RECORD</a>
+  <a href="#!" class = "navLink" style = " padding-right: 15px;">HOME</a>
+  <a href="{{route('dashboard')}}" class = "navLink" style = " padding-right: 15px;">DATABASE</a>
+  <a href="{{route('add_form')}}" class = "navLink" style = " padding-right: 15px;">CREATE A RECORD</a>
   <i class="fa fa-sign-out" aria-hidden="true"></i><a href="log_in" class = "navLink">LOGOUT </a> <a href="#!" class = "navLink" style="position: relative;
     right: 90px;
     top: 16px;">
@@ -473,7 +485,7 @@ a:hover {
                   <div class = "col-md-9">
                       <div class = "container para">
           
-                        <h5 style = "font-size : 20px !important;" class = "add_data">ADD DATA</h5>
+                        <h5 style = "font-size : 14px !important;" class = "add_data">ADD DATA</h5>
                         <p class = "add_para">Select the site data you want to add</p>
                       </div>
                   </div>
@@ -500,58 +512,64 @@ a:hover {
               </div>
               <div class = "site_button">
                     <label for="radio_label_4" class = "radio-button">
-                    Cultural Period Assignment  <input id="radio_label_4" type="radio" class = "radio4" name="basic_information" value="cultural_period_assignment" onchange="showSection('section5')">
+                    Condition Assessment  <input id="radio_label_4" type="radio" class = "radio4" name="basic_information" value="cultural_period_assignment" onchange="showSection('section5')">
                     </label>
               </div>
               <div class = "site_button">
                     <label for="radio_label_5" class = "radio-button">
-                    Environmental Information <input id="radio_label_5" type="radio" class = "radio5" name="basic_information" value="environmental_information" onchange="showSection('section6')">
+                    Cultural Period Assignment  <input id="radio_label_5" type="radio" class = "radio4" name="basic_information" value="cultural_period_assignment" onchange="showSection('section6')">
                     </label>
               </div>
               <div class = "site_button">
                     <label for="radio_label_6" class = "radio-button">
-                    Form And Interpretation  <input id="radio_label_6" type="radio" class = "radio6" name="basic_information" value="form_and_interpretation" onchange="showSection('section7')">
+                    Environmental Information <input id="radio_label_6" type="radio" class = "radio5" name="basic_information" value="environmental_information" onchange="showSection('section7')">
+                    </label>
+              </div>
+              <div class = "site_button">
+                    <label for="radio_label_7" class = "radio-button">
+                    Form And Interpretation  <input id="radio_label_7" type="radio" class = "radio6" name="basic_information" value="form_and_interpretation" onchange="showSection('section8')">
                     </label>
               </div>
               
               <div class = "site_button">
-                    <label for="radio_label_7" class = "radio-button">
-                    Heritage Protection Status  <input id="radio_label_7" type="radio" class = "radio7" name="basic_information" value="name" onchange="showSection('section7')">
-                    </label>
-              </div>
-              <div class = "site_button">
                     <label for="radio_label_8" class = "radio-button">
-                    Historic Maps Assessment  <input id="radio_label_8" type="radio" class = "radio7" name="basic_information" value="name" onchange="showSection('section8')">
+                    Heritage Protection Status  <input id="radio_label_8" type="radio" class = "radio7" name="basic_information" value="name" onchange="showSection('section9')">
                     </label>
               </div>
               <div class = "site_button">
                     <label for="radio_label_9" class = "radio-button">
-                    Keywords And Themes  <input id="radio_label_9" type="radio" class = "radio10" name="basic_information" value="keywords_and_themes" onchange="showSection('section9')">
+                    Historic Maps Assessment  <input id="radio_label_9" type="radio" class = "radio7" name="basic_information" value="name" onchange="showSection('section10')">
                     </label>
               </div>
               <div class = "site_button">
                     <label for="radio_label_10" class = "radio-button">
-                    Location <input id="radio_label_10" type="radio" class = "radio9" name="basic_information" value="location" onchange="showSection('section10')">
+                    Keywords And Themes  <input id="radio_label_10" type="radio" class = "radio10" name="basic_information" value="keywords_and_themes" onchange="showSection('section11')">
                     </label>
               </div>
               <div class = "site_button">
                     <label for="radio_label_11" class = "radio-button">
-                    Name  <input id="radio_label_11" type="radio" class = "radio7" name="basic_information" value="name" onchange="showSection('section11')">
+                    Location <input id="radio_label_11" type="radio" class = "radio9" name="basic_information" value="location" onchange="showSection('section12')">
                     </label>
               </div>
               <div class = "site_button">
                     <label for="radio_label_12" class = "radio-button">
-                    Vessel Information <input id="radio_label_12" type="radio" class = "radio7" name="basic_information" value="name" onchange="showSection('section12')">
+                    Name  <input id="radio_label_12" type="radio" class = "radio7" name="basic_information" value="name" onchange="showSection('section13')">
                     </label>
               </div>
+            
               <div class = "site_button">
                     <label for="radio_label_13" class = "radio-button">
-                    Vessel Tonnage  <input id="radio_label_13" type="radio" class = "radio11" name="basic_information" value="vessel_tonage" onchange="showSection('section13')">
+                    Vessel Tonnage  <input id="radio_label_13" type="radio" class = "radio11" name="basic_information" value="vessel_tonage" onchange="showSection('section14')">
                     </label>
               </div>
               <div class = "site_button">
                     <label for="radio_label_14" class = "radio-button">
-                    Site Depth Information  <input  id="radio_label_14" type="radio" class = "radio11" name="basic_information" value="vessel_tonage" onchange="showSection('section13')">
+                    Site Depth Information  <input  id="radio_label_14" type="radio" class = "radio11" name="basic_information" value="vessel_tonage" onchange="showSection('section15')">
+                    </label>
+              </div>
+              <div class = "site_button">
+                    <label for="radio_label_15" class = "radio-button">
+                    Vessel Information <input id="radio_label_15" type="radio" class = "radio7" name="basic_information" value="name" onchange="showSection('section16')">
                     </label>
               </div>
             </div>
@@ -567,7 +585,7 @@ a:hover {
               <form class="sign-up-form signupForm"  action="{{route('add_record')}}" method="POST" enctype="multipart/form-data" data-wf-user-form-type="signup">
                     {!! csrf_field() !!}  
                     <div class="w-users-userformheader account-form-title">
-                    <h3 class="blue_bar" id="form_head"> BASIC INFORMATION </h3>
+                    <h3 style = "font-weight : 800 !important;" class="blue_bar" id="form_head"> BASIC INFORMATION </h3>
                     </div>
                         <label for="Name" class="field-label login-email imap">IMAP ID <span style = "color:red;"> *</span></label>
                     
@@ -628,11 +646,30 @@ a:hover {
                         <label for="Name" class="field-label login-email">Material</label>
                         <input type="text" class="form-field w-input"  name="material" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
                         
-                        <label for="Name" class="field-label login-email">Technique</label>
-                        <input type="text" class="form-field w-input"  name="technique" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
+                        <label for="Name" class="field-label login-email">Construction Technique</label>
+                        <input type="text" class="form-field w-input"  name="construction_technique" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
                       
                       </div>
-                      <div class = "cultural_period_assignment sec" id = "section5" style="display: none;">
+
+                      <div class = "condition_assessment sec" id = "section5" style="display: none;">
+                        <label for="Name" class="field-label login-email">Date</label>
+                        <input type="text" class="form-field w-input"  name="date" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
+                        
+                        <label for="Name" class="field-label login-email">Condition Level</label>
+                        <input type="text" class="form-field w-input"  name="condition_level" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
+                        
+                        <label for="Name" class="field-label login-email">Condition Description</label>
+                        <input type="text" class="form-field w-input"  name="condition_description" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
+                        
+                        <label for="Name" class="field-label login-email">Threat Level</label>
+                        <input type="text" class="form-field w-input"  name="threat_level" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
+                        <label for="Name" class="field-label login-email">Threat Description</label>
+                        <input type="text" class="form-field w-input"  name="threat_description" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
+                        <label for="Name" class="field-label login-email">Recommendations</label>
+                        <input type="text" class="form-field w-input"  name="recommendations" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
+                      </div>
+
+                      <div class = "cultural_period_assignment sec" id = "section6" style="display: none;">
                         <label for="Name" class="field-label login-email">Cultural Period Major</label>
                         <input type="text" class="form-field w-input"  name="cultural_period_major" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
                         
@@ -646,7 +683,7 @@ a:hover {
                         <input type="text" class="form-field w-input"  name="sources_of_documented_cultural_periods" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
                       
                       </div>
-                      <div class = "environmental_information sec" id = "section6" style="display: none;">
+                      <div class = "environmental_information sec" id = "section7" style="display: none;">
                         <label for="Name" class="field-label login-email">Soil Type</label>
                         <input type="text" class="form-field w-input"  name="soil_type" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
                         
@@ -657,7 +694,7 @@ a:hover {
                         <input type="text" class="form-field w-input"  name="site_environmental_context" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
                       
                       </div>
-                      <div class = "form_and_interpretation sec" id = "section7" style="display: none;">
+                      <div class = "form_and_interpretation sec" id = "section8" style="display: none;">
                         <label for="Name" class="field-label login-email">Form</label>
                         <input type="text" class="form-field w-input"  name="form" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
                         
@@ -665,7 +702,7 @@ a:hover {
                         <input type="text" class="form-field w-input"  name="interpretation" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
                         
                       </div>
-                      <div class = "heritage_protection_status sec" id = "section8" style="display: none;">
+                      <div class = "heritage_protection_status sec" id = "section9" style="display: none;">
                         <label for="Name" class="field-label login-email">Level Of Protection</label>
                         <input type="text" class="form-field w-input"  name="level_of_protection" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
                         
@@ -679,7 +716,7 @@ a:hover {
                         <input type="text" class="form-field w-input"  name="protected_designation_status" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
                         
                       </div>
-                      <div class = "historic_maps_assessment sec" id = "section9" style="display: none;">
+                      <div class = "historic_maps_assessment sec" id = "section10" style="display: none;">
                         <label for="Name" class="field-label login-email">HM Legend</label>
                         <input type="text" class="form-field w-input"  name="hm_legend" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
                         
@@ -698,7 +735,7 @@ a:hover {
                         <label for="Name" class="field-label login-email">Assess By</label>
                         <input type="text" class="form-field w-input"  name="assess_by" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
                       </div>
-                      <div class = "keywords_and_themes sec" id = "section10" style="display: none;">
+                      <div class = "keywords_and_themes sec" id = "section11" style="display: none;">
                         <label for="Name" class="field-label login-email">Keywords</label>
                         <input type="text" class="form-field w-input"  name="keywords" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
                         
@@ -706,7 +743,7 @@ a:hover {
                         <input type="text" class="form-field w-input"  name="themes" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
                         
                       </div>
-                      <div class = "location sec" id = "section11" style="display: none;">
+                      <div class = "location sec" id = "section12" style="display: none;">
                         <label for="Name" class="field-label login-email">Maritime Zone</label>
                         <input type="text" class="form-field w-input"  name="maritime_zone" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
                         
@@ -737,7 +774,7 @@ a:hover {
                         <label for="Name" class="field-label login-email">Site Coordinates 1</label>
                         <input type="text" class="form-field w-input"  name="site_coordinates1" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
                       </div>
-                      <div class = "name sec" id = "section12" style="display: none;">
+                      <div class = "name sec" id = "section13" style="display: none;">
                         <label for="Name" class="field-label login-email">Site Name</label>
                         <input type="text" class="form-field w-input"  name="site_name" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
                         
@@ -749,7 +786,7 @@ a:hover {
                         
                       
                       </div>
-                      <div class = "vessel_tonage sec" id = "section13" style="display: none;">
+                      <div class = "vessel_tonage sec" id = "section14" style="display: none;">
                         <label for="Name" class="field-label login-email">Tonnage Type</label>
                         <input type="text" class="form-field w-input"  name="tonnage_type" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
                         
@@ -757,39 +794,13 @@ a:hover {
                         <input type="text" class="form-field w-input"  name="tonnage_value" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
                         
                       </div>
-                      <div class = "site_depth_information sec" id = "section14" style="display: none;">
+                      <div class = "site_depth_information sec" id = "section15" style="display: none;">
                         <label for="Name" class="field-label login-email">Max Depth</label>
                         <input type="text" class="form-field w-input"  name="max_depth" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
                         
                         <label for="Name" class="field-label login-email">Min Depth</label>
                         <input type="text" class="form-field w-input"  name="min_depth" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
                       
-                      </div>
-                      <div class = "vessel_information sec" id = "section15" style="display: none;">
-                        <label for="Name" class="field-label login-email">Vessel ID</label>
-                        <input type="text" class="form-field w-input"  name="vessel_id" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
-                        
-                        <label for="Name" class="field-label login-email">Vessel Type</label>
-                        <input type="text" class="form-field w-input"  name="vessel_type" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
-                        
-                        <label for="Name" class="field-label login-email">Vessel Construction</label>
-                        <input type="text" class="form-field w-input"  name="vessel_construction" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
-                        
-                        <label for="Name" class="field-label login-email">Where Built</label>
-                        <input type="text" class="form-field w-input"  name="where_built" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
-                        
-                        <label for="Name" class="field-label login-email">When Built</label>
-                        <input type="text" class="form-field w-input"  name="when_built" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
-                      
-                        <label for="Name" class="field-label login-email">When Loss</label>
-                        <input type="text" class="form-field w-input"  name="when_loss" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
-
-                        <label for="Name" class="field-label login-email">Reason Loss</label>
-                        <input type="text" class="form-field w-input"  name="reason_loss" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
-
-                        <label for="Name" class="field-label login-email">Nationality</label>
-                        <input type="text" class="form-field w-input"  name="nationality" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
-                        
                       </div>
                       <div class = "vessel_information sec" id = "section16" style="display: none;">
                         <label for="Name" class="field-label login-email">Vessel ID</label>
@@ -817,6 +828,7 @@ a:hover {
                         <input type="text" class="form-field w-input"  name="nationality" data-name="field" data-wf-user-field="wf-user-field-name" placeholder=""   >
                         
                       </div>
+                    
                       
                         
                 <button type="submit" class="styled-submit-button">
@@ -829,7 +841,9 @@ a:hover {
         </div>
       </div>
 </div>
-  
+<footer style="background-color: white; padding: 20px; text-align: center; height : 75px;">
+    <p>&copy; IMAP</p>
+</footer>
 
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

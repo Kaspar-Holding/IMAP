@@ -292,7 +292,6 @@ class WebsiteController extends Controller
     
     function add_record(Request $req){
       $type = "application/json";
-      
           $record1 = new BasicSiteInformation;
           $record1->imap_id = $req->imap_id;
           $record1->grid_square_id = $req->grid_square_id;
@@ -328,7 +327,7 @@ class WebsiteController extends Controller
           $record4 = new BuiltComponent;
           $record4->imap_id = $req->imap_id;
           $record4->material = $req->material;
-          $record4->construction_technique = $req->technique;
+          $record4->construction_technique = $req->construction_technique;
           $record4->save();
           
           $record5 = new CulturalPeriodAssignment;

@@ -98,6 +98,7 @@ class FormsController extends Controller
             'imap_id' => $req->imap_id,
             'grid_square_id' => $req->grid_square_id,
             'site_description' => $req->site_description,
+            'site_classification' => $req->site_classification,
             'ground_truthed' => $req->ground_truthed,
             'drone_truthed' => $req->drone_truthed,
            'located' => $req->located,
